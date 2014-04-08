@@ -20,6 +20,7 @@ There is a configuration button which will look for Glimworm iBeacons and allow 
 - Major and minor integers are generated randomly every time a new advertising session starts. 
 - The app will not list itself as a beacon, even if you toggle advertising on. (It's how the API works.) You need to run another instance of the app for that.
 - The UI doesn't show any alerts; check the console for more details.
+
 ###From Glimworm Beacon Configuration
 - Configuration may ask for a pairing passcord which is 6 digits
 
