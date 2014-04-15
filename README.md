@@ -10,7 +10,13 @@ This App is a fully functional demo app for the new iBeacons API in iOS 7. The a
 There is a configuration button which will look for Glimworm iBeacons and allow you to set the UUID, Major, Minor Ad ratio and Range via a serial BLE connection
 
 ## Screenshot
-![Screenshot](https://raw.github.com/nicktoumpelis/HiBeacons/master/screenshot.png)
+![Screenshot](screenshot.png)
+![Screenshot](IMG_5726.PNG)
+![Screenshot](IMG_5727.PNG)
+![Screenshot](IMG_5728.PNG)
+![Screenshot](IMG_5729.PNG)
+![Screenshot](IMG_5730.PNG)
+![Screenshot](IMG_5731.PNG)
 
 ## Notes
 ###From HiBeacons
