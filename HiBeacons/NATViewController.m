@@ -1193,6 +1193,7 @@ bool peripheralIsConnectedButNotRead = NO;
 
 NSString *incoming_uuid = @"00000000-0000-0000-0000-000000000000";
 
+
 - (void) peripheral:(CBPeripheral *)aPeripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     NSLog(@"-- didUpdateValueForCharacteristic");
@@ -1215,6 +1216,15 @@ NSString *incoming_uuid = @"00000000-0000-0000-0000-000000000000";
             NSLog(@"currentcommand:retval %@", str);
             peripheralIsConnecting = NO;
             
+            if ([currentcommand isEqualToString:@"GB+BTYPE"]) {
+                NSArray *array = [str componentsSeparatedByString:@":"];
+                NSLog(@"GB returns %@",str);
+                if (array.count > 1) {
+                    
+                } else {
+                    NSLog(@"ERR returns %@",str);
+                }
+            }
             
             if ([currentcommand isEqualToString:@"AT+VERS?"]) {
                 
@@ -1538,6 +1548,7 @@ NSString *currentInterval = @"";
 - (void)q_readall {
     
     
+    NSString *get0 = [[NSString alloc] initWithFormat:@"GB+BTYPE"];
     NSString *get1 = [[NSString alloc] initWithFormat:@"AT+VERS?"];
     NSString *get2 = [[NSString alloc] initWithFormat:@"AT+BATT?"];
     NSString *get3 = [[NSString alloc] initWithFormat:@"AT+ADVI?"];
