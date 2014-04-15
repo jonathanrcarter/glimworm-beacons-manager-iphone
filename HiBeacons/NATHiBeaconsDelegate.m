@@ -47,6 +47,15 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    /*
+     this is called when the application returns from hacing the pairing window
+     */
+    NSLog(@"applicationDidBecomeActive");
+
+//    UIViewController* root = _window.rootViewController;
+//    UINavigationController* navController = (UINavigationController*)root;
+//    NATViewController * mycontroller = (NATViewController *)[[navController viewControllers] objectAtIndex:0];
+//    [mycontroller a];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

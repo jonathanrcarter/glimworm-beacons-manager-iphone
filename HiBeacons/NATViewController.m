@@ -92,12 +92,21 @@ bool isWorking = FALSE;
 @property (weak, nonatomic) IBOutlet UITextField *p_uuid;
 @property (weak, nonatomic) IBOutlet UITextField *p_major;
 @property (weak, nonatomic) IBOutlet UITextField *p_minor;
+@property (weak, nonatomic) IBOutlet UITextField *p_name;
+@property (weak, nonatomic) IBOutlet UITextField *p_pincode;
 @property (weak, nonatomic) IBOutlet UILabel *p_firmware;
 - (IBAction)p_update:(id)sender;
 - (IBAction)p_sendchanges:(id)sender;
 - (IBAction)p_reload:(id)sender;
 - (IBAction)connect_cancel_but:(id)sender;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *w_spinner;
+@property (weak, nonatomic) IBOutlet UIView *WriteView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *write_spinner;
+- (IBAction)write_cancel:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *p_advint;
+- (IBAction)p_advintslider:(id)sender;
+@property (weak, nonatomic) IBOutlet UISlider *p_advintslider;
+@property (weak, nonatomic) IBOutlet UILabel *p_battlevel;
 
 @end
 @implementation NATViewController
@@ -277,17 +286,9 @@ bool isWorking = FALSE;
                 if (!cell)
                     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                                   reuseIdentifier:kBeaconCellIdentifier];
-                cell.textLabel.text = beacon.UUID;
-                cell.detailTextLabel.text = [NSString stringWithFormat : @"%@ %@", beacon.name, beacon.RSSI];
+                cell.textLabel.text = beacon.name;
+                cell.detailTextLabel.text = [NSString stringWithFormat : @"%@", beacon.UUID];
                 cell.detailTextLabel.textColor = [UIColor grayColor];
-//                cell.backgroundColor = [UIColor greenColor];
-//                
-//                [self.configSwitch addTarget:self
-//                                      action:@selector(changeConfigState:)
-//                            forControlEvents:UIControlEventValueChanged];
-                
-                
-                
                 
             } else {
             
@@ -526,10 +527,29 @@ bool isWorking = FALSE;
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI {
     
-    NSString *value = [[NSString alloc] initWithFormat:@"disc %@ %@ %@", peripheral.name, RSSI, [peripheral.identifier UUIDString]];
+    //NSString *value = [[NSString alloc] initWithFormat:@"disc %@ %@ %@", peripheral.name, RSSI, [peripheral.identifier UUIDString]];
     NSString *_name = [[NSString alloc] initWithFormat:@"%@", peripheral.name];
-    NSString *u = [peripheral.identifier UUIDString];
+    //NSString *u = [peripheral.identifier UUIDString];
     NSString *_uuid = [peripheral.identifier UUIDString];
+    
+    NSLog(@"ADDATA u %@",advertisementData);
+    
+    /*
+
+     kCBAdvDataChannel = 38;
+     kCBAdvDataIsConnectable = 1;
+     kCBAdvDataLocalName = GLBeacon;
+     kCBAdvDataServiceData =     {
+        "Unknown (<b000>)" = <00000042>;
+     };
+     kCBAdvDataServiceUUIDs =     (
+        "Unknown (<ffe0>)"
+     );
+     kCBAdvDataTxPowerLevel = 0;
+     
+     */
+    NSLog(@"ADDATA u %@",[advertisementData allValues]);
+    
     
     //NSLog(@"CFSTRINGREF u %@",u);   // this is just the UUID
     //NSLog(@"CFSTRINGREF U %@",_uuid);
@@ -555,11 +575,11 @@ bool isWorking = FALSE;
                 m.RSSI = RSSI;
                 m.name = _name;
                 
-                for (CBService* service in peripheral.services)
+                /*for (CBService* service in peripheral.services)
                 {
                     NSString *__uuid = [[NSString alloc] initWithFormat:@"LS : %@", service.UUID];
-                    //NSLog(@"%@",__uuid);
-                }
+                    NSLog(@"%@",__uuid);
+                }*/
                 
                 
                 for (id key in [advertisementData allKeys]){
@@ -721,7 +741,11 @@ bool isWorking = FALSE;
 }
 
 -(void)clearItemArray {
-    self.ItemArray = [NSMutableArray arrayWithObjects:nil];
+    if (!self.ItemArray) {
+        self.ItemArray = [NSMutableArray arrayWithObjects:nil];
+    } else {
+        [self.ItemArray removeAllObjects];
+    }
 }
 
 
@@ -1024,6 +1048,9 @@ bool isWorking = FALSE;
     NSLog(@"Peripheral manager is on.");
     [self turnOnAdvertising];
 }
+-(void) peripheralManagerIsReadyToUpdateSubscribers:(CBPeripheralManager *)peripheral {
+    NSLog(@"isreadytoupdatesubscribers");
+}
 
 #pragma mark - Configuration Popup window
 
@@ -1045,14 +1072,46 @@ bool isWorking = FALSE;
 */
     
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(activate:)
+//                                                 name:UIApplicationWillEnterForegroundNotification
+//                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(activate:)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
+
+}
+
+bool peripheralIsConnected = NO;
+bool peripheralIsConnecting = NO;
+bool peripheralIsConnectedButNotRead = NO;
+
 - (void) centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)aPeripheral
 {
     NSLog(@" connectED ( %@ )", [aPeripheral name]);
     
+    peripheralIsConnected = YES;
+    peripheralIsConnecting = NO;
+    peripheralIsConnectedButNotRead = YES;
     [self stopScan];
     [aPeripheral setDelegate:self];
     [aPeripheral discoverServices:nil];
 }
+
+-(void) activate:(NSNotification *)pNotification {
+    NSLog(@"application activate ");
+    if (peripheralIsConnectedButNotRead) {
+        NSLog(@"application activate READ");
+        [self q_readall];
+    }
+}
+
+
 - (void)peripheral:(CBPeripheral *)aPeripheral didDiscoverServices:(NSError *)error {
     
     NSLog(@" servicesDISCOVERED ( %@ )", [aPeripheral name]);
@@ -1149,31 +1208,40 @@ NSString *incoming_uuid = @"00000000-0000-0000-0000-000000000000";
             NSString *str=[[NSString alloc] initWithBytes:characteristic.value.bytes length:characteristic.value.length encoding:NSUTF8StringEncoding];
             NSLog(@"retval %@", str);
             
-            NSString *logmessage = [[NSString alloc] initWithFormat:@"'%@' : '%@'", currentcommand, str];
+            //NSString *logmessage = [[NSString alloc] initWithFormat:@"'%@' : '%@'", currentcommand, str];
             
             
             NSLog(@"currentcommand %@", currentcommand);
             NSLog(@"currentcommand:retval %@", str);
+            peripheralIsConnecting = NO;
+            
             
             if ([currentcommand isEqualToString:@"AT+VERS?"]) {
                 
-                NSArray *array = [str componentsSeparatedByString:@" "];
-                self.p_firmware.text = array[1];
-                currentfirmware = [[NSString alloc] initWithFormat:@"%@", array[1]];
+                peripheralIsConnectedButNotRead = NO;
                 
-                if ([currentfirmware isEqualToString:@"V517"]) {
-                    // dvert 0 = 100 , 1 = 1280
-                    
-                } else if ([currentfirmware isEqualToString:@"V518"]) {
-                    
-                } else if ([currentfirmware isEqualToString:@"V519"]) {
-                    
-                } else if ([currentfirmware isEqualToString:@"V520"]) {
-                    
-                } else if ([currentfirmware isEqualToString:@"V521"]) {
-                    
-                } else if ([currentfirmware isEqualToString:@"V522"]) {
-                    
+                NSArray *array = [str componentsSeparatedByString:@" "];
+                if (array.count > 1) {
+                    self.p_firmware.text = array[1];
+                    currentfirmware = [[NSString alloc] initWithFormat:@"%@", array[1]];
+                
+                    if ([currentfirmware isEqualToString:@"V517"]) {
+                        // dvert 0 = 100 , 1 = 1280
+                        
+                    } else if ([currentfirmware isEqualToString:@"V518"]) {
+                        
+                    } else if ([currentfirmware isEqualToString:@"V519"]) {
+                        
+                    } else if ([currentfirmware isEqualToString:@"V520"]) {
+                        
+                    } else if ([currentfirmware isEqualToString:@"V521"]) {
+                        
+                    } else if ([currentfirmware isEqualToString:@"V522"]) {
+                        
+                    }
+                } else {
+                    NSLog(@"ERR returns %@",str);
+                    q_error = YES;
                 }
                 
             }
@@ -1190,41 +1258,96 @@ NSString *incoming_uuid = @"00000000-0000-0000-0000-000000000000";
             if ([currentcommand isEqualToString:@"AT+IBE0?"]) {
                 NSArray *array = [str componentsSeparatedByString:@"x"];
                 incoming_uuid = @"00000000-0000-0000-0000-000000000000";
-                incoming_uuid = [NSString stringWithFormat:@"%@%@",
-                                 array[1],
-                                 [incoming_uuid substringWithRange:NSMakeRange(8,28)]
-                                ];
+                if (array.count > 1) {
+                    incoming_uuid = [NSString stringWithFormat:@"%@%@",
+                                     array[1],
+                                     [incoming_uuid substringWithRange:NSMakeRange(8,28)]
+                                     ];
+                } else {
+                    NSLog(@"ERR returns %@",str);
+                    q_error = YES;
+                }
             }
             
             if ([currentcommand isEqualToString:@"AT+IBE1?"]) {
                 NSArray *array = [str componentsSeparatedByString:@"x"];
-                incoming_uuid = [NSString stringWithFormat:@"%@-%@-%@-%@",
-                                 [incoming_uuid substringWithRange:NSMakeRange(0,8)],
-                                 [array[1] substringWithRange:NSMakeRange(0,4)],
-                                 [array[1] substringWithRange:NSMakeRange(4,4)],
-                                 [incoming_uuid substringWithRange:NSMakeRange(19,17)]
-                                 ];
+                if (array.count > 1 && [incoming_uuid length] == 36) {
+                    incoming_uuid = [NSString stringWithFormat:@"%@-%@-%@-%@",
+                                     [incoming_uuid substringWithRange:NSMakeRange(0,8)],
+                                     [array[1] substringWithRange:NSMakeRange(0,4)],
+                                     [array[1] substringWithRange:NSMakeRange(4,4)],
+                                     [incoming_uuid substringWithRange:NSMakeRange(19,17)]
+                                     ];
+                } else {
+                    NSLog(@"ERR returns %@",str);
+                    q_error = YES;
+                }
             }
             
             if ([currentcommand isEqualToString:@"AT+IBE2?"]) {
                 NSArray *array = [str componentsSeparatedByString:@"x"];
-                incoming_uuid = [NSString stringWithFormat:@"%@-%@-%@%@",
-                                 [incoming_uuid substringWithRange:NSMakeRange(0,18)],
-                                 [array[1] substringWithRange:NSMakeRange(0,4)],
-                                 [array[1] substringWithRange:NSMakeRange(4,4)],
-                                 [incoming_uuid substringWithRange:NSMakeRange(28,8)]
-                                 ];
+                if (array.count > 1 && [incoming_uuid length] == 36) {
+                    incoming_uuid = [NSString stringWithFormat:@"%@-%@-%@%@",
+                                     [incoming_uuid substringWithRange:NSMakeRange(0,18)],
+                                     [array[1] substringWithRange:NSMakeRange(0,4)],
+                                     [array[1] substringWithRange:NSMakeRange(4,4)],
+                                     [incoming_uuid substringWithRange:NSMakeRange(28,8)]
+                                     ];
+                } else {
+                    NSLog(@"ERR returns %@",str);
+                    q_error = YES;
+                }
             }
             if ([currentcommand isEqualToString:@"AT+IBE3?"]) {
                 NSArray *array = [str componentsSeparatedByString:@"x"];
-                incoming_uuid = [NSString stringWithFormat:@"%@%@",
-                                 [incoming_uuid substringWithRange:NSMakeRange(0,28)],
-                                 [array[1] substringWithRange:NSMakeRange(0,8)]
-                                 ];
-                self.p_uuid.text = incoming_uuid;
+                if (array.count > 1 && [incoming_uuid length] == 36) {
+                    incoming_uuid = [NSString stringWithFormat:@"%@%@",
+                                     [incoming_uuid substringWithRange:NSMakeRange(0,28)],
+                                     [array[1] substringWithRange:NSMakeRange(0,8)]
+                                     ];
+                    self.p_uuid.text = incoming_uuid;
+                } else {
+                    NSLog(@"ERR returns %@",str);
+                    q_error = YES;
+                }
             }
 
 
+            
+            if ([currentcommand isEqualToString:@"AT+NAME?"]) {
+                NSArray *array = [str componentsSeparatedByString:@":"];
+                if (array.count > 1) {
+                    NSLog(@"array %@",array[1]);
+                    self.p_name.text = array[1];
+                } else {
+                    NSLog(@"ERR returns %@",str);
+                    q_error = YES;
+                }
+            }
+            if ([currentcommand isEqualToString:@"AT+PASS?"]) {
+                NSArray *array = [str componentsSeparatedByString:@":"];
+                if (array.count > 1) {
+                    NSLog(@"array %@",array[1]);
+                    self.p_pincode.text = array[1];
+                } else {
+                    NSLog(@"ERR returns %@",str);
+                    q_error = YES;
+                }
+            }
+
+            if ([currentcommand isEqualToString:@"AT+TYPE?"]) {
+                NSArray *array = [str componentsSeparatedByString:@":"];
+                if (array.count > 1) {
+                    int val = [array[1] intValue];
+                    if (val == 0) {
+                        self.p_pincode.text = @"";
+                    }
+                } else {
+                    NSLog(@"ERR returns %@",str);
+                    q_error = YES;
+                }
+            }
+            
             
             if ([currentcommand isEqualToString:@"AT+POWE?"]) {
                 NSArray *array = [str componentsSeparatedByString:@":"];
@@ -1254,38 +1377,41 @@ NSString *incoming_uuid = @"00000000-0000-0000-0000-000000000000";
             
             if ([currentcommand isEqualToString:@"AT+ADVI?"]) {
                 NSArray *array = [str componentsSeparatedByString:@":"];
+                if (array.count > 1) {
                 
-                NSLog(@"array %@",array[1]);
-                int val = [array[1] intValue];
-                NSString *Val = array[1];
-                
-//                [self clearadvertisingbuttonstates];
-                
-                if ([self has16advertisments] == FALSE) {
+                    NSLog(@"array %@",array[1]);
+                    int val = [array[1] intValue];
+                    NSString *Val = array[1];
                     
-//                    if ([Val isEqualToString:@"0"]) p_adv_100.state = 1;
-//                    if ([Val isEqualToString:@"1"]) p_adv_1280a.state = 1;
+                    //                [self clearadvertisingbuttonstates];
+                    
+                    if ([self has16advertisments] == FALSE) {
+                        
+                        if ([Val isEqualToString:@"0"]) self.p_advintslider.value = 0;
+                        if ([Val isEqualToString:@"1"]) self.p_advintslider.value = 15;
+                    } else {
+                        if ([Val isEqualToString:@"0"]) self.p_advintslider.value = 0;
+                        if ([Val isEqualToString:@"1"]) self.p_advintslider.value = 1;
+                        if ([Val isEqualToString:@"2"]) self.p_advintslider.value = 2;
+                        if ([Val isEqualToString:@"3"]) self.p_advintslider.value = 3;
+                        if ([Val isEqualToString:@"4"]) self.p_advintslider.value = 4;
+                        if ([Val isEqualToString:@"5"]) self.p_advintslider.value = 5;
+                        if ([Val isEqualToString:@"6"]) self.p_advintslider.value = 6;
+                        if ([Val isEqualToString:@"7"]) self.p_advintslider.value = 7;
+                        if ([Val isEqualToString:@"8"]) self.p_advintslider.value = 8;
+                        if ([Val isEqualToString:@"9"]) self.p_advintslider.value = 9;
+                        if ([Val isEqualToString:@"A"]) self.p_advintslider.value = 10;
+                        if ([Val isEqualToString:@"B"]) self.p_advintslider.value = 11;
+                        if ([Val isEqualToString:@"C"]) self.p_advintslider.value = 12;
+                        if ([Val isEqualToString:@"D"]) self.p_advintslider.value = 13;
+                        if ([Val isEqualToString:@"E"]) self.p_advintslider.value = 14;
+                        if ([Val isEqualToString:@"F"]) self.p_advintslider.value = 15;
+                    }
+                    [self setAdvIntervalFromSlider];
                 } else {
-                    /*
-                    if ([Val isEqualToString:@"0"]) p_adv_100.state = 1;
-                    if ([Val isEqualToString:@"1"]) p_adv_152.state = 1;
-                    if ([Val isEqualToString:@"2"]) p_adv_211.state = 1;
-                    if ([Val isEqualToString:@"3"]) p_adv_318.state = 1;
-                    if ([Val isEqualToString:@"4"]) p_adv_417.state = 1;
-                    if ([Val isEqualToString:@"5"]) p_adv_546.state = 1;
-                    if ([Val isEqualToString:@"6"]) p_adv_760.state = 1;
-                    if ([Val isEqualToString:@"7"]) p_adv_852.state = 1;
-                    if ([Val isEqualToString:@"8"]) p_adv_1022.state = 1;
-                    if ([Val isEqualToString:@"9"]) p_adv_1280a.state = 1;
-                    if ([Val isEqualToString:@"A"]) p_adv_2000.state = 1;
-                    if ([Val isEqualToString:@"B"]) p_adv_3000.state = 1;
-                    if ([Val isEqualToString:@"C"]) p_adv_4000.state = 1;
-                    if ([Val isEqualToString:@"D"]) p_adv_5000.state = 1;
-                    if ([Val isEqualToString:@"E"]) p_adv_6000.state = 1;
-                    if ([Val isEqualToString:@"F"]) p_adv_7000.state = 1;
-                    */
+                    NSLog(@"ERR returns %@",str);
+                    q_error = YES;
                 }
-                
             }
             
             
@@ -1295,13 +1421,17 @@ NSString *incoming_uuid = @"00000000-0000-0000-0000-000000000000";
                 NSLog(@"currentcommand MATCHED");
                 
                 NSArray *array = [str componentsSeparatedByString:@":"];
+                if (array.count > 1) {
                 
-                double dv = [array[1] doubleValue];
-                NSLog(@"array %@",array[1]);
-                NSLog(@"array intvalue %ld",(long)[array[1] integerValue]);
-                NSLog(@"array intvalue %d",[array[1] intValue]);
-                NSLog(@"array intvalue %f",dv);
-                
+                    double dv = [array[1] doubleValue];
+                    NSLog(@"array %@",array[1]);
+                    NSLog(@"array intvalue %ld",(long)[array[1] integerValue]);
+                    NSLog(@"array intvalue %d",[array[1] intValue]);
+                    NSLog(@"array intvalue %f",dv);
+                } else {
+                    NSLog(@"ERR returns %@",str);
+                    q_error = YES;
+                }
 //                [p_batterylevel setDoubleValue:dv];
 //                [p_batterlevel_txt setDoubleValue:dv];
                 
@@ -1315,6 +1445,95 @@ NSString *incoming_uuid = @"00000000-0000-0000-0000-000000000000";
         }
     }
 }
+NSString *currentInterval = @"";
+
+-(void)setAdvIntervalFromSlider {
+    
+    self.p_advintslider.value = roundf(self.p_advintslider.value);
+    
+    if ([self has16advertisments] == FALSE) {
+        switch ((int)self.p_advintslider.value) {
+            case 0:
+                self.p_advint.text = @"100ms";
+                currentInterval = @"0";
+                break;
+            default:
+                self.p_advint.text = @"100ms";
+                currentInterval = @"1";
+                break;
+        }
+
+    } else {
+
+        switch ((int)self.p_advintslider.value) {
+            case 0:
+                self.p_advint.text = @"100ms";
+                currentInterval = @"0";
+                break;
+            case 1:
+                self.p_advint.text = @"152ms";
+                currentInterval = @"1";
+                break;
+            case 2:
+                self.p_advint.text = @"211ms";
+                currentInterval = @"2";
+                break;
+            case 3:
+                self.p_advint.text = @"318ms";
+                currentInterval = @"3";
+                break;
+            case 4:
+                self.p_advint.text = @"417ms";
+                currentInterval = @"4";
+                break;
+            case 5:
+                self.p_advint.text = @"546ms";
+                currentInterval = @"5";
+                break;
+            case 6:
+                self.p_advint.text = @"760ms";
+                currentInterval = @"6";
+                break;
+            case 7:
+                self.p_advint.text = @"852ms";
+                currentInterval = @"7";
+                break;
+            case 8:
+                self.p_advint.text = @"1022ms";
+                currentInterval = @"8";
+                break;
+            case 9:
+                self.p_advint.text = @"1280ms";
+                currentInterval = @"9";
+                break;
+            case 10:
+                self.p_advint.text = @"2s";
+                currentInterval = @"A";
+                break;
+            case 11:
+                self.p_advint.text = @"3s";
+                currentInterval = @"B";
+                break;
+            case 12:
+                self.p_advint.text = @"4s";
+                currentInterval = @"C";
+                break;
+            case 13:
+                self.p_advint.text = @"5s";
+                currentInterval = @"D";
+                break;
+            case 14:
+                self.p_advint.text = @"6s";
+                currentInterval = @"E";
+                break;
+            case 15:
+                self.p_advint.text = @"7s";
+                currentInterval = @"F";
+                break;
+        }
+    }
+    
+}
 
 - (void)q_readall {
     
@@ -1323,24 +1542,27 @@ NSString *incoming_uuid = @"00000000-0000-0000-0000-000000000000";
     NSString *get2 = [[NSString alloc] initWithFormat:@"AT+BATT?"];
     NSString *get3 = [[NSString alloc] initWithFormat:@"AT+ADVI?"];
     NSString *get4 = [[NSString alloc] initWithFormat:@"AT+POWE?"]; // 0 1 2 3 2 = std
-    NSString *get5 = [[NSString alloc] initWithFormat:@"AT+TYPE?"]; // 2 PIN
+    NSString *get5 = [[NSString alloc] initWithFormat:@"AT+PASS?"]; // 2 PIN
     NSString *get6 = [[NSString alloc] initWithFormat:@"AT+MARJ?"]; // 2 PIN
     NSString *get7 = [[NSString alloc] initWithFormat:@"AT+MINO?"]; // 2 PIN
     NSString *get8 = [[NSString alloc] initWithFormat:@"AT+IBE0?"]; // 2 PIN
     NSString *get9 = [[NSString alloc] initWithFormat:@"AT+IBE1?"]; // 2 PIN
     NSString *get10 = [[NSString alloc] initWithFormat:@"AT+IBE2?"]; // 2 PIN
     NSString *get11 = [[NSString alloc] initWithFormat:@"AT+IBE3?"]; // 2 PIN
+    NSString *get12 = [[NSString alloc] initWithFormat:@"AT+TYPE?"]; // 2 PIN
+    NSString *get13 = [[NSString alloc] initWithFormat:@"AT+NAME?"]; // 2 PIN
     
     
     //    NSString *get6 = [[NSString alloc] initWithFormat:@"AT+MEAS?"]; // Value
     
-    Queue = [NSMutableArray arrayWithObjects:get1,get2,get3,get4,get5,get6,get7,get8,get9,get10,get11,nil];
+    Queue = [NSMutableArray arrayWithObjects:@"clearerror",get1,get2,get3,get4,get5,get6,get7,get8,get9,get10,get11,get12,get13,@"checkerror",nil];
     
     [self q_next];
 }
 
 
 NSMutableArray *Queue;
+bool q_error = NO;
 
 - (void)q_next {
     
@@ -1359,6 +1581,31 @@ NSMutableArray *Queue;
             currentcommand = @"";
             
             [self p_close_window];
+            return;
+        }
+        if ([q_str isEqualToString:@"checkerror"]) {
+            if (q_error == YES) {
+
+                UILocalNotification *notification = [UILocalNotification new];
+                
+                // Notification details
+                notification.alertBody = [NSString stringWithFormat:@"There was an error"];
+                notification.alertAction = NSLocalizedString(@"View Details", nil);
+                notification.soundName = UILocalNotificationDefaultSoundName;
+                
+                [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+            
+            }
+            [self q_next];
+            return;
+        }
+        if ([q_str isEqualToString:@"clearerror"]) {
+            q_error = NO;
+            [self q_next];
+            return;
+        }
+        if ([q_str isEqualToString:@"skip"]) {
+            [self q_next];
             return;
         }
         
@@ -1411,7 +1658,7 @@ NSMutableArray *Queue;
         [currentPeripheral.peripheral writeValue:data forCharacteristic:_currentChar type:CBCharacteristicWriteWithoutResponse];
     } else {
         currentcommand = @"";
-//        [self donewriting];
+        [self donewriting];
         [self done];
     }
     
@@ -1422,7 +1669,7 @@ NSMutableArray *Queue;
     
     // thanks for the formaating of the hex to http://stackoverflow.com/questions/5473896/objective-c-converting-an-integer-to-a-hex-value
     
-//    [self writing];
+    [self writing];
     
     NSString *ibmajor_str_val = [[NSString alloc] initWithFormat:@"%04X", [self.p_major.text intValue]];
     NSString *ibminor_str_val = [[NSString alloc] initWithFormat:@"%04X", [self.p_minor.text intValue]];
@@ -1436,15 +1683,28 @@ NSMutableArray *Queue;
                              [ibminor_str_val substringWithRange:NSMakeRange(0,2)],
                              [ibminor_str_val substringWithRange:NSMakeRange(2,2)]];
     
-    /*
+    
+    NSString *adv = [NSString stringWithFormat:@"AT+ADVI%@",currentInterval];
+    
+    
     NSString *name_str = [[NSString alloc] initWithFormat:@"AT+NAME%@           ",
-                          ([[p_name stringValue] length] > 11 ) ? [[[p_name stringValue] uppercaseString] substringWithRange:NSMakeRange(0, 11)] : [[p_name stringValue] uppercaseString]
-                          ];
-    */
+                          (self.p_name.text.length > 11 ) ? [self.p_name.text.uppercaseString substringWithRange:NSMakeRange(0, 11)] : self.p_name.text.uppercaseString];
 
+    NSString *pass0 = @"skip";
+    NSString *pass1 = @"skip";
+    NSString *pass2 = @"skip";
+
+    if (self.p_pincode.text.length == 6) {
+        pass0 = @"AT+TYPE0";
+        pass1 = [NSString stringWithFormat:@"AT+PASS%@",self.p_pincode.text];
+        pass2 = @"AT+TYPE2";
+    } else if (self.p_pincode.text.length == 0) {
+        pass0 = @"AT+TYPE0";
+    }
+    
+    
     // format   74278bda-b644-4520-8f0c-720eaf059935
     //          0        9    14   19   24  28
-    
     
     if (self.p_uuid.text.length == 36) {
         NSString *ib0 = [NSString stringWithFormat:@"AT+IBE0%@",
@@ -1464,10 +1724,12 @@ NSMutableArray *Queue;
         NSString *ib3 = [NSString stringWithFormat:@"AT+IBE3%@",
                          [[self.p_uuid.text uppercaseString] substringWithRange:NSMakeRange(28, 8)]
                          ];
-        Queue = [NSMutableArray arrayWithObjects:ibmajor_str,ibminor_str,ib0,ib1,ib2,ib3,nil];
+        
+        Queue = [NSMutableArray arrayWithObjects:@"clearerror",ibmajor_str,ibminor_str,ib0,ib1,ib2,ib3,adv,pass0,pass1,pass2,name_str,@"checkerror",nil];
+        
 
     } else {
-        Queue = [NSMutableArray arrayWithObjects:ibmajor_str,ibminor_str,nil];
+        Queue = [NSMutableArray arrayWithObjects:@"clearerror",ibmajor_str,ibminor_str,adv,pass0,pass1,pass2,name_str,@"checkerror",nil];
         
     }
     
@@ -1499,7 +1761,10 @@ NSMutableArray *Queue;
     
     if (currentPeripheral != Nil) {
         
-        if(currentPeripheral.peripheral && ([currentPeripheral.peripheral isConnected]))
+        if(currentPeripheral.peripheral && ([currentPeripheral.peripheral state] == CBPeripheralStateConnecting )) {
+            [self.manager cancelPeripheralConnection:currentPeripheral.peripheral];
+        }
+        if(currentPeripheral.peripheral && ([currentPeripheral.peripheral state] == CBPeripheralStateConnected ))
         {
             /* Disconnect if it's already connected */
             if (_currentChar != Nil) {
@@ -1508,8 +1773,12 @@ NSMutableArray *Queue;
             [self.manager cancelPeripheralConnection:currentPeripheral.peripheral];
         }
     }
+    
     _currentChar = Nil;
     currentPeripheral = Nil;
+    peripheralIsConnected = NO;
+    peripheralIsConnecting = NO;
+    peripheralIsConnectedButNotRead = NO;
     
     [ConfigView endEditing:YES];
     ConfigView.hidden = YES;
@@ -1517,6 +1786,7 @@ NSMutableArray *Queue;
 
 -(void) working {
     self.WorkingView.hidden = FALSE;
+    [self.WorkingView setFrame: [self.view bounds]];
     [self.w_spinner startAnimating];
     
 }
@@ -1526,13 +1796,28 @@ NSMutableArray *Queue;
     [self.w_spinner stopAnimating];
 }
 
+
+- (void)writing {
+    self.WriteView.hidden = FALSE;
+    [self.WriteView setFrame: [self.view bounds]];
+    [self.write_spinner startAnimating];
+}
+
+- (void)donewriting {
+    self.WriteView.hidden = TRUE;
+    [self.write_spinner stopAnimating];
+}
+
+
+
+
+
 - (IBAction)p_update:(id)sender {
 
     if (currentPeripheral != Nil) {
         
-        if(currentPeripheral.peripheral)
+        if(currentPeripheral.peripheral && peripheralIsConnected == YES && peripheralIsConnectedButNotRead == NO)
         {
-            
             
             @try {
             
@@ -1551,6 +1836,10 @@ NSMutableArray *Queue;
             }
             @finally {
             }
+        } else if (currentPeripheral.peripheral && peripheralIsConnected == NO) {
+            if (currentPeripheral != Nil) {
+                [self.manager cancelPeripheralConnection:currentPeripheral.peripheral];
+            }
         }
     }
     
@@ -1564,11 +1853,33 @@ NSMutableArray *Queue;
     [self p_set];
 }
 - (IBAction)p_reload:(id)sender {
-    [self working];
-    [self q_readall];
+    if (currentPeripheral != Nil) {
+        if(currentPeripheral.peripheral && ([currentPeripheral.peripheral state] == CBPeripheralStateConnected )) {
+            [self working];
+            [self q_readall];
+        }
+    }
 }
 
 - (IBAction)connect_cancel_but:(id)sender {
+    if (currentPeripheral != Nil) {
+        if(currentPeripheral.peripheral && ([currentPeripheral.peripheral state] == CBPeripheralStateConnecting )) {
+            [self.manager cancelPeripheralConnection:currentPeripheral.peripheral];
+            peripheralIsConnecting = NO;
+            peripheralIsConnected = NO;
+            peripheralIsConnectedButNotRead = NO;
+        }
+    }
     [self done];
+}
+
+
+
+- (IBAction)write_cancel:(id)sender {
+}
+- (IBAction)p_advintslider:(id)sender {
+    self.p_advint.text = [NSString stringWithFormat:@"%f", self.p_advintslider.value];
+    [self setAdvIntervalFromSlider];
+    
 }
 @end

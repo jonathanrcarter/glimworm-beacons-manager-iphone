@@ -25,7 +25,7 @@
 @property(retain, readwrite) NSString * UUID;
 @property(retain, readwrite) NSNumber * RSSI;
 @property(readwrite) CFUUIDRef * uuidref;
-@property(retain, readwrite) CBPeripheral * peripheral;
+@property(strong, readwrite) CBPeripheral * peripheral;
 @property(retain, readwrite) NSString * ib_uuid;
 @property(retain, readwrite) NSString * ib_major;
 @property(retain, readwrite) NSString * ib_minor;
