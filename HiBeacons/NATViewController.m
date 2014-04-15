@@ -44,7 +44,7 @@ static CGFloat const kOperationCellHeight = 44;
 static CGFloat const kBeaconCellHeight = 52;
 static CGFloat const kBLECellHeight = 82;
 static NSString * const kBeaconSectionTitle = @"Looking for beacons...";
-static NSString * const kBLESectionTitle = @"Looking for BLE devices...";
+static NSString * const kBLESectionTitle = @"Looking for configurable beacons ...";
 static CGPoint const kActivityIndicatorPosition = (CGPoint){205, 12};
 static NSString * const kBeaconsHeaderViewIdentifier = @"BeaconsHeader";
 
@@ -1438,6 +1438,7 @@ NSString *incoming_uuid = @"00000000-0000-0000-0000-000000000000";
                     NSLog(@"array intvalue %ld",(long)[array[1] integerValue]);
                     NSLog(@"array intvalue %d",[array[1] intValue]);
                     NSLog(@"array intvalue %f",dv);
+                    self.p_battlevel.text = [NSString stringWithFormat:@"Battery :%d %%", [array[1] intValue]];
                 } else {
                     NSLog(@"ERR returns %@",str);
                     q_error = YES;
