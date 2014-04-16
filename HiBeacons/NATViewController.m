@@ -69,10 +69,21 @@ CBCharacteristic *_currentChar = Nil;
 NSString *currentcommand = @"";
 NSString *currentfirmware = @"";
 bool isWorking = FALSE;
+static const NSTimeInterval kLXCBScanningTimeout = 10.0;
+static const NSTimeInterval kLXCBConnectingTimeout = 10.0;
+static const NSTimeInterval kLXCBRequestTimeout = 5.0;
+
+
+
 /* added by j carter for glimworm beacons - end */
 
 
 @interface NATViewController ()
+
+@property(nonatomic, strong) CBPeripheral *connectedPeripheral;
+@property(nonatomic, strong) CBService *connectedService;
+@property(nonatomic, strong) CBCharacteristic *currentChar;
+
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLBeaconRegion *beaconRegion;
@@ -1073,6 +1084,29 @@ bool isWorking = FALSE;
     
 }
 
+/*
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self setFontFamily:@"FagoOfficeSans-Regular" forView:self.view andSubViews:YES];
+}
+-(void)setFontFamily:(NSString*)fontFamily forView:(UIView*)view andSubViews:(BOOL)isSubViews
+{
+    if ([view isKindOfClass:[UILabel class]])
+    {
+        UILabel *lbl = (UILabel *)view;
+        [lbl setFont:[UIFont fontWithName:fontFamily size:[[lbl font] pointSize]]];
+    }
+    
+    if (isSubViews)
+    {
+        for (UIView *sview in view.subviews)
+        {
+            [self setFontFamily:fontFamily forView:sview andSubViews:YES];
+        }
+    }
+}
+ */
 - (void)viewWillAppear:(BOOL)animated {
 
 //    [[NSNotificationCenter defaultCenter] addObserver:self
@@ -1197,6 +1231,7 @@ NSString *incoming_uuid = @"00000000-0000-0000-0000-000000000000";
 - (void) peripheral:(CBPeripheral *)aPeripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     NSLog(@"-- didUpdateValueForCharacteristic");
+    [self cancelRequestTimeoutMonitor:characteristic];
     
     /* Updated value for heart rate measurement received */
     if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"FFE1"]])
@@ -1567,11 +1602,37 @@ NSString *currentInterval = @"";
     
     //    NSString *get6 = [[NSString alloc] initWithFormat:@"AT+MEAS?"]; // Value
     
-    Queue = [NSMutableArray arrayWithObjects:@"clearerror",get1,get2,get3,get4,get5,get6,get7,get8,get9,get10,get11,get12,get13,@"checkerror",nil];
+    Queue = [NSMutableArray arrayWithObjects:@"clearerror",get0,get1,get2,get3,get4,get5,get6,get7,get8,get9,get10,get11,get12,get13,@"checkerror",nil];
     
     [self q_next];
 }
 
+
+#pragma mark -
+
+- (void)startRequestTimeout:(CBCharacteristic *)characteristic {
+    [self cancelRequestTimeoutMonitor:characteristic];
+    [self performSelector:@selector(requestDidTimeout:)
+               withObject:characteristic
+               afterDelay:kLXCBRequestTimeout];
+}
+
+- (void)cancelRequestTimeoutMonitor:(CBCharacteristic *)characteristic {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self
+                                             selector:@selector(requestDidTimeout:)
+                                               object:characteristic];
+}
+
+- (void)requestDidTimeout:(CBCharacteristic *)characteristic {
+    NSLog(@"requestDidTimeout: %@", characteristic);
+    [self q_next];
+//    NSError *error = [[self class] errorWithDescription:@"Unable to request data from BTLE device."];
+//    [self.delegate centralClient:self
+//        requestForCharacteristic:characteristic
+//                         didFail:error];
+//    [self.connectedPeripheral setNotifyValue:NO
+//                           forCharacteristic:characteristic];
+}
 
 NSMutableArray *Queue;
 bool q_error = NO;
@@ -1668,6 +1729,7 @@ bool q_error = NO;
 //        NSString *str=[[NSString alloc] initWithBytes:data.bytes length:data.length encoding:NSUTF8StringEncoding];
 //        [currentPeripheral.peripheral writeValue:data forCharacteristic:_currentChar type:CBCharacteristicWriteWithResponse];
         [currentPeripheral.peripheral writeValue:data forCharacteristic:_currentChar type:CBCharacteristicWriteWithoutResponse];
+        [self startRequestTimeout:_currentChar];
     } else {
         currentcommand = @"";
         [self donewriting];
@@ -1791,6 +1853,9 @@ bool q_error = NO;
     peripheralIsConnected = NO;
     peripheralIsConnecting = NO;
     peripheralIsConnectedButNotRead = NO;
+
+    [self stopConfigurationMonitoring];
+    [self startConfigurationMonitoring];
     
     [ConfigView endEditing:YES];
     ConfigView.hidden = YES;
