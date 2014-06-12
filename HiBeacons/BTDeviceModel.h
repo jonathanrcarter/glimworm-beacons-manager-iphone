@@ -18,6 +18,7 @@
     NSString * ib_major;
     NSString * ib_minor;
     NSString * found;
+    int batterylevel;
     NSString * ID;
 
 }
@@ -31,5 +32,6 @@
 @property(retain, readwrite) NSString * ib_minor;
 @property(retain, readwrite) NSString * found;
 @property(retain, readwrite) NSString * ID;
+@property(readwrite) int batterylevel;
 
 @end

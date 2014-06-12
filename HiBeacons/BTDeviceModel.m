@@ -22,6 +22,8 @@
 @synthesize ib_minor;
 @synthesize found;
 @synthesize ID;
+@synthesize batterylevel;
+
 
 -(void) dealloc {
 //    [name release];

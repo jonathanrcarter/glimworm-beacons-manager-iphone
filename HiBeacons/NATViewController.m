@@ -69,6 +69,9 @@ CBCharacteristic *_currentChar = Nil;
 NSString *currentcommand = @"";
 NSString *currentfirmware = @"";
 bool isWorking = FALSE;
+int MIN = 0;
+NSString *LASTPASS = @"761298";
+
 static const NSTimeInterval kLXCBScanningTimeout = 10.0;
 static const NSTimeInterval kLXCBConnectingTimeout = 10.0;
 static const NSTimeInterval kLXCBRequestTimeout = 5.0;
@@ -106,6 +109,7 @@ static const NSTimeInterval kLXCBRequestTimeout = 5.0;
 @property (weak, nonatomic) IBOutlet UITextField *p_name;
 @property (weak, nonatomic) IBOutlet UITextField *p_pincode;
 @property (weak, nonatomic) IBOutlet UILabel *p_firmware;
+- (IBAction)p_reset:(id)sender;
 - (IBAction)p_update:(id)sender;
 - (IBAction)p_sendchanges:(id)sender;
 - (IBAction)p_reload:(id)sender;
@@ -297,7 +301,7 @@ static const NSTimeInterval kLXCBRequestTimeout = 5.0;
                 if (!cell)
                     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                                   reuseIdentifier:kBeaconCellIdentifier];
-                cell.textLabel.text = beacon.name;
+                cell.textLabel.text = [NSString stringWithFormat : @"%@ (%d%%)", beacon.name,beacon.batterylevel];
                 cell.detailTextLabel.text = [NSString stringWithFormat : @"%@", beacon.UUID];
                 cell.detailTextLabel.textColor = [UIColor grayColor];
                 
@@ -545,6 +549,52 @@ static const NSTimeInterval kLXCBRequestTimeout = 5.0;
     
     NSLog(@"ADDATA u %@",advertisementData);
     
+    NSData* versionInfo = [advertisementData objectForKey:CBAdvertisementDataManufacturerDataKey];
+    
+    NSLog(@"versionInfo u %@",versionInfo);
+
+    NSNumber* isconnectable = [advertisementData objectForKey:CBAdvertisementDataIsConnectable];
+    
+    NSLog(@"isconnectable u %@",isconnectable);
+
+    NSDictionary* servicedata = [advertisementData objectForKey:CBAdvertisementDataServiceDataKey];
+    NSLog(@"servicedata u %@",servicedata);
+
+    int batt = 0;
+    
+    BOOL fnd = NO;
+    CBUUID *_key;
+    for (_key in [servicedata allKeys]){
+        NSData *obj;
+        obj = [servicedata objectForKey: _key];
+        NSLog(@"key : %@  value : %@",_key.data,obj);
+        
+        NSString *__key = [[NSString alloc] initWithFormat:@"%@", _key.data];
+        NSString *__val = [[NSString alloc] initWithFormat:@"%@", obj];
+        if ([__key isEqualToString:@"<b000>"]) {
+            fnd = YES;
+            NSString *batt_level = [NSString stringWithFormat:@"%@",
+                                    [__val substringWithRange:NSMakeRange(6, 3)]];
+            
+            NSString *batt_level_int;
+            batt_level_int = [self hex2dec:batt_level];
+            batt = [batt_level_int intValue];
+            
+        }
+    };
+    
+    if (!fnd) {
+        return;
+    }
+
+    NSLog(@"Battery level : %d",batt);
+
+    /*[servicedata enumerateKeysAndObjectsUsingBlock::^(id key, id object, BOOL *stop) {
+        NSLog(@"The key is %@", key);
+        NSLog(@"The value is %@", object);
+    }];*/
+
+    
     /*
 
      kCBAdvDataChannel = 38;
@@ -585,6 +635,7 @@ static const NSTimeInterval kLXCBRequestTimeout = 5.0;
                 //NSLog(@"** MATCHED **");
                 m.RSSI = RSSI;
                 m.name = _name;
+                m.batterylevel = batt;
                 
                 /*for (CBService* service in peripheral.services)
                 {
@@ -642,6 +693,7 @@ static const NSTimeInterval kLXCBRequestTimeout = 5.0;
         pm.ib_uuid = @"";
         pm.ib_major = @"";
         pm.ib_minor = @"";
+        pm.batterylevel = batt;
         
         /*
         NSLog(@"%@",value);
@@ -1081,6 +1133,7 @@ static const NSTimeInterval kLXCBRequestTimeout = 5.0;
     self.p_major.text = btm.ib_major;
     self.p_minor.text = btm.ib_minor;
 */
+    self.p_uuid.layer.borderColor = [[UIColor grayColor]CGColor];
     
 }
 
@@ -1218,6 +1271,7 @@ bool peripheralIsConnectedButNotRead = NO;
     if ([currentfirmware isEqualToString:@"V519"]) return FALSE;
     if ([currentfirmware isEqualToString:@"V520"]) return FALSE;
     if ([currentfirmware isEqualToString:@"V521"]) return FALSE;
+    if ([currentfirmware isEqualToString:@"V522"]) return FALSE;
     return TRUE;
 }
 
@@ -1282,6 +1336,10 @@ NSString *incoming_uuid = @"00000000-0000-0000-0000-000000000000";
                     } else if ([currentfirmware isEqualToString:@"V521"]) {
                         
                     } else if ([currentfirmware isEqualToString:@"V522"]) {
+                    } else if ([currentfirmware isEqualToString:@"V523"]) {
+                    } else if ([currentfirmware isEqualToString:@"V524"]) {
+                    } else if ([currentfirmware isEqualToString:@"V525"]) {
+                    } else if ([currentfirmware isEqualToString:@"V526"]) {
                         
                     }
                 } else {
@@ -1608,7 +1666,9 @@ NSString *currentInterval = @"";
 }
 
 
-#pragma mark -
+#pragma mark - request timeout code 
+// thanks to https://github.com/liquidx/CoreBluetoothPeripheral/blob/48ff54b31b41e5ca01fae496e3548209f6da9e8b/CoreBluetoothOSXCentral/CoreBluetoothOSXCentral/LXCBCentralClient.m
+
 
 - (void)startRequestTimeout:(CBCharacteristic *)characteristic {
     [self cancelRequestTimeoutMonitor:characteristic];
@@ -1633,6 +1693,9 @@ NSString *currentInterval = @"";
 //    [self.connectedPeripheral setNotifyValue:NO
 //                           forCharacteristic:characteristic];
 }
+
+
+#pragma mark - sending queue
 
 NSMutableArray *Queue;
 bool q_error = NO;
@@ -1776,6 +1839,7 @@ bool q_error = NO;
         pass0 = @"AT+TYPE0";
     }
     
+    NSString *showbatt = @"AT+BATC1";
     
     // format   74278bda-b644-4520-8f0c-720eaf059935
     //          0        9    14   19   24  28
@@ -1799,11 +1863,11 @@ bool q_error = NO;
                          [[self.p_uuid.text uppercaseString] substringWithRange:NSMakeRange(28, 8)]
                          ];
         
-        Queue = [NSMutableArray arrayWithObjects:@"clearerror",ibmajor_str,ibminor_str,ib0,ib1,ib2,ib3,adv,pass0,pass1,pass2,name_str,@"checkerror",nil];
+        Queue = [NSMutableArray arrayWithObjects:@"clearerror",ibmajor_str,ibminor_str,ib0,ib1,ib2,ib3,adv,pass0,pass1,pass2,name_str,showbatt,@"checkerror",nil];
         
 
     } else {
-        Queue = [NSMutableArray arrayWithObjects:@"clearerror",ibmajor_str,ibminor_str,adv,pass0,pass1,pass2,name_str,@"checkerror",nil];
+        Queue = [NSMutableArray arrayWithObjects:@"clearerror",ibmajor_str,ibminor_str,adv,pass0,pass1,pass2,name_str,showbatt,@"checkerror",nil];
         
     }
     
@@ -1861,6 +1925,9 @@ bool q_error = NO;
     ConfigView.hidden = YES;
 }
 
+#pragma mark - working views
+
+
 -(void) working {
     self.WorkingView.hidden = FALSE;
     [self.WorkingView setFrame: [self.view bounds]];
@@ -1889,8 +1956,23 @@ bool q_error = NO;
 
 
 
+- (IBAction)p_reset:(id)sender {
+    MIN = [self.p_minor.text intValue];
+    MIN++;
+    self.p_major.text = @"1";
+    self.p_pincode.text = LASTPASS;
+    self.p_minor.text = [[NSString alloc] initWithFormat:@"%d",MIN];
+    self.p_uuid.text = @"74278bda-b644-4520-8f0c-720eaf059935";
+    self.p_advintslider.value = 9;
+    self.p_name.text = [[NSString alloc] initWithFormat:@"GWB_%@_%@",self.p_major.text,self.p_minor.text];
+    [self setAdvIntervalFromSlider];
+}
+
 - (IBAction)p_update:(id)sender {
 
+    MIN = [self.p_minor.text intValue];
+    LASTPASS = self.p_pincode.text;
+    
     if (currentPeripheral != Nil) {
         
         if(currentPeripheral.peripheral && peripheralIsConnected == YES && peripheralIsConnectedButNotRead == NO)
