@@ -36,15 +36,15 @@ static NSString * const kBeaconCellIdentifier = @"BeaconCell";
 
 static NSString * const kMonitoringOperationTitle = @"Monitoring";
 static NSString * const kAdvertisingOperationTitle = @"Advertising";
-static NSString * const kRangingOperationTitle = @"Ranging";
-static NSString * const kConfigOperationTitle = @"Configure";
+static NSString * const kRangingOperationTitle = @"Range For Beacons";
+static NSString * const kConfigOperationTitle = @"Configure Beacons";
 static NSUInteger const kNumberOfSections = 2;
-static NSUInteger const kNumberOfAvailableOperations = 4;
+static NSUInteger const kNumberOfAvailableOperations = 2;   // 4
 static CGFloat const kOperationCellHeight = 44;
 static CGFloat const kBeaconCellHeight = 52;
 static CGFloat const kBLECellHeight = 82;
 static NSString * const kBeaconSectionTitle = @"Looking for beacons...";
-static NSString * const kBLESectionTitle = @"Looking for configurable beacons ...";
+static NSString * const kBLESectionTitle = @"Looking for configurable Glimworm Beacons ...";
 static CGPoint const kActivityIndicatorPosition = (CGPoint){205, 12};
 static NSString * const kBeaconsHeaderViewIdentifier = @"BeaconsHeader";
 
@@ -56,11 +56,18 @@ typedef NS_ENUM(NSUInteger, NTSectionType) {
     NTDetectedBeaconsSection
 };
 
+//typedef NS_ENUM(NSUInteger, NTOperationsRow) {
+//    NTMonitoringRow,
+//    NTAdvertisingRow,
+//    NTRangingRow,
+//    NTConfigRow
+//};
+
 typedef NS_ENUM(NSUInteger, NTOperationsRow) {
-    NTMonitoringRow,
-    NTAdvertisingRow,
+    NTConfigRow,
     NTRangingRow,
-    NTConfigRow
+    NTMonitoringRow,
+    NTAdvertisingRow
 };
 
 /* added by j carter for glimworm beacons - start*/
@@ -70,10 +77,10 @@ NSString *currentcommand = @"";
 NSString *currentfirmware = @"";
 bool isWorking = FALSE;
 int MIN = 0;
-NSString *LASTPASS = @"761298";
+NSString *LASTPASS = @"";
 
-static const NSTimeInterval kLXCBScanningTimeout = 10.0;
-static const NSTimeInterval kLXCBConnectingTimeout = 10.0;
+//static const NSTimeInterval kLXCBScanningTimeout = 10.0;
+//static const NSTimeInterval kLXCBConnectingTimeout = 10.0;
 static const NSTimeInterval kLXCBRequestTimeout = 5.0;
 
 
@@ -213,19 +220,26 @@ static const NSTimeInterval kLXCBRequestTimeout = 5.0;
     NSMutableArray *mutableBeacons = [beacons mutableCopy];
     
     NSMutableSet *lookup = [[NSMutableSet alloc] init];
-    for (int index = 0; index < [beacons count]; index++) {
-        CLBeacon *curr = [beacons objectAtIndex:index];
+    for (int index = 0; index < [mutableBeacons count]; index++) {
+        CLBeacon *curr = [mutableBeacons objectAtIndex:index];
         NSString *identifier = [NSString stringWithFormat:@"%@/%@", curr.major, curr.minor];
+        
+        //NSLog(@"FILTER : look for %@ at index %d.", identifier, index);
         
         // this is very fast constant time lookup in a hash table
         if ([lookup containsObject:identifier]) {
+            //NSLog(@"FILTER : look for [lookup contained object] , length motable beacons is %d  ", [mutableBeacons count]);
+            //NSLog(@"FILTER : look for [lookup contained object] , identifier : d %@. ", identifier);
+            //NSLog(@"FILTER : look for [lookup contained object] , index is  : d %@. ", identifier);
             [mutableBeacons removeObjectAtIndex:index];
         } else {
+            //NSLog(@"FILTER : look for [lookup FAIL] , length motable beacons is %d  ", [mutableBeacons count]);
+            //NSLog(@"FILTER : look for [lookup FAIL] , identifier : d %@. ", identifier);
             [lookup addObject:identifier];
         }
     }
-    
-    return [mutableBeacons copy];
+    return mutableBeacons;
+//    return [mutableBeacons copy];
 }
 
 #pragma mark - Table view functionality
@@ -301,9 +315,26 @@ static const NSTimeInterval kLXCBRequestTimeout = 5.0;
                 if (!cell)
                     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                                   reuseIdentifier:kBeaconCellIdentifier];
-                cell.textLabel.text = [NSString stringWithFormat : @"%@ (%d%%)", beacon.name,beacon.batterylevel];
-                cell.detailTextLabel.text = [NSString stringWithFormat : @"%@", beacon.UUID];
-                cell.detailTextLabel.textColor = [UIColor grayColor];
+                
+                
+                
+                NSString *lvl = @"Very Low";
+                if (beacon.batterylevel > 20) lvl = @"Low";
+                if (beacon.batterylevel > 40) lvl = @"Medium";
+                if (beacon.batterylevel > 60) lvl = @"High";
+                if (beacon.batterylevel > 80) lvl = @"Very High";
+                
+//                cell.textLabel.text = [NSString stringWithFormat : @"%@ (%d%%)", beacon.name,beacon.batterylevel];
+                cell.textLabel.text = [NSString stringWithFormat : @"%@", beacon.name];
+//                cell.detailTextLabel.text = [NSString stringWithFormat : @"%@", beacon.UUID];
+                cell.detailTextLabel.text = [NSString stringWithFormat : @"Battery Level : %@", lvl];
+                cell.detailTextLabel.textColor = [UIColor colorWithRed:90 green:0 blue:0 alpha:1];
+                if (beacon.batterylevel > 20) cell.detailTextLabel.textColor = [UIColor orangeColor];
+                if (beacon.batterylevel > 40) cell.detailTextLabel.textColor = [UIColor orangeColor];
+                if (beacon.batterylevel > 60) cell.detailTextLabel.textColor = [UIColor colorWithRed:0 green:60 blue:0 alpha:1];
+                if (beacon.batterylevel > 80) cell.detailTextLabel.textColor = [UIColor colorWithRed:0 green:60 blue:0 alpha:1];
+                cell.detailTextLabel.font = [UIFont fontWithName:@"LiberationMono-Bold" size:22];
+                
                 
             } else {
             
@@ -415,6 +446,7 @@ static const NSTimeInterval kLXCBRequestTimeout = 5.0;
                     [self connect];
                     
                     [self.p_uuid becomeFirstResponder];
+                    self.configSwitch.on = false;
                 }
             }
     }
@@ -542,23 +574,22 @@ static const NSTimeInterval kLXCBRequestTimeout = 5.0;
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI {
     
-    //NSString *value = [[NSString alloc] initWithFormat:@"disc %@ %@ %@", peripheral.name, RSSI, [peripheral.identifier UUIDString]];
     NSString *_name = [[NSString alloc] initWithFormat:@"%@", peripheral.name];
-    //NSString *u = [peripheral.identifier UUIDString];
     NSString *_uuid = [peripheral.identifier UUIDString];
     
-    NSLog(@"ADDATA u %@",advertisementData);
+    
+    //NSLog(@"CBAdvertisementDataManufacturerDataKey u %@",CBAdvertisementDataManufacturerDataKey);
     
     NSData* versionInfo = [advertisementData objectForKey:CBAdvertisementDataManufacturerDataKey];
     
-    NSLog(@"versionInfo u %@",versionInfo);
+    //NSLog(@"versionInfo u %@",versionInfo);
 
     NSNumber* isconnectable = [advertisementData objectForKey:CBAdvertisementDataIsConnectable];
     
-    NSLog(@"isconnectable u %@",isconnectable);
+    //NSLog(@"isconnectable u %@",isconnectable);
 
     NSDictionary* servicedata = [advertisementData objectForKey:CBAdvertisementDataServiceDataKey];
-    NSLog(@"servicedata u %@",servicedata);
+    //NSLog(@"servicedata u %@",servicedata);
 
     int batt = 0;
     
@@ -567,7 +598,7 @@ static const NSTimeInterval kLXCBRequestTimeout = 5.0;
     for (_key in [servicedata allKeys]){
         NSData *obj;
         obj = [servicedata objectForKey: _key];
-        NSLog(@"key : %@  value : %@",_key.data,obj);
+        //NSLog(@"key : %@  value : %@",_key.data,obj);
         
         NSString *__key = [[NSString alloc] initWithFormat:@"%@", _key.data];
         NSString *__val = [[NSString alloc] initWithFormat:@"%@", obj];
@@ -587,7 +618,7 @@ static const NSTimeInterval kLXCBRequestTimeout = 5.0;
         return;
     }
 
-    NSLog(@"Battery level : %d",batt);
+    //NSLog(@"Battery level : %d",batt);
 
     /*[servicedata enumerateKeysAndObjectsUsingBlock::^(id key, id object, BOOL *stop) {
         NSLog(@"The key is %@", key);
@@ -609,7 +640,7 @@ static const NSTimeInterval kLXCBRequestTimeout = 5.0;
      kCBAdvDataTxPowerLevel = 0;
      
      */
-    NSLog(@"ADDATA u %@",[advertisementData allValues]);
+    //NSLog(@"ADDATA u %@",[advertisementData allValues]);
     
     
     //NSLog(@"CFSTRINGREF u %@",u);   // this is just the UUID
@@ -746,10 +777,10 @@ static const NSTimeInterval kLXCBRequestTimeout = 5.0;
         
     }
     @catch (NSException * e) {
-        NSLog(@"Exception: %@", e);
+        //NSLog(@"Exception: %@", e);
     }
     @finally {
-//        NSLog(@"Array is now: %@", self.ItemArray);
+        NSLog(@"Array is now: %@", self.ItemArray);
         [self updateBLEtable];
         
     
@@ -758,8 +789,35 @@ static const NSTimeInterval kLXCBRequestTimeout = 5.0;
 
 -(void)updateBLEtable {
 
+    /*
+    NSIndexSet *insertedSections = [self insertedSections];
+    NSIndexSet *deletedSections = [self deletedSections];
+    NSArray *deletedRows = [self indexPathsOfRemovedBeacons:filteredBeacons];
+    NSArray *insertedRows = [self indexPathsOfInsertedBeacons:filteredBeacons];
+    NSArray *reloadedRows = nil;
+    if (!deletedRows && !insertedRows)
+        reloadedRows = [self indexPathsForBeacons:filteredBeacons];
+    
+    self.detectedBeacons = [filteredBeacons copy];
+    
+    [self.beaconTableView beginUpdates];
+    if (insertedSections)
+        [self.beaconTableView insertSections:insertedSections withRowAnimation:UITableViewRowAnimationFade];
+    if (deletedSections)
+        [self.beaconTableView deleteSections:deletedSections withRowAnimation:UITableViewRowAnimationFade];
+    if (insertedRows)
+        [self.beaconTableView insertRowsAtIndexPaths:insertedRows withRowAnimation:UITableViewRowAnimationFade];
+    if (deletedRows)
+        [self.beaconTableView deleteRowsAtIndexPaths:deletedRows withRowAnimation:UITableViewRowAnimationFade];
+    if (reloadedRows)
+        [self.beaconTableView reloadRowsAtIndexPaths:reloadedRows withRowAnimation:UITableViewRowAnimationNone];
+    [self.beaconTableView endUpdates];
+    */
+    
+    
     NSIndexSet *insertedSections;
     if (self.configSwitch.on && [self.beaconTableView numberOfSections] == kNumberOfSections - 1) {
+        NSLog(@"INSERTING SECTION");
         insertedSections = [NSIndexSet indexSetWithIndex:1];
         [self.beaconTableView beginUpdates];
         [self.beaconTableView insertSections:insertedSections withRowAnimation:UITableViewRowAnimationFade];
@@ -769,9 +827,10 @@ static const NSTimeInterval kLXCBRequestTimeout = 5.0;
 
     if (!self.configSwitch.on && [self.beaconTableView numberOfSections] == kNumberOfSections) {
         NSLog(@"DELETING SECTION");
-        insertedSections = [NSIndexSet indexSetWithIndex:1];
+//        insertedSections = [NSIndexSet indexSetWithIndex:1];
+        NSIndexSet *deletedSections = [self deletedSections];
         [self.beaconTableView beginUpdates];
-        [self.beaconTableView deleteSections:insertedSections withRowAnimation:UITableViewRowAnimationFade];
+        [self.beaconTableView deleteSections:deletedSections withRowAnimation:UITableViewRowAnimationFade];
         [self.beaconTableView endUpdates];
         return;
     }
@@ -976,6 +1035,8 @@ static const NSTimeInterval kLXCBRequestTimeout = 5.0;
     if (!deletedRows && !insertedRows)
         reloadedRows = [self indexPathsForBeacons:filteredBeacons];
     
+//    self.detectedBeacons = nil;
+//    self.detectedBeacons = [filteredBeacons copy];
     self.detectedBeacons = filteredBeacons;
     
     [self.beaconTableView beginUpdates];
@@ -1968,8 +2029,7 @@ bool q_error = NO;
     [self setAdvIntervalFromSlider];
 }
 
-- (IBAction)p_update:(id)sender {
-
+-(void) close_update_window {
     MIN = [self.p_minor.text intValue];
     LASTPASS = self.p_pincode.text;
     
@@ -1979,7 +2039,7 @@ bool q_error = NO;
         {
             
             @try {
-            
+                
                 //            NSString *name_str = [[NSString alloc] initWithFormat:@"AT+NAME%@",
                 //                                  ([[p_name stringValue] length] > 11 ) ? [[[p_name stringValue] uppercaseString] substringWithRange:NSMakeRange(0, 11)] : [[p_name stringValue] uppercaseString]
                 //                                  ];
@@ -1988,7 +2048,7 @@ bool q_error = NO;
                 Queue = [NSMutableArray arrayWithObjects:reset,@"close",nil];
                 [self q_next];
                 return;
-
+                
             }
             @catch (NSException * e) {
                 NSLog(@"Exception: %@", e);
@@ -2003,8 +2063,13 @@ bool q_error = NO;
     }
     
     [self p_close_window];
+    
+}
 
 
+- (IBAction)p_update:(id)sender {
+    
+    [self close_update_window];
 
 }
 
@@ -2029,6 +2094,7 @@ bool q_error = NO;
             peripheralIsConnectedButNotRead = NO;
         }
     }
+    [self close_update_window];
     [self done];
 }
 
@@ -2041,4 +2107,5 @@ bool q_error = NO;
     [self setAdvIntervalFromSlider];
     
 }
+
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		490E934F19685C0B00E4ACE7 /* working.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490E934E19685C0B00E4ACE7 /* working.xib */; };
 		494C6A151940A4A900E2EC69 /* NATHiBeaconsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2BC93218019D6100C66D15 /* NATHiBeaconsDelegate.m */; };
 		494C6A161940A4A900E2EC69 /* BTDeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4955666B18F1503800DA3A12 /* BTDeviceModel.m */; };
 		494C6A171940A4A900E2EC69 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2BC92E18019D6100C66D15 /* main.m */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		490E934E19685C0B00E4ACE7 /* working.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = working.xib; sourceTree = "<group>"; };
 		494C6A271940A4A900E2EC69 /* HiBeacons copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HiBeacons copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		494C6A281940A4AB00E2EC69 /* HiBeacons copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "HiBeacons copy-Info.plist"; path = "/Users/jc/Downloads/HiBeacons-master/HiBeacons copy-Info.plist"; sourceTree = "<absolute>"; };
 		4955666A18F1503100DA3A12 /* BTDeviceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTDeviceModel.h; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				CF2BC93118019D6100C66D15 /* NATHiBeaconsDelegate.h */,
 				CF2BC93218019D6100C66D15 /* NATHiBeaconsDelegate.m */,
 				CF2BC9511801A09D00C66D15 /* Main.storyboard */,
+				490E934E19685C0B00E4ACE7 /* working.xib */,
 				CF2BC9531801A0C700C66D15 /* NATViewController.h */,
 				CF2BC9541801A0C700C66D15 /* NATViewController.m */,
 				CF2BC93418019D6100C66D15 /* Images.xcassets */,
@@ -316,6 +319,7 @@
 				CF2BC92D18019D6100C66D15 /* InfoPlist.strings in Resources */,
 				CF2BC93518019D6100C66D15 /* Images.xcassets in Resources */,
 				CF2BC9521801A09D00C66D15 /* Main.storyboard in Resources */,
+				490E934F19685C0B00E4ACE7 /* working.xib in Resources */,
 				49B5A53519002C2200745F94 /* gbhome.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -500,8 +504,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Glimworm Information Technology BV (6T85H53TFX)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Glimworm Information Technology BV (6T85H53TFX)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HiBeacons/HiBeacons-Prefix.pch";
 				INFOPLIST_FILE = "HiBeacons/HiBeacons-Info.plist";
@@ -516,8 +520,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Glimworm Information Technology BV (6T85H53TFX)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Glimworm Information Technology BV (6T85H53TFX)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HiBeacons/HiBeacons-Prefix.pch";
 				INFOPLIST_FILE = "HiBeacons/HiBeacons-Info.plist";
