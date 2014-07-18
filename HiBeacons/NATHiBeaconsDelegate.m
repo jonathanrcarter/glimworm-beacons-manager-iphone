@@ -35,14 +35,18 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
+    NSLog(@"application RESIGNED ACTIVE ");
+
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    NSLog(@"application ENTER BG ");
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
+    NSLog(@"application ENTER FG ");
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -60,6 +64,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+    NSLog(@"application WILL TERMINATE ");
 }
 
 @end

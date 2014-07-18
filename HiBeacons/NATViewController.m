@@ -82,6 +82,7 @@ NSString *LASTPASS = @"";
 //static const NSTimeInterval kLXCBScanningTimeout = 10.0;
 //static const NSTimeInterval kLXCBConnectingTimeout = 10.0;
 static const NSTimeInterval kLXCBRequestTimeout = 5.0;
+static const NSTimeInterval kLXCBActivateTimeout = 5.0;
 
 
 
@@ -129,6 +130,12 @@ static const NSTimeInterval kLXCBRequestTimeout = 5.0;
 - (IBAction)p_advintslider:(id)sender;
 @property (weak, nonatomic) IBOutlet UISlider *p_advintslider;
 @property (weak, nonatomic) IBOutlet UILabel *p_battlevel;
+- (IBAction)p_rangeslider:(id)sender;
+@property (weak, nonatomic) IBOutlet UISlider *p_rangeslider;
+@property (weak, nonatomic) IBOutlet UILabel *p_measuredpower;
+@property (weak, nonatomic) IBOutlet UILabel *p_rangelabel;
+
+
 
 @end
 @implementation NATViewController
@@ -780,7 +787,7 @@ static const NSTimeInterval kLXCBRequestTimeout = 5.0;
         //NSLog(@"Exception: %@", e);
     }
     @finally {
-        NSLog(@"Array is now: %@", self.ItemArray);
+//        NSLog(@"Array is now: %@", self.ItemArray);
         [self updateBLEtable];
         
     
@@ -1180,8 +1187,15 @@ static const NSTimeInterval kLXCBRequestTimeout = 5.0;
 
 -(void)connect {
 
+    
+    
     if (currentPeripheral != Nil) {
-        [self.manager connectPeripheral:currentPeripheral.peripheral options:nil];
+        if (!peripheralIsConnected && !peripheralIsConnecting) {
+            if (!connectActive) {
+                [self.manager connectPeripheral:currentPeripheral.peripheral options:nil];
+                connectActive = YES;
+            }
+        }
     }
 /*
     NSLog(@"DIDSELECTROWATINDEXPATH %@", btm);
@@ -1221,6 +1235,12 @@ static const NSTimeInterval kLXCBRequestTimeout = 5.0;
     }
 }
  */
+-(void) m1 {
+    NSLog(@"application M1 ");
+}
+
+
+
 - (void)viewWillAppear:(BOOL)animated {
 
 //    [[NSNotificationCenter defaultCenter] addObserver:self
@@ -1232,9 +1252,10 @@ static const NSTimeInterval kLXCBRequestTimeout = 5.0;
                                              selector:@selector(activate:)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
-
+    
 }
 
+bool connectActive = NO;
 bool peripheralIsConnected = NO;
 bool peripheralIsConnecting = NO;
 bool peripheralIsConnectedButNotRead = NO;
@@ -1242,7 +1263,7 @@ bool peripheralIsConnectedButNotRead = NO;
 - (void) centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)aPeripheral
 {
     NSLog(@" connectED ( %@ )", [aPeripheral name]);
-    
+    connectActive = NO;
     peripheralIsConnected = YES;
     peripheralIsConnecting = NO;
     peripheralIsConnectedButNotRead = YES;
@@ -1513,10 +1534,19 @@ NSString *incoming_uuid = @"00000000-0000-0000-0000-000000000000";
             }
             
             
+            if ([currentcommand isEqualToString:@"AT+MEAS?"]) {
+                NSArray *array = [str componentsSeparatedByString:@":"];
+                NSLog(@"measured power : %@",[self hex2dec:array[1]]);
+                self.p_measuredpower.text = [self hex2dec:array[1]];
+
+            }
             if ([currentcommand isEqualToString:@"AT+POWE?"]) {
                 NSArray *array = [str componentsSeparatedByString:@":"];
                 NSLog(@"array %@",array[1]);
                 int val = [array[1] intValue];
+                self.p_rangeslider.value = val;
+                [self setRangeLabelFromSlider];
+                
                 if (val == 0) {
 //                    p5m.state = 0;
 //                    p50m.state = 0;
@@ -1610,8 +1640,31 @@ NSString *incoming_uuid = @"00000000-0000-0000-0000-000000000000";
         }
     }
 }
-NSString *currentInterval = @"";
+NSString *currentRange = @"";
 
+-(void)setRangeLabelFromSlider {
+    self.p_rangeslider.value = roundf(self.p_rangeslider.value);
+    switch ((int)self.p_rangeslider.value) {
+        case 0:
+            self.p_rangelabel.text = @"10m";
+            currentRange = @"0";
+            break;
+        case 1:
+            self.p_rangelabel.text = @"20m";
+            currentRange = @"1";
+            break;
+        case 2:
+            self.p_rangelabel.text = @"50m";
+            currentRange = @"2";
+            break;
+        case 3:
+            self.p_rangelabel.text = @"100m";
+            currentRange = @"3";
+            break;
+    }
+}
+
+NSString *currentInterval = @"";
 -(void)setAdvIntervalFromSlider {
     
     self.p_advintslider.value = roundf(self.p_advintslider.value);
@@ -1708,6 +1761,7 @@ NSString *currentInterval = @"";
     NSString *get2 = [[NSString alloc] initWithFormat:@"AT+BATT?"];
     NSString *get3 = [[NSString alloc] initWithFormat:@"AT+ADVI?"];
     NSString *get4 = [[NSString alloc] initWithFormat:@"AT+POWE?"]; // 0 1 2 3 2 = std
+    NSString *get4a = [[NSString alloc] initWithFormat:@"AT+MEAS?"]; // 0 1 2 3 2 = std
     NSString *get5 = [[NSString alloc] initWithFormat:@"AT+PASS?"]; // 2 PIN
     NSString *get6 = [[NSString alloc] initWithFormat:@"AT+MARJ?"]; // 2 PIN
     NSString *get7 = [[NSString alloc] initWithFormat:@"AT+MINO?"]; // 2 PIN
@@ -1721,7 +1775,7 @@ NSString *currentInterval = @"";
     
     //    NSString *get6 = [[NSString alloc] initWithFormat:@"AT+MEAS?"]; // Value
     
-    Queue = [NSMutableArray arrayWithObjects:@"clearerror",get0,get1,get2,get3,get4,get5,get6,get7,get8,get9,get10,get11,get12,get13,@"checkerror",nil];
+    Queue = [NSMutableArray arrayWithObjects:@"clearerror",get0,get1,get2,get3,get4,get4a,get5,get6,get7,get8,get9,get10,get11,get12,get13,@"checkerror",nil];
     
     [self q_next];
 }
@@ -1732,16 +1786,32 @@ NSString *currentInterval = @"";
 
 
 - (void)startRequestTimeout:(CBCharacteristic *)characteristic {
-    [self cancelRequestTimeoutMonitor:characteristic];
-    [self performSelector:@selector(requestDidTimeout:)
-               withObject:characteristic
-               afterDelay:kLXCBRequestTimeout];
+    @try {
+        [self cancelRequestTimeoutMonitor:characteristic];
+        [self performSelector:@selector(requestDidTimeout:)
+                   withObject:characteristic
+                   afterDelay:kLXCBRequestTimeout];
+    }
+    @catch (NSException * e) {
+        NSLog(@"Exception: %@", e);
+    }
+    @finally {
+        NSLog(@"finally");
+    }
 }
 
 - (void)cancelRequestTimeoutMonitor:(CBCharacteristic *)characteristic {
-    [NSObject cancelPreviousPerformRequestsWithTarget:self
-                                             selector:@selector(requestDidTimeout:)
-                                               object:characteristic];
+    @try {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self
+                                                 selector:@selector(requestDidTimeout:)
+                                                   object:characteristic];
+    }
+    @catch (NSException * e) {
+        NSLog(@"Exception: %@", e);
+    }
+    @finally {
+        NSLog(@"finally");
+    }
 }
 
 - (void)requestDidTimeout:(CBCharacteristic *)characteristic {
@@ -1883,7 +1953,9 @@ bool q_error = NO;
     
     
     NSString *adv = [NSString stringWithFormat:@"AT+ADVI%@",currentInterval];
-    
+
+    NSString *range = [NSString stringWithFormat:@"AT+POWE%@",currentRange];
+
     
     NSString *name_str = [[NSString alloc] initWithFormat:@"AT+NAME%@           ",
                           (self.p_name.text.length > 11 ) ? [self.p_name.text.uppercaseString substringWithRange:NSMakeRange(0, 11)] : self.p_name.text.uppercaseString];
@@ -1924,11 +1996,11 @@ bool q_error = NO;
                          [[self.p_uuid.text uppercaseString] substringWithRange:NSMakeRange(28, 8)]
                          ];
         
-        Queue = [NSMutableArray arrayWithObjects:@"clearerror",ibmajor_str,ibminor_str,ib0,ib1,ib2,ib3,adv,pass0,pass1,pass2,name_str,showbatt,@"checkerror",nil];
+        Queue = [NSMutableArray arrayWithObjects:@"clearerror",ibmajor_str,ibminor_str,ib0,ib1,ib2,ib3,adv,pass0,pass1,pass2,name_str,showbatt,range,@"checkerror",nil];
         
 
     } else {
-        Queue = [NSMutableArray arrayWithObjects:@"clearerror",ibmajor_str,ibminor_str,adv,pass0,pass1,pass2,name_str,showbatt,@"checkerror",nil];
+        Queue = [NSMutableArray arrayWithObjects:@"clearerror",ibmajor_str,ibminor_str,adv,pass0,pass1,pass2,name_str,showbatt,range,@"checkerror",nil];
         
     }
     
@@ -2026,7 +2098,9 @@ bool q_error = NO;
     self.p_uuid.text = @"74278bda-b644-4520-8f0c-720eaf059935";
     self.p_advintslider.value = 9;
     self.p_name.text = [[NSString alloc] initWithFormat:@"GWB_%@_%@",self.p_major.text,self.p_minor.text];
+    self.p_rangeslider.value = 2;
     [self setAdvIntervalFromSlider];
+    [self setRangeLabelFromSlider];
 }
 
 -(void) close_update_window {
@@ -2094,6 +2168,7 @@ bool q_error = NO;
             peripheralIsConnectedButNotRead = NO;
         }
     }
+    connectActive = NO;
     [self close_update_window];
     [self done];
 }
@@ -2108,4 +2183,8 @@ bool q_error = NO;
     
 }
 
+- (IBAction)p_rangeslider:(id)sender {
+    self.p_rangelabel.text = [NSString stringWithFormat:@"%f", self.p_rangeslider.value];
+    [self setRangeLabelFromSlider];
+}
 @end
