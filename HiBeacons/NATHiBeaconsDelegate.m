@@ -25,6 +25,7 @@
 //
 
 #import "NATHiBeaconsDelegate.h"
+#import "AppStatus.h"
 
 @implementation NATHiBeaconsDelegate
 
@@ -35,6 +36,9 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
+    AppStatus *Status = [AppStatus sharedManager];
+    Status.currentStatus = @"not active";
+    
     NSLog(@"application RESIGNED ACTIVE ");
 
 }
@@ -55,6 +59,8 @@
      this is called when the application returns from hacing the pairing window
      */
     NSLog(@"applicationDidBecomeActive");
+    AppStatus *Status = [AppStatus sharedManager];
+    Status.currentStatus = @"active";
 
 //    UIViewController* root = _window.rootViewController;
 //    UINavigationController* navController = (UINavigationController*)root;

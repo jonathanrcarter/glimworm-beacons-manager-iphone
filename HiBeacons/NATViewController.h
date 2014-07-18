@@ -28,7 +28,7 @@
 @import CoreBluetooth;
 
 @interface NATViewController : UIViewController <CLLocationManagerDelegate, CBPeripheralManagerDelegate,
-    UITableViewDataSource, UITableViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate>
+    UITableViewDataSource, UITableViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate, UIApplicationDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *beaconTableView;
 

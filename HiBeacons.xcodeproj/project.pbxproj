@@ -23,6 +23,7 @@
 		494C6A231940A4A900E2EC69 /* gbhome.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B5A53419002C2200745F94 /* gbhome.png */; };
 		4955666C18F1503800DA3A12 /* BTDeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4955666B18F1503800DA3A12 /* BTDeviceModel.m */; };
 		49B5A53519002C2200745F94 /* gbhome.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B5A53419002C2200745F94 /* gbhome.png */; };
+		49F8D1C11979A67500CC9068 /* AppStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F8D1C01979A67500CC9068 /* AppStatus.m */; };
 		CF2BC92318019D6100C66D15 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF2BC92218019D6100C66D15 /* Foundation.framework */; };
 		CF2BC92518019D6100C66D15 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF2BC92418019D6100C66D15 /* CoreGraphics.framework */; };
 		CF2BC92718019D6100C66D15 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF2BC92618019D6100C66D15 /* UIKit.framework */; };
@@ -58,6 +59,8 @@
 		4955666A18F1503100DA3A12 /* BTDeviceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTDeviceModel.h; sourceTree = "<group>"; };
 		4955666B18F1503800DA3A12 /* BTDeviceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTDeviceModel.m; sourceTree = "<group>"; };
 		49B5A53419002C2200745F94 /* gbhome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gbhome.png; sourceTree = "<group>"; };
+		49F8D1BF1979A67500CC9068 /* AppStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppStatus.h; sourceTree = "<group>"; };
+		49F8D1C01979A67500CC9068 /* AppStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppStatus.m; sourceTree = "<group>"; };
 		CF2BC91F18019D6100C66D15 /* HiBeacons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiBeacons.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF2BC92218019D6100C66D15 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CF2BC92418019D6100C66D15 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -166,6 +169,8 @@
 				CF2BC9541801A0C700C66D15 /* NATViewController.m */,
 				CF2BC93418019D6100C66D15 /* Images.xcassets */,
 				CF2BC92918019D6100C66D15 /* Supporting Files */,
+				49F8D1BF1979A67500CC9068 /* AppStatus.h */,
+				49F8D1C01979A67500CC9068 /* AppStatus.m */,
 			);
 			path = HiBeacons;
 			sourceTree = "<group>";
@@ -354,6 +359,7 @@
 				4955666C18F1503800DA3A12 /* BTDeviceModel.m in Sources */,
 				CF2BC92F18019D6100C66D15 /* main.m in Sources */,
 				CF2BC9551801A0C700C66D15 /* NATViewController.m in Sources */,
+				49F8D1C11979A67500CC9068 /* AppStatus.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

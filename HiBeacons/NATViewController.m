@@ -26,6 +26,7 @@
 
 #import "NATViewController.h"
 #import "BTDeviceModel.h"
+#import "AppStatus.h"
 
 /* glimworm beacon default uuid */
 static NSString * const kUUID = @"74278bda-b644-4520-8f0c-720eaf059935";
@@ -1313,7 +1314,10 @@ bool peripheralIsConnectedButNotRead = NO;
                 _peripheral = aPeripheral;
                 
                 [self working];
-                [self performSelector:@selector(q_readall) withObject:self afterDelay:3.0];
+                [self performSelector:@selector(q_readall_auto) withObject:self afterDelay:3.0];
+                
+
+
 //                [self q_readall];
                 
                 
@@ -1753,6 +1757,15 @@ NSString *currentInterval = @"";
     
 }
 
+- (void)q_readall_auto {
+
+    AppStatus *Status = [AppStatus sharedManager];
+
+    if ([Status.currentStatus isEqualToString:@"active"]) {
+        [self q_readall];
+    }
+    
+}
 - (void)q_readall {
     
     
@@ -1922,6 +1935,16 @@ bool q_error = NO;
         
 //        NSString *str=[[NSString alloc] initWithBytes:data.bytes length:data.length encoding:NSUTF8StringEncoding];
 //        [currentPeripheral.peripheral writeValue:data forCharacteristic:_currentChar type:CBCharacteristicWriteWithResponse];
+
+        if (_currentChar == nil) {
+            [self q_next];
+            return;
+        }
+        if(currentPeripheral.peripheral && ([currentPeripheral.peripheral state] != CBPeripheralStateConnected )) {
+            [self cancel_due_to_faulure];
+            return;
+        }
+    
         [currentPeripheral.peripheral writeValue:data forCharacteristic:_currentChar type:CBCharacteristicWriteWithoutResponse];
         [self startRequestTimeout:_currentChar];
     } else {
@@ -2159,7 +2182,7 @@ bool q_error = NO;
     }
 }
 
-- (IBAction)connect_cancel_but:(id)sender {
+- (void)cancel_and_close_window {
     if (currentPeripheral != Nil) {
         if(currentPeripheral.peripheral && ([currentPeripheral.peripheral state] == CBPeripheralStateConnecting )) {
             [self.manager cancelPeripheralConnection:currentPeripheral.peripheral];
@@ -2171,6 +2194,14 @@ bool q_error = NO;
     connectActive = NO;
     [self close_update_window];
     [self done];
+}
+
+- (void)cancel_due_to_faulure {
+    [self cancel_and_close_window];
+}
+
+- (IBAction)connect_cancel_but:(id)sender {
+    [self cancel_and_close_window];
 }
 
 
@@ -2187,4 +2218,6 @@ bool q_error = NO;
     self.p_rangelabel.text = [NSString stringWithFormat:@"%f", self.p_rangeslider.value];
     [self setRangeLabelFromSlider];
 }
+
+
 @end
