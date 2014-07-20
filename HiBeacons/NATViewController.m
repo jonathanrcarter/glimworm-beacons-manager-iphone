@@ -552,6 +552,15 @@ static const NSTimeInterval kLXCBActivateTimeout = 5.0;
     return dec_string;
 }
 
+- (NSString *) hex2dec_min256:(NSString *)HEX {
+    
+    unsigned int ibmajor;
+    NSScanner* scanner = [NSScanner scannerWithString:HEX];
+    [scanner scanHexInt:&ibmajor];
+    NSString *dec_string = [[NSString alloc] initWithFormat:@"%u", (256 - ibmajor)];
+    return dec_string;
+}
+
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
     NSLog(@"state update");
@@ -1538,10 +1547,10 @@ NSString *incoming_uuid = @"00000000-0000-0000-0000-000000000000";
             }
             
             
-            if ([currentcommand isEqualToString:@"AT+MEAS?"]) {
+            if ([currentcommand isEqualToString:@"AT+MEA??"]) {
                 NSArray *array = [str componentsSeparatedByString:@":"];
-                NSLog(@"measured power : %@",[self hex2dec:array[1]]);
-                self.p_measuredpower.text = [self hex2dec:array[1]];
+                NSLog(@"measured power : %@",[self hex2dec_min256:array[1]]);
+                self.p_measuredpower.text = [self hex2dec_min256:array[1]];
 
             }
             if ([currentcommand isEqualToString:@"AT+POWE?"]) {
@@ -1774,7 +1783,7 @@ NSString *currentInterval = @"";
     NSString *get2 = [[NSString alloc] initWithFormat:@"AT+BATT?"];
     NSString *get3 = [[NSString alloc] initWithFormat:@"AT+ADVI?"];
     NSString *get4 = [[NSString alloc] initWithFormat:@"AT+POWE?"]; // 0 1 2 3 2 = std
-    NSString *get4a = [[NSString alloc] initWithFormat:@"AT+MEAS?"]; // 0 1 2 3 2 = std
+    NSString *get4a = [[NSString alloc] initWithFormat:@"AT+MEA??"]; // 0 1 2 3 2 = std
     NSString *get5 = [[NSString alloc] initWithFormat:@"AT+PASS?"]; // 2 PIN
     NSString *get6 = [[NSString alloc] initWithFormat:@"AT+MARJ?"]; // 2 PIN
     NSString *get7 = [[NSString alloc] initWithFormat:@"AT+MINO?"]; // 2 PIN
@@ -1897,32 +1906,32 @@ bool q_error = NO;
          3. Add AT+MINO command (Query/Set iBeacon minor)
          */
         
-        if ([currentfirmware isEqualToString:@"V517"] && [currentcommand isEqualToString:@"AT+MEAS?"]) {
+        if ([currentfirmware isEqualToString:@"V517"] && [currentcommand isEqualToString:@"AT+MEA??"]) {
             [self q_next];
             return;
         }
-        if ([currentfirmware isEqualToString:@"V518"] && [currentcommand isEqualToString:@"AT+MEAS?"]) {
+        if ([currentfirmware isEqualToString:@"V518"] && [currentcommand isEqualToString:@"AT+MEA??"]) {
             [self q_next];
             return;
         }
-        if ([currentfirmware isEqualToString:@"V519"] && [currentcommand isEqualToString:@"AT+MEAS?"]) {
+        if ([currentfirmware isEqualToString:@"V519"] && [currentcommand isEqualToString:@"AT+MEA??"]) {
             [self q_next];
             return;
         }
         
-        if ([currentfirmware isEqualToString:@"V517"] && [currentcommand isEqualToString:@"AT+MEAS?"]) {
+        if ([currentfirmware isEqualToString:@"V517"] && [currentcommand isEqualToString:@"AT+MEA??"]) {
             [self q_next];
             return;
         }
-        if ([currentfirmware isEqualToString:@"V518"] && [currentcommand isEqualToString:@"AT+MEAS?"]) {
+        if ([currentfirmware isEqualToString:@"V518"] && [currentcommand isEqualToString:@"AT+MEA??"]) {
             [self q_next];
             return;
         }
-        if ([currentfirmware isEqualToString:@"V519"] && [currentcommand isEqualToString:@"AT+MEAS?"]) {
+        if ([currentfirmware isEqualToString:@"V519"] && [currentcommand isEqualToString:@"AT+MEA??"]) {
             [self q_next];
             return;
         }
-        if ([currentfirmware isEqualToString:@"V520"] && [currentcommand isEqualToString:@"AT+MEAS?"]) {
+        if ([currentfirmware isEqualToString:@"V520"] && [currentcommand isEqualToString:@"AT+MEA??"]) {
             [self q_next];
             return;
         }

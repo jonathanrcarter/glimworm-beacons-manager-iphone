@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HiBeacons/NATViewController.m"
-            timestampString = "427403718.251919"
+            timestampString = "427406566.522102"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1791"
-            endingLineNumber = "1791"
+            startingLineNumber = "1800"
+            endingLineNumber = "1800"
             landmarkName = "-q_readall"
             landmarkType = "5">
          </BreakpointContent>
