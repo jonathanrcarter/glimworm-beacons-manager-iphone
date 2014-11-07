@@ -7,7 +7,48 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		490E934F19685C0B00E4ACE7 /* working.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490E934E19685C0B00E4ACE7 /* working.xib */; };
+		067868E7B37D440C8890DCC5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A7AEC3BE2A4AED93F9BBF6 /* libPods.a */; };
+		490DACA819ED42EB00B7E936 /* NewScanCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C315BA19894E250077B6E3 /* NewScanCollectionViewFlowLayout.m */; };
+		490DACAA19ED42EB00B7E936 /* NewScanCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C315B419894DD80077B6E3 /* NewScanCollectionView.m */; };
+		490DACAB19ED42EB00B7E936 /* ShapeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C315C2198AB9060077B6E3 /* ShapeView.m */; };
+		490DACAC19ED42EB00B7E936 /* NewScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C315AE19894BAE0077B6E3 /* NewScanViewController.m */; };
+		490DACAD19ED42EB00B7E936 /* NewScanCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C315B719894DFE0077B6E3 /* NewScanCollectionViewCell.m */; };
+		490DACAE19ED42EB00B7E936 /* NATHiBeaconsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2BC93218019D6100C66D15 /* NATHiBeaconsDelegate.m */; };
+		490DACAF19ED42EB00B7E936 /* NewScanBeaconViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49194B561992C7730057C2C1 /* NewScanBeaconViewController.m */; };
+		490DACB019ED42EB00B7E936 /* NewScanCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C315B119894CE60077B6E3 /* NewScanCollectionViewController.m */; };
+		490DACB119ED42EB00B7E936 /* BTDeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4955666B18F1503800DA3A12 /* BTDeviceModel.m */; };
+		490DACB219ED42EB00B7E936 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2BC92E18019D6100C66D15 /* main.m */; };
+		490DACB319ED42EB00B7E936 /* NATViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2BC9541801A0C700C66D15 /* NATViewController.m */; };
+		490DACB419ED42EB00B7E936 /* AppStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F8D1C01979A67500CC9068 /* AppStatus.m */; };
+		490DACB619ED42EB00B7E936 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF2BC9581801A35E00C66D15 /* CoreLocation.framework */; };
+		490DACB719ED42EB00B7E936 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF2BC9561801A34900C66D15 /* CoreBluetooth.framework */; };
+		490DACB819ED42EB00B7E936 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF2BC92418019D6100C66D15 /* CoreGraphics.framework */; };
+		490DACB919ED42EB00B7E936 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF2BC92618019D6100C66D15 /* UIKit.framework */; };
+		490DACBA19ED42EB00B7E936 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF2BC92218019D6100C66D15 /* Foundation.framework */; };
+		490DACBB19ED42EB00B7E936 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A7AEC3BE2A4AED93F9BBF6 /* libPods.a */; };
+		490DACBD19ED42EB00B7E936 /* NewScanBeaconViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49194B541992B1EC0057C2C1 /* NewScanBeaconViewController.xib */; };
+		490DACBE19ED42EB00B7E936 /* bat_high.png in Resources */ = {isa = PBXBuildFile; fileRef = 49194B581994EC0B0057C2C1 /* bat_high.png */; };
+		490DACBF19ED42EB00B7E936 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CF2BC92B18019D6100C66D15 /* InfoPlist.strings */; };
+		490DACC019ED42EB00B7E936 /* icon_128.png in Resources */ = {isa = PBXBuildFile; fileRef = 49C315A91988B6980077B6E3 /* icon_128.png */; };
+		490DACC119ED42EB00B7E936 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF2BC93418019D6100C66D15 /* Images.xcassets */; };
+		490DACC219ED42EB00B7E936 /* icons in Resources */ = {isa = PBXBuildFile; fileRef = 49C315AA1988B6980077B6E3 /* icons */; };
+		490DACC319ED42EB00B7E936 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2BC9511801A09D00C66D15 /* Main.storyboard */; };
+		490DACC419ED42EB00B7E936 /* Background_GOLIVE_EXPORTED.png in Resources */ = {isa = PBXBuildFile; fileRef = 49C315A5198845600077B6E3 /* Background_GOLIVE_EXPORTED.png */; };
+		490DACC519ED42EB00B7E936 /* diagram_whatis.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49C315A7198849650077B6E3 /* diagram_whatis.jpg */; };
+		490DACC619ED42EB00B7E936 /* bat_medium.png in Resources */ = {isa = PBXBuildFile; fileRef = 49194B5B1994EC2A0057C2C1 /* bat_medium.png */; };
+		490DACC719ED42EB00B7E936 /* gbhome.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B5A53419002C2200745F94 /* gbhome.png */; };
+		490DACC819ED42EB00B7E936 /* bat_veryhigh.png in Resources */ = {isa = PBXBuildFile; fileRef = 49194B5C1994EC2A0057C2C1 /* bat_veryhigh.png */; };
+		490DACC919ED42EB00B7E936 /* bat_verylow.png in Resources */ = {isa = PBXBuildFile; fileRef = 49194B5D1994EC2A0057C2C1 /* bat_verylow.png */; };
+		490DACCA19ED42EB00B7E936 /* bat_low.png in Resources */ = {isa = PBXBuildFile; fileRef = 49194B5A1994EC290057C2C1 /* bat_low.png */; };
+		490DACCB19ED42EB00B7E936 /* frontslider-2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49C315A3198845330077B6E3 /* frontslider-2.jpg */; };
+		49194B551992B1EC0057C2C1 /* NewScanBeaconViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49194B541992B1EC0057C2C1 /* NewScanBeaconViewController.xib */; };
+		49194B571992C7730057C2C1 /* NewScanBeaconViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49194B561992C7730057C2C1 /* NewScanBeaconViewController.m */; };
+		49194B591994EC0B0057C2C1 /* bat_high.png in Resources */ = {isa = PBXBuildFile; fileRef = 49194B581994EC0B0057C2C1 /* bat_high.png */; };
+		49194B5E1994EC2A0057C2C1 /* bat_low.png in Resources */ = {isa = PBXBuildFile; fileRef = 49194B5A1994EC290057C2C1 /* bat_low.png */; };
+		49194B5F1994EC2A0057C2C1 /* bat_medium.png in Resources */ = {isa = PBXBuildFile; fileRef = 49194B5B1994EC2A0057C2C1 /* bat_medium.png */; };
+		49194B601994EC2A0057C2C1 /* bat_veryhigh.png in Resources */ = {isa = PBXBuildFile; fileRef = 49194B5C1994EC2A0057C2C1 /* bat_veryhigh.png */; };
+		49194B611994EC2A0057C2C1 /* bat_verylow.png in Resources */ = {isa = PBXBuildFile; fileRef = 49194B5D1994EC2A0057C2C1 /* bat_verylow.png */; };
+		494B68D819F6DF77003914C9 /* NewAboutBeaconsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 494B68D719F6DF77003914C9 /* NewAboutBeaconsViewController.m */; };
 		494C6A151940A4A900E2EC69 /* NATHiBeaconsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2BC93218019D6100C66D15 /* NATHiBeaconsDelegate.m */; };
 		494C6A161940A4A900E2EC69 /* BTDeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4955666B18F1503800DA3A12 /* BTDeviceModel.m */; };
 		494C6A171940A4A900E2EC69 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2BC92E18019D6100C66D15 /* main.m */; };
@@ -22,7 +63,37 @@
 		494C6A221940A4A900E2EC69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2BC9511801A09D00C66D15 /* Main.storyboard */; };
 		494C6A231940A4A900E2EC69 /* gbhome.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B5A53419002C2200745F94 /* gbhome.png */; };
 		4955666C18F1503800DA3A12 /* BTDeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4955666B18F1503800DA3A12 /* BTDeviceModel.m */; };
+		498961191A0CC9E000F3A445 /* RoundedCornerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 498961181A0CC9E000F3A445 /* RoundedCornerView.m */; };
+		499684EC19F2359400B8EE25 /* appicon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 499684E919F2359400B8EE25 /* appicon-60@2x.png */; };
+		499684ED19F2359400B8EE25 /* appicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 499684EA19F2359400B8EE25 /* appicon.png */; };
+		499684EE19F2359400B8EE25 /* appicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 499684EB19F2359400B8EE25 /* appicon@2x.png */; };
+		499684F219F2A74C00B8EE25 /* SpinnerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 499684F119F2A74C00B8EE25 /* SpinnerView.m */; };
+		499684F519F3114600B8EE25 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499684F419F3114600B8EE25 /* QuartzCore.framework */; };
+		499684F719F3193400B8EE25 /* bgblur1.png in Resources */ = {isa = PBXBuildFile; fileRef = 499684F619F3193400B8EE25 /* bgblur1.png */; };
+		499684FB19F3B30500B8EE25 /* AutoSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 499684FA19F3B30500B8EE25 /* AutoSetupViewController.m */; };
+		499684FF19F3B7FD00B8EE25 /* GBDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 499684FE19F3B7FD00B8EE25 /* GBDefaults.m */; };
 		49B5A53519002C2200745F94 /* gbhome.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B5A53419002C2200745F94 /* gbhome.png */; };
+		49C315A4198845330077B6E3 /* frontslider-2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49C315A3198845330077B6E3 /* frontslider-2.jpg */; };
+		49C315A6198845600077B6E3 /* Background_GOLIVE_EXPORTED.png in Resources */ = {isa = PBXBuildFile; fileRef = 49C315A5198845600077B6E3 /* Background_GOLIVE_EXPORTED.png */; };
+		49C315A8198849650077B6E3 /* diagram_whatis.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49C315A7198849650077B6E3 /* diagram_whatis.jpg */; };
+		49C315AB1988B6980077B6E3 /* icon_128.png in Resources */ = {isa = PBXBuildFile; fileRef = 49C315A91988B6980077B6E3 /* icon_128.png */; };
+		49C315AC1988B6980077B6E3 /* icons in Resources */ = {isa = PBXBuildFile; fileRef = 49C315AA1988B6980077B6E3 /* icons */; };
+		49C315AF19894BAE0077B6E3 /* NewScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C315AE19894BAE0077B6E3 /* NewScanViewController.m */; };
+		49C315B219894CE60077B6E3 /* NewScanCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C315B119894CE60077B6E3 /* NewScanCollectionViewController.m */; };
+		49C315B519894DD80077B6E3 /* NewScanCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C315B419894DD80077B6E3 /* NewScanCollectionView.m */; };
+		49C315B819894DFE0077B6E3 /* NewScanCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C315B719894DFE0077B6E3 /* NewScanCollectionViewCell.m */; };
+		49C315BB19894E250077B6E3 /* NewScanCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C315BA19894E250077B6E3 /* NewScanCollectionViewFlowLayout.m */; };
+		49C315C3198AB9060077B6E3 /* ShapeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C315C2198AB9060077B6E3 /* ShapeView.m */; };
+		49D1975E19F14A62009FFD64 /* GlimwormBeaconEdit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D1975D19F14A62009FFD64 /* GlimwormBeaconEdit.m */; };
+		49E4EE2A19F44484008962FF /* NewTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E4EE2919F44484008962FF /* NewTabBar.m */; };
+		49E4EE2E19F446AB008962FF /* NewTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E4EE2919F44484008962FF /* NewTabBar.m */; };
+		49E4EE2F19F446AC008962FF /* NewTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E4EE2919F44484008962FF /* NewTabBar.m */; };
+		49E4EE3119F56429008962FF /* glyphicons_152_new_window.png in Resources */ = {isa = PBXBuildFile; fileRef = 49E4EE3019F56429008962FF /* glyphicons_152_new_window.png */; };
+		49E4EE3419F5649E008962FF /* glyphicons_032_wifi_alt.png in Resources */ = {isa = PBXBuildFile; fileRef = 49E4EE3319F5649E008962FF /* glyphicons_032_wifi_alt.png */; };
+		49E4EE3619F564D4008962FF /* glyphicons_023_cogwheels.png in Resources */ = {isa = PBXBuildFile; fileRef = 49E4EE3519F564D4008962FF /* glyphicons_023_cogwheels.png */; };
+		49E4EE3819F56527008962FF /* glyphicons_030_pencil.png in Resources */ = {isa = PBXBuildFile; fileRef = 49E4EE3719F56527008962FF /* glyphicons_030_pencil.png */; };
+		49E4EE3A19F56567008962FF /* glyphicons_020_home.png in Resources */ = {isa = PBXBuildFile; fileRef = 49E4EE3919F56567008962FF /* glyphicons_020_home.png */; };
+		49E4EE3C19F565B4008962FF /* glyphicons_195_circle_info.png in Resources */ = {isa = PBXBuildFile; fileRef = 49E4EE3B19F565B4008962FF /* glyphicons_195_circle_info.png */; };
 		49F8D1C11979A67500CC9068 /* AppStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F8D1C01979A67500CC9068 /* AppStatus.m */; };
 		CF2BC92318019D6100C66D15 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF2BC92218019D6100C66D15 /* Foundation.framework */; };
 		CF2BC92518019D6100C66D15 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF2BC92418019D6100C66D15 /* CoreGraphics.framework */; };
@@ -53,12 +124,64 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		490E934E19685C0B00E4ACE7 /* working.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = working.xib; sourceTree = "<group>"; };
+		10A7AEC3BE2A4AED93F9BBF6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		490DACD019ED42EB00B7E936 /* HiBeacons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiBeacons.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		490DACD119ED42EC00B7E936 /* HiBeacons copy2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "HiBeacons copy2-Info.plist"; path = "/Users/jc/Downloads/HiBeacons-master/HiBeacons copy2-Info.plist"; sourceTree = "<absolute>"; };
+		49194B531992B1EC0057C2C1 /* NewScanBeaconViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewScanBeaconViewController.h; sourceTree = "<group>"; };
+		49194B541992B1EC0057C2C1 /* NewScanBeaconViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewScanBeaconViewController.xib; sourceTree = "<group>"; };
+		49194B561992C7730057C2C1 /* NewScanBeaconViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewScanBeaconViewController.m; sourceTree = "<group>"; };
+		49194B581994EC0B0057C2C1 /* bat_high.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bat_high.png; sourceTree = "<group>"; };
+		49194B5A1994EC290057C2C1 /* bat_low.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bat_low.png; sourceTree = "<group>"; };
+		49194B5B1994EC2A0057C2C1 /* bat_medium.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bat_medium.png; sourceTree = "<group>"; };
+		49194B5C1994EC2A0057C2C1 /* bat_veryhigh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bat_veryhigh.png; sourceTree = "<group>"; };
+		49194B5D1994EC2A0057C2C1 /* bat_verylow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bat_verylow.png; sourceTree = "<group>"; };
+		494B68D619F6DF77003914C9 /* NewAboutBeaconsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewAboutBeaconsViewController.h; sourceTree = "<group>"; };
+		494B68D719F6DF77003914C9 /* NewAboutBeaconsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewAboutBeaconsViewController.m; sourceTree = "<group>"; };
 		494C6A271940A4A900E2EC69 /* HiBeacons copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HiBeacons copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		494C6A281940A4AB00E2EC69 /* HiBeacons copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "HiBeacons copy-Info.plist"; path = "/Users/jc/Downloads/HiBeacons-master/HiBeacons copy-Info.plist"; sourceTree = "<absolute>"; };
 		4955666A18F1503100DA3A12 /* BTDeviceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTDeviceModel.h; sourceTree = "<group>"; };
 		4955666B18F1503800DA3A12 /* BTDeviceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTDeviceModel.m; sourceTree = "<group>"; };
+		498961171A0CC9E000F3A445 /* RoundedCornerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedCornerView.h; sourceTree = "<group>"; };
+		498961181A0CC9E000F3A445 /* RoundedCornerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedCornerView.m; sourceTree = "<group>"; };
+		499684E919F2359400B8EE25 /* appicon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon-60@2x.png"; sourceTree = "<group>"; };
+		499684EA19F2359400B8EE25 /* appicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appicon.png; sourceTree = "<group>"; };
+		499684EB19F2359400B8EE25 /* appicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon@2x.png"; sourceTree = "<group>"; };
+		499684F019F2A74B00B8EE25 /* SpinnerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpinnerView.h; sourceTree = "<group>"; };
+		499684F119F2A74C00B8EE25 /* SpinnerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpinnerView.m; sourceTree = "<group>"; };
+		499684F419F3114600B8EE25 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		499684F619F3193400B8EE25 /* bgblur1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bgblur1.png; path = backgrounds/bgblur1.png; sourceTree = "<group>"; };
+		499684F919F3B30500B8EE25 /* AutoSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoSetupViewController.h; sourceTree = "<group>"; };
+		499684FA19F3B30500B8EE25 /* AutoSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoSetupViewController.m; sourceTree = "<group>"; };
+		499684FD19F3B7FD00B8EE25 /* GBDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDefaults.h; sourceTree = "<group>"; };
+		499684FE19F3B7FD00B8EE25 /* GBDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBDefaults.m; sourceTree = "<group>"; };
 		49B5A53419002C2200745F94 /* gbhome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gbhome.png; sourceTree = "<group>"; };
+		49C315A3198845330077B6E3 /* frontslider-2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "frontslider-2.jpg"; sourceTree = "<group>"; };
+		49C315A5198845600077B6E3 /* Background_GOLIVE_EXPORTED.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background_GOLIVE_EXPORTED.png; sourceTree = "<group>"; };
+		49C315A7198849650077B6E3 /* diagram_whatis.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = diagram_whatis.jpg; sourceTree = "<group>"; };
+		49C315A91988B6980077B6E3 /* icon_128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_128.png; sourceTree = "<group>"; };
+		49C315AA1988B6980077B6E3 /* icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = icons; sourceTree = "<group>"; };
+		49C315AD19894BAE0077B6E3 /* NewScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewScanViewController.h; sourceTree = "<group>"; };
+		49C315AE19894BAE0077B6E3 /* NewScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewScanViewController.m; sourceTree = "<group>"; };
+		49C315B019894CE60077B6E3 /* NewScanCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewScanCollectionViewController.h; sourceTree = "<group>"; };
+		49C315B119894CE60077B6E3 /* NewScanCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewScanCollectionViewController.m; sourceTree = "<group>"; };
+		49C315B319894DD80077B6E3 /* NewScanCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewScanCollectionView.h; sourceTree = "<group>"; };
+		49C315B419894DD80077B6E3 /* NewScanCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewScanCollectionView.m; sourceTree = "<group>"; };
+		49C315B619894DFE0077B6E3 /* NewScanCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewScanCollectionViewCell.h; sourceTree = "<group>"; };
+		49C315B719894DFE0077B6E3 /* NewScanCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewScanCollectionViewCell.m; sourceTree = "<group>"; };
+		49C315B919894E250077B6E3 /* NewScanCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewScanCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		49C315BA19894E250077B6E3 /* NewScanCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewScanCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		49C315C1198AB9060077B6E3 /* ShapeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapeView.h; sourceTree = "<group>"; };
+		49C315C2198AB9060077B6E3 /* ShapeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShapeView.m; sourceTree = "<group>"; };
+		49D1975C19F14A44009FFD64 /* GlimwormBeaconEdit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlimwormBeaconEdit.h; sourceTree = "<group>"; };
+		49D1975D19F14A62009FFD64 /* GlimwormBeaconEdit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlimwormBeaconEdit.m; sourceTree = "<group>"; };
+		49E4EE2819F44484008962FF /* NewTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewTabBar.h; sourceTree = "<group>"; };
+		49E4EE2919F44484008962FF /* NewTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewTabBar.m; sourceTree = "<group>"; };
+		49E4EE3019F56429008962FF /* glyphicons_152_new_window.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = glyphicons_152_new_window.png; path = tab/glyphicons_152_new_window.png; sourceTree = SOURCE_ROOT; };
+		49E4EE3319F5649E008962FF /* glyphicons_032_wifi_alt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_032_wifi_alt.png; sourceTree = "<group>"; };
+		49E4EE3519F564D4008962FF /* glyphicons_023_cogwheels.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_023_cogwheels.png; sourceTree = "<group>"; };
+		49E4EE3719F56527008962FF /* glyphicons_030_pencil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_030_pencil.png; sourceTree = "<group>"; };
+		49E4EE3919F56567008962FF /* glyphicons_020_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_020_home.png; sourceTree = "<group>"; };
+		49E4EE3B19F565B4008962FF /* glyphicons_195_circle_info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_195_circle_info.png; sourceTree = "<group>"; };
 		49F8D1BF1979A67500CC9068 /* AppStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppStatus.h; sourceTree = "<group>"; };
 		49F8D1C01979A67500CC9068 /* AppStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppStatus.m; sourceTree = "<group>"; };
 		CF2BC91F18019D6100C66D15 /* HiBeacons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiBeacons.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,9 +205,23 @@
 		CF2BC9541801A0C700C66D15 /* NATViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NATViewController.m; sourceTree = "<group>"; };
 		CF2BC9561801A34900C66D15 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		CF2BC9581801A35E00C66D15 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		F4E8D02EBE464A769A548061 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		490DACB519ED42EB00B7E936 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				490DACB619ED42EB00B7E936 /* CoreLocation.framework in Frameworks */,
+				490DACB719ED42EB00B7E936 /* CoreBluetooth.framework in Frameworks */,
+				490DACB819ED42EB00B7E936 /* CoreGraphics.framework in Frameworks */,
+				490DACB919ED42EB00B7E936 /* UIKit.framework in Frameworks */,
+				490DACBA19ED42EB00B7E936 /* Foundation.framework in Frameworks */,
+				490DACBB19ED42EB00B7E936 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		494C6A191940A4A900E2EC69 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -101,11 +238,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				499684F519F3114600B8EE25 /* QuartzCore.framework in Frameworks */,
 				CF2BC9591801A35E00C66D15 /* CoreLocation.framework in Frameworks */,
 				CF2BC9571801A34900C66D15 /* CoreBluetooth.framework in Frameworks */,
 				CF2BC92518019D6100C66D15 /* CoreGraphics.framework in Frameworks */,
 				CF2BC92718019D6100C66D15 /* UIKit.framework in Frameworks */,
 				CF2BC92318019D6100C66D15 /* Foundation.framework in Frameworks */,
+				067868E7B37D440C8890DCC5 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,6 +261,147 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4989611A1A0CC9E700F3A445 /* Utility Views */ = {
+			isa = PBXGroup;
+			children = (
+				498961171A0CC9E000F3A445 /* RoundedCornerView.h */,
+				498961181A0CC9E000F3A445 /* RoundedCornerView.m */,
+			);
+			name = "Utility Views";
+			sourceTree = "<group>";
+		};
+		499684EF19F235A000B8EE25 /* App Icons */ = {
+			isa = PBXGroup;
+			children = (
+				499684E919F2359400B8EE25 /* appicon-60@2x.png */,
+				499684EA19F2359400B8EE25 /* appicon.png */,
+				499684EB19F2359400B8EE25 /* appicon@2x.png */,
+			);
+			name = "App Icons";
+			sourceTree = "<group>";
+		};
+		499684F319F2A75500B8EE25 /* Universal Spinner View */ = {
+			isa = PBXGroup;
+			children = (
+				499684F019F2A74B00B8EE25 /* SpinnerView.h */,
+				499684F119F2A74C00B8EE25 /* SpinnerView.m */,
+			);
+			name = "Universal Spinner View";
+			sourceTree = "<group>";
+		};
+		499684F819F3193C00B8EE25 /* Bacgrounds */ = {
+			isa = PBXGroup;
+			children = (
+				499684F619F3193400B8EE25 /* bgblur1.png */,
+			);
+			name = Bacgrounds;
+			sourceTree = "<group>";
+		};
+		499684FC19F3B31800B8EE25 /* V2 Auto Setup View */ = {
+			isa = PBXGroup;
+			children = (
+				499684F919F3B30500B8EE25 /* AutoSetupViewController.h */,
+				499684FA19F3B30500B8EE25 /* AutoSetupViewController.m */,
+			);
+			name = "V2 Auto Setup View";
+			sourceTree = "<group>";
+		};
+		49C315CA198B4EE00077B6E3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4955666A18F1503100DA3A12 /* BTDeviceModel.h */,
+				4955666B18F1503800DA3A12 /* BTDeviceModel.m */,
+				499684FD19F3B7FD00B8EE25 /* GBDefaults.h */,
+				499684FE19F3B7FD00B8EE25 /* GBDefaults.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		49C315CB198B4EEF0077B6E3 /* Animated views */ = {
+			isa = PBXGroup;
+			children = (
+				49C315C1198AB9060077B6E3 /* ShapeView.h */,
+				49C315C2198AB9060077B6E3 /* ShapeView.m */,
+			);
+			name = "Animated views";
+			sourceTree = "<group>";
+		};
+		49C315CC198B4F110077B6E3 /* Singletons */ = {
+			isa = PBXGroup;
+			children = (
+				49F8D1BF1979A67500CC9068 /* AppStatus.h */,
+				49F8D1C01979A67500CC9068 /* AppStatus.m */,
+				49D1975C19F14A44009FFD64 /* GlimwormBeaconEdit.h */,
+				49D1975D19F14A62009FFD64 /* GlimwormBeaconEdit.m */,
+			);
+			name = Singletons;
+			sourceTree = "<group>";
+		};
+		49C315CE198B4F410077B6E3 /* V2 UI */ = {
+			isa = PBXGroup;
+			children = (
+				49C315CB198B4EEF0077B6E3 /* Animated views */,
+				49C315B919894E250077B6E3 /* NewScanCollectionViewFlowLayout.h */,
+				49C315BA19894E250077B6E3 /* NewScanCollectionViewFlowLayout.m */,
+				49C315B619894DFE0077B6E3 /* NewScanCollectionViewCell.h */,
+				49C315B719894DFE0077B6E3 /* NewScanCollectionViewCell.m */,
+				49C315B319894DD80077B6E3 /* NewScanCollectionView.h */,
+				49C315B419894DD80077B6E3 /* NewScanCollectionView.m */,
+				49C315B019894CE60077B6E3 /* NewScanCollectionViewController.h */,
+				49C315B119894CE60077B6E3 /* NewScanCollectionViewController.m */,
+				49C315AD19894BAE0077B6E3 /* NewScanViewController.h */,
+				49C315AE19894BAE0077B6E3 /* NewScanViewController.m */,
+				494B68D619F6DF77003914C9 /* NewAboutBeaconsViewController.h */,
+				494B68D719F6DF77003914C9 /* NewAboutBeaconsViewController.m */,
+				4989611A1A0CC9E700F3A445 /* Utility Views */,
+			);
+			name = "V2 UI";
+			sourceTree = "<group>";
+		};
+		49C315CF198B4F5D0077B6E3 /* V1 UI */ = {
+			isa = PBXGroup;
+			children = (
+				CF2BC9541801A0C700C66D15 /* NATViewController.m */,
+				CF2BC9531801A0C700C66D15 /* NATViewController.h */,
+			);
+			name = "V1 UI";
+			sourceTree = "<group>";
+		};
+		49C315D0198B4FA90077B6E3 /* App Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				CF2BC93118019D6100C66D15 /* NATHiBeaconsDelegate.h */,
+				CF2BC93218019D6100C66D15 /* NATHiBeaconsDelegate.m */,
+				49E4EE2819F44484008962FF /* NewTabBar.h */,
+				49E4EE2919F44484008962FF /* NewTabBar.m */,
+			);
+			name = "App Delegate";
+			sourceTree = "<group>";
+		};
+		49C315D1198B4FDF0077B6E3 /* V2 Editor */ = {
+			isa = PBXGroup;
+			children = (
+				49194B541992B1EC0057C2C1 /* NewScanBeaconViewController.xib */,
+				49194B531992B1EC0057C2C1 /* NewScanBeaconViewController.h */,
+				49194B561992C7730057C2C1 /* NewScanBeaconViewController.m */,
+				499684F319F2A75500B8EE25 /* Universal Spinner View */,
+			);
+			name = "V2 Editor";
+			sourceTree = "<group>";
+		};
+		49E4EE3219F56430008962FF /* tabs */ = {
+			isa = PBXGroup;
+			children = (
+				49E4EE3719F56527008962FF /* glyphicons_030_pencil.png */,
+				49E4EE3919F56567008962FF /* glyphicons_020_home.png */,
+				49E4EE3B19F565B4008962FF /* glyphicons_195_circle_info.png */,
+				49E4EE3519F564D4008962FF /* glyphicons_023_cogwheels.png */,
+				49E4EE3019F56429008962FF /* glyphicons_152_new_window.png */,
+				49E4EE3319F5649E008962FF /* glyphicons_032_wifi_alt.png */,
+			);
+			name = tabs;
+			sourceTree = "<group>";
+		};
 		CF2BC91618019D6100C66D15 = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +410,8 @@
 				CF2BC92118019D6100C66D15 /* Frameworks */,
 				CF2BC92018019D6100C66D15 /* Products */,
 				494C6A281940A4AB00E2EC69 /* HiBeacons copy-Info.plist */,
+				F4E8D02EBE464A769A548061 /* Pods.xcconfig */,
+				490DACD119ED42EC00B7E936 /* HiBeacons copy2-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -139,6 +421,7 @@
 				CF2BC91F18019D6100C66D15 /* HiBeacons.app */,
 				CF2BC93A18019D6100C66D15 /* HiBeaconsTests.xctest */,
 				494C6A271940A4A900E2EC69 /* HiBeacons copy.app */,
+				490DACD019ED42EB00B7E936 /* HiBeacons.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -146,12 +429,14 @@
 		CF2BC92118019D6100C66D15 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				499684F419F3114600B8EE25 /* QuartzCore.framework */,
 				CF2BC9581801A35E00C66D15 /* CoreLocation.framework */,
 				CF2BC9561801A34900C66D15 /* CoreBluetooth.framework */,
 				CF2BC92218019D6100C66D15 /* Foundation.framework */,
 				CF2BC92418019D6100C66D15 /* CoreGraphics.framework */,
 				CF2BC92618019D6100C66D15 /* UIKit.framework */,
 				CF2BC93B18019D6100C66D15 /* XCTest.framework */,
+				10A7AEC3BE2A4AED93F9BBF6 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -159,18 +444,16 @@
 		CF2BC92818019D6100C66D15 /* HiBeacons */ = {
 			isa = PBXGroup;
 			children = (
-				4955666A18F1503100DA3A12 /* BTDeviceModel.h */,
-				4955666B18F1503800DA3A12 /* BTDeviceModel.m */,
-				CF2BC93118019D6100C66D15 /* NATHiBeaconsDelegate.h */,
-				CF2BC93218019D6100C66D15 /* NATHiBeaconsDelegate.m */,
+				49C315CA198B4EE00077B6E3 /* Model */,
+				49C315CC198B4F110077B6E3 /* Singletons */,
+				49C315D0198B4FA90077B6E3 /* App Delegate */,
 				CF2BC9511801A09D00C66D15 /* Main.storyboard */,
-				490E934E19685C0B00E4ACE7 /* working.xib */,
-				CF2BC9531801A0C700C66D15 /* NATViewController.h */,
-				CF2BC9541801A0C700C66D15 /* NATViewController.m */,
+				49C315CE198B4F410077B6E3 /* V2 UI */,
+				499684FC19F3B31800B8EE25 /* V2 Auto Setup View */,
+				49C315D1198B4FDF0077B6E3 /* V2 Editor */,
+				49C315CF198B4F5D0077B6E3 /* V1 UI */,
 				CF2BC93418019D6100C66D15 /* Images.xcassets */,
 				CF2BC92918019D6100C66D15 /* Supporting Files */,
-				49F8D1BF1979A67500CC9068 /* AppStatus.h */,
-				49F8D1C01979A67500CC9068 /* AppStatus.m */,
 			);
 			path = HiBeacons;
 			sourceTree = "<group>";
@@ -178,6 +461,19 @@
 		CF2BC92918019D6100C66D15 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				499684EF19F235A000B8EE25 /* App Icons */,
+				49194B5A1994EC290057C2C1 /* bat_low.png */,
+				49194B5B1994EC2A0057C2C1 /* bat_medium.png */,
+				49E4EE3219F56430008962FF /* tabs */,
+				499684F819F3193C00B8EE25 /* Bacgrounds */,
+				49194B5C1994EC2A0057C2C1 /* bat_veryhigh.png */,
+				49194B5D1994EC2A0057C2C1 /* bat_verylow.png */,
+				49194B581994EC0B0057C2C1 /* bat_high.png */,
+				49C315A91988B6980077B6E3 /* icon_128.png */,
+				49C315AA1988B6980077B6E3 /* icons */,
+				49C315A7198849650077B6E3 /* diagram_whatis.jpg */,
+				49C315A5198845600077B6E3 /* Background_GOLIVE_EXPORTED.png */,
+				49C315A3198845330077B6E3 /* frontslider-2.jpg */,
 				49B5A53419002C2200745F94 /* gbhome.png */,
 				CF2BC92A18019D6100C66D15 /* HiBeacons-Info.plist */,
 				CF2BC92B18019D6100C66D15 /* InfoPlist.strings */,
@@ -208,6 +504,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		490DACA519ED42EB00B7E936 /* HiBeacons ADHOC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 490DACCD19ED42EB00B7E936 /* Build configuration list for PBXNativeTarget "HiBeacons ADHOC" */;
+			buildPhases = (
+				490DACA619ED42EB00B7E936 /* Check Pods Manifest.lock */,
+				490DACA719ED42EB00B7E936 /* Sources */,
+				490DACB519ED42EB00B7E936 /* Frameworks */,
+				490DACBC19ED42EB00B7E936 /* Resources */,
+				490DACCC19ED42EB00B7E936 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "HiBeacons ADHOC";
+			productName = HiBeacons;
+			productReference = 490DACD019ED42EB00B7E936 /* HiBeacons.app */;
+			productType = "com.apple.product-type.application";
+		};
 		494C6A131940A4A900E2EC69 /* HiBeacons Dev */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 494C6A241940A4A900E2EC69 /* Build configuration list for PBXNativeTarget "HiBeacons Dev" */;
@@ -229,9 +544,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CF2BC94B18019D6100C66D15 /* Build configuration list for PBXNativeTarget "HiBeacons" */;
 			buildPhases = (
+				AD11DA93860D45B89A46C71C /* Check Pods Manifest.lock */,
 				CF2BC91B18019D6100C66D15 /* Sources */,
 				CF2BC91C18019D6100C66D15 /* Frameworks */,
 				CF2BC91D18019D6100C66D15 /* Resources */,
+				F39D3D6E554345A19CC9DF0F /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -270,8 +587,11 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Nick Toumpelis";
 				TargetAttributes = {
+					490DACA519ED42EB00B7E936 = {
+						DevelopmentTeam = L75YA92R5L;
+					};
 					CF2BC91E18019D6100C66D15 = {
-						DevelopmentTeam = 6T85H53TFX;
+						DevelopmentTeam = L75YA92R5L;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -301,11 +621,34 @@
 				CF2BC91E18019D6100C66D15 /* HiBeacons */,
 				CF2BC93918019D6100C66D15 /* HiBeaconsTests */,
 				494C6A131940A4A900E2EC69 /* HiBeacons Dev */,
+				490DACA519ED42EB00B7E936 /* HiBeacons ADHOC */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		490DACBC19ED42EB00B7E936 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				490DACBD19ED42EB00B7E936 /* NewScanBeaconViewController.xib in Resources */,
+				490DACBE19ED42EB00B7E936 /* bat_high.png in Resources */,
+				490DACBF19ED42EB00B7E936 /* InfoPlist.strings in Resources */,
+				490DACC019ED42EB00B7E936 /* icon_128.png in Resources */,
+				490DACC119ED42EB00B7E936 /* Images.xcassets in Resources */,
+				490DACC219ED42EB00B7E936 /* icons in Resources */,
+				490DACC319ED42EB00B7E936 /* Main.storyboard in Resources */,
+				490DACC419ED42EB00B7E936 /* Background_GOLIVE_EXPORTED.png in Resources */,
+				490DACC519ED42EB00B7E936 /* diagram_whatis.jpg in Resources */,
+				490DACC619ED42EB00B7E936 /* bat_medium.png in Resources */,
+				490DACC719ED42EB00B7E936 /* gbhome.png in Resources */,
+				490DACC819ED42EB00B7E936 /* bat_veryhigh.png in Resources */,
+				490DACC919ED42EB00B7E936 /* bat_verylow.png in Resources */,
+				490DACCA19ED42EB00B7E936 /* bat_low.png in Resources */,
+				490DACCB19ED42EB00B7E936 /* frontslider-2.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		494C6A1F1940A4A900E2EC69 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -321,11 +664,31 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				499684F719F3193400B8EE25 /* bgblur1.png in Resources */,
+				49194B551992B1EC0057C2C1 /* NewScanBeaconViewController.xib in Resources */,
+				49194B591994EC0B0057C2C1 /* bat_high.png in Resources */,
+				49E4EE3A19F56567008962FF /* glyphicons_020_home.png in Resources */,
 				CF2BC92D18019D6100C66D15 /* InfoPlist.strings in Resources */,
+				49C315AB1988B6980077B6E3 /* icon_128.png in Resources */,
 				CF2BC93518019D6100C66D15 /* Images.xcassets in Resources */,
+				49C315AC1988B6980077B6E3 /* icons in Resources */,
+				49E4EE3119F56429008962FF /* glyphicons_152_new_window.png in Resources */,
 				CF2BC9521801A09D00C66D15 /* Main.storyboard in Resources */,
-				490E934F19685C0B00E4ACE7 /* working.xib in Resources */,
+				49C315A6198845600077B6E3 /* Background_GOLIVE_EXPORTED.png in Resources */,
+				49C315A8198849650077B6E3 /* diagram_whatis.jpg in Resources */,
+				49194B5F1994EC2A0057C2C1 /* bat_medium.png in Resources */,
 				49B5A53519002C2200745F94 /* gbhome.png in Resources */,
+				499684EC19F2359400B8EE25 /* appicon-60@2x.png in Resources */,
+				49194B601994EC2A0057C2C1 /* bat_veryhigh.png in Resources */,
+				49E4EE3C19F565B4008962FF /* glyphicons_195_circle_info.png in Resources */,
+				499684EE19F2359400B8EE25 /* appicon@2x.png in Resources */,
+				49E4EE3819F56527008962FF /* glyphicons_030_pencil.png in Resources */,
+				49E4EE3419F5649E008962FF /* glyphicons_032_wifi_alt.png in Resources */,
+				49E4EE3619F564D4008962FF /* glyphicons_023_cogwheels.png in Resources */,
+				49194B611994EC2A0057C2C1 /* bat_verylow.png in Resources */,
+				49194B5E1994EC2A0057C2C1 /* bat_low.png in Resources */,
+				49C315A4198845330077B6E3 /* frontslider-2.jpg in Resources */,
+				499684ED19F2359400B8EE25 /* appicon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,12 +702,96 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		490DACA619ED42EB00B7E936 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		490DACCC19ED42EB00B7E936 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AD11DA93860D45B89A46C71C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F39D3D6E554345A19CC9DF0F /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		490DACA719ED42EB00B7E936 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				490DACA819ED42EB00B7E936 /* NewScanCollectionViewFlowLayout.m in Sources */,
+				490DACAA19ED42EB00B7E936 /* NewScanCollectionView.m in Sources */,
+				49E4EE2F19F446AC008962FF /* NewTabBar.m in Sources */,
+				490DACAB19ED42EB00B7E936 /* ShapeView.m in Sources */,
+				490DACAC19ED42EB00B7E936 /* NewScanViewController.m in Sources */,
+				490DACAD19ED42EB00B7E936 /* NewScanCollectionViewCell.m in Sources */,
+				490DACAE19ED42EB00B7E936 /* NATHiBeaconsDelegate.m in Sources */,
+				490DACAF19ED42EB00B7E936 /* NewScanBeaconViewController.m in Sources */,
+				490DACB019ED42EB00B7E936 /* NewScanCollectionViewController.m in Sources */,
+				490DACB119ED42EB00B7E936 /* BTDeviceModel.m in Sources */,
+				490DACB219ED42EB00B7E936 /* main.m in Sources */,
+				490DACB319ED42EB00B7E936 /* NATViewController.m in Sources */,
+				490DACB419ED42EB00B7E936 /* AppStatus.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		494C6A141940A4A900E2EC69 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				494C6A151940A4A900E2EC69 /* NATHiBeaconsDelegate.m in Sources */,
+				49E4EE2E19F446AB008962FF /* NewTabBar.m in Sources */,
 				494C6A161940A4A900E2EC69 /* BTDeviceModel.m in Sources */,
 				494C6A171940A4A900E2EC69 /* main.m in Sources */,
 				494C6A181940A4A900E2EC69 /* NATViewController.m in Sources */,
@@ -355,11 +802,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49C315BB19894E250077B6E3 /* NewScanCollectionViewFlowLayout.m in Sources */,
+				49C315B519894DD80077B6E3 /* NewScanCollectionView.m in Sources */,
+				49C315C3198AB9060077B6E3 /* ShapeView.m in Sources */,
+				49C315AF19894BAE0077B6E3 /* NewScanViewController.m in Sources */,
+				49C315B819894DFE0077B6E3 /* NewScanCollectionViewCell.m in Sources */,
 				CF2BC93318019D6100C66D15 /* NATHiBeaconsDelegate.m in Sources */,
+				49194B571992C7730057C2C1 /* NewScanBeaconViewController.m in Sources */,
+				494B68D819F6DF77003914C9 /* NewAboutBeaconsViewController.m in Sources */,
+				49C315B219894CE60077B6E3 /* NewScanCollectionViewController.m in Sources */,
+				499684FF19F3B7FD00B8EE25 /* GBDefaults.m in Sources */,
+				499684F219F2A74C00B8EE25 /* SpinnerView.m in Sources */,
 				4955666C18F1503800DA3A12 /* BTDeviceModel.m in Sources */,
 				CF2BC92F18019D6100C66D15 /* main.m in Sources */,
+				499684FB19F3B30500B8EE25 /* AutoSetupViewController.m in Sources */,
 				CF2BC9551801A0C700C66D15 /* NATViewController.m in Sources */,
 				49F8D1C11979A67500CC9068 /* AppStatus.m in Sources */,
+				49D1975E19F14A62009FFD64 /* GlimwormBeaconEdit.m in Sources */,
+				498961191A0CC9E000F3A445 /* RoundedCornerView.m in Sources */,
+				49E4EE2A19F44484008962FF /* NewTabBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +862,40 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		490DACCE19ED42EB00B7E936 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4E8D02EBE464A769A548061 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HiBeacons/HiBeacons-Prefix.pch";
+				INFOPLIST_FILE = "HiBeacons copy2-Info.plist";
+				PRODUCT_NAME = HiBeacons;
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		490DACCF19ED42EB00B7E936 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4E8D02EBE464A769A548061 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HiBeacons/HiBeacons-Prefix.pch";
+				INFOPLIST_FILE = "HiBeacons copy2-Info.plist";
+				PRODUCT_NAME = HiBeacons;
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		494C6A251940A4A900E2EC69 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -505,6 +1000,7 @@
 		};
 		CF2BC94C18019D6100C66D15 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4E8D02EBE464A769A548061 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -521,6 +1017,7 @@
 		};
 		CF2BC94D18019D6100C66D15 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4E8D02EBE464A769A548061 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -578,6 +1075,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		490DACCD19ED42EB00B7E936 /* Build configuration list for PBXNativeTarget "HiBeacons ADHOC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				490DACCE19ED42EB00B7E936 /* Debug */,
+				490DACCF19ED42EB00B7E936 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		494C6A241940A4A900E2EC69 /* Build configuration list for PBXNativeTarget "HiBeacons Dev" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

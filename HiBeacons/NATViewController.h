@@ -35,5 +35,7 @@
 @property (weak, nonatomic) IBOutlet UIView *ConfigView;
 @property (weak, nonatomic) IBOutlet UIView *WorkingView;
 
+@property (weak, nonatomic) IBOutlet UILabel *connectingStringDisplay;
+@property (weak, nonatomic) IBOutlet UILabel *p_pdate;
 
 @end

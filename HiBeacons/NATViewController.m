@@ -40,7 +40,7 @@ static NSString * const kAdvertisingOperationTitle = @"Advertising";
 static NSString * const kRangingOperationTitle = @"Range For Beacons";
 static NSString * const kConfigOperationTitle = @"Configure Beacons";
 static NSUInteger const kNumberOfSections = 2;
-static NSUInteger const kNumberOfAvailableOperations = 2;   // 4
+static NSUInteger const kNumberOfAvailableOperations = 1;   // 4
 static CGFloat const kOperationCellHeight = 44;
 static CGFloat const kBeaconCellHeight = 52;
 static CGFloat const kBLECellHeight = 82;
@@ -65,8 +65,8 @@ typedef NS_ENUM(NSUInteger, NTSectionType) {
 //};
 
 typedef NS_ENUM(NSUInteger, NTOperationsRow) {
-    NTConfigRow,
     NTRangingRow,
+    NTConfigRow,
     NTMonitoringRow,
     NTAdvertisingRow
 };
@@ -79,11 +79,19 @@ NSString *currentfirmware = @"";
 bool isWorking = FALSE;
 int MIN = 0;
 NSString *LASTPASS = @"";
+AppStatus *appStatus = nil;
+
+
+NSString *BTYPE = @"";
+NSString *PDATE = @"";
+long PDATELONG = 0;
+
 
 //static const NSTimeInterval kLXCBScanningTimeout = 10.0;
 //static const NSTimeInterval kLXCBConnectingTimeout = 10.0;
-static const NSTimeInterval kLXCBRequestTimeout = 5.0;
-static const NSTimeInterval kLXCBActivateTimeout = 5.0;
+//static const NSTimeInterval kLXCBRequestTimeout = 8.0;  // was 8 secs , does not neet tobe that long
+static const NSTimeInterval kLXCBRequestTimeout = 1.0;
+//static const NSTimeInterval kLXCBActivateTimeout = 8.0;
 
 
 
@@ -108,7 +116,7 @@ static const NSTimeInterval kLXCBActivateTimeout = 5.0;
 @property (nonatomic, unsafe_unretained) void *operationContext;
 
 /* added by j carter for glimworm beacons - start */
-@property (nonatomic, strong) CBCentralManager *manager;
+//@property (nonatomic, strong) CBCentralManager *manager;
 @property (nonatomic, strong) CBPeripheral *peripheral;
 @property  (nonatomic, strong) NSMutableArray *ItemArray;
 /* added by j carter for glimworm beacons - end */
@@ -141,7 +149,8 @@ static const NSTimeInterval kLXCBActivateTimeout = 5.0;
 @end
 @implementation NATViewController
 @synthesize ConfigView;
-
+@synthesize connectingStringDisplay;
+@synthesize p_pdate;
 
 #pragma mark - Index path management
 - (NSArray *)indexPathsOfRemovedBeacons:(NSArray *)beacons
@@ -283,6 +292,7 @@ static const NSTimeInterval kLXCBActivateTimeout = 5.0;
             switch (indexPath.row) {
                 case NTMonitoringRow:
                     cell.textLabel.text = kMonitoringOperationTitle;
+                    [cell.textLabel setFont:[UIFont fontWithName: @"Futura" size: 16.0f]];
                     self.monitoringSwitch = (UISwitch *)cell.accessoryView;
                     [self.monitoringSwitch addTarget:self
                                               action:@selector(changeMonitoringState:)
@@ -290,6 +300,7 @@ static const NSTimeInterval kLXCBActivateTimeout = 5.0;
                     break;
                 case NTAdvertisingRow:
                     cell.textLabel.text = kAdvertisingOperationTitle;
+                    [cell.textLabel setFont:[UIFont fontWithName: @"Futura" size: 16.0f]];
                     self.advertisingSwitch = (UISwitch *)cell.accessoryView;
                     [self.advertisingSwitch addTarget:self
                                                action:@selector(changeAdvertisingState:)
@@ -297,6 +308,7 @@ static const NSTimeInterval kLXCBActivateTimeout = 5.0;
                     break;
                 case NTConfigRow:
                     cell.textLabel.text = kConfigOperationTitle;
+                    [cell.textLabel setFont:[UIFont fontWithName: @"Futura" size: 16.0f]];
                     self.configSwitch = (UISwitch *)cell.accessoryView;
                     [self.configSwitch addTarget:self
                                                action:@selector(changeConfigState:)
@@ -306,6 +318,7 @@ static const NSTimeInterval kLXCBActivateTimeout = 5.0;
                 case NTRangingRow:
                 default:
                     cell.textLabel.text = kRangingOperationTitle;
+                    [cell.textLabel setFont:[UIFont fontWithName: @"Futura" size: 16.0f]];
                     self.rangingSwitch = (UISwitch *)cell.accessoryView;
                     [self.rangingSwitch addTarget:self
                                            action:@selector(changeRangingState:)
@@ -334,6 +347,8 @@ static const NSTimeInterval kLXCBActivateTimeout = 5.0;
                 
 //                cell.textLabel.text = [NSString stringWithFormat : @"%@ (%d%%)", beacon.name,beacon.batterylevel];
                 cell.textLabel.text = [NSString stringWithFormat : @"%@", beacon.name];
+                [cell.textLabel setFont:[UIFont fontWithName: @"Futura" size: 12.0f]];
+                
 //                cell.detailTextLabel.text = [NSString stringWithFormat : @"%@", beacon.UUID];
                 cell.detailTextLabel.text = [NSString stringWithFormat : @"Battery Level : %@", lvl];
                 cell.detailTextLabel.textColor = [UIColor colorWithRed:90 green:0 blue:0 alpha:1];
@@ -341,7 +356,7 @@ static const NSTimeInterval kLXCBActivateTimeout = 5.0;
                 if (beacon.batterylevel > 40) cell.detailTextLabel.textColor = [UIColor orangeColor];
                 if (beacon.batterylevel > 60) cell.detailTextLabel.textColor = [UIColor colorWithRed:0 green:60 blue:0 alpha:1];
                 if (beacon.batterylevel > 80) cell.detailTextLabel.textColor = [UIColor colorWithRed:0 green:60 blue:0 alpha:1];
-                cell.detailTextLabel.font = [UIFont fontWithName:@"LiberationMono-Bold" size:22];
+                cell.detailTextLabel.font = [UIFont fontWithName:@"Futura" size:22];
                 
                 
             } else {
@@ -355,8 +370,10 @@ static const NSTimeInterval kLXCBActivateTimeout = 5.0;
                                               reuseIdentifier:kBeaconCellIdentifier];
             
                 cell.textLabel.text = beacon.proximityUUID.UUIDString;
+                [cell.textLabel setFont:[UIFont fontWithName: @"Futura" size: 12.0f]];
                 cell.detailTextLabel.text = [self detailsStringForBeacon:beacon];
                 cell.detailTextLabel.textColor = [UIColor grayColor];
+                [cell.detailTextLabel setFont:[UIFont fontWithName: @"Futura" size: 12.0f]];
             }
         }
             break;
@@ -462,14 +479,32 @@ static const NSTimeInterval kLXCBActivateTimeout = 5.0;
 
 
 #pragma mark - Common
+NSString *currentlyUsedUUID = @"";
+
 - (void)createBeaconRegion
 {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *defaultUUID = [defaults objectForKey:@"uuid"];
+    NSLog(@"RANGING %@ %@",defaultUUID, currentlyUsedUUID);
+    
+    if ([defaultUUID isEqualToString:@""]) {
+        defaultUUID = kUUID;
+    }
+
+    if (![defaultUUID isEqualToString:currentlyUsedUUID]) {
+        self.beaconRegion = nil;
+    }
+    
     if (self.beaconRegion)
         return;
     
-    NSUUID *proximityUUID = [[NSUUID alloc] initWithUUIDString:kUUID];
+    
+
+    NSUUID *proximityUUID = [[NSUUID alloc] initWithUUIDString:defaultUUID];
     self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:proximityUUID identifier:kIdentifier];
     self.beaconRegion.notifyEntryStateOnDisplay = YES;
+    currentlyUsedUUID = defaultUUID;
 }
 
 - (void)createLocationManager
@@ -501,9 +536,9 @@ static const NSTimeInterval kLXCBActivateTimeout = 5.0;
     
     [self clearItemArray];
 
-    if (!self.manager) {
-        self.manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:nil];
-        self.manager.delegate = self;
+    if (!appStatus.manager) {
+        appStatus.manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:nil];
+        appStatus.manager.delegate = self;
         self.beaconTableView.delegate = self;
     } else {
         [self startScan];
@@ -528,14 +563,17 @@ static const NSTimeInterval kLXCBActivateTimeout = 5.0;
 }
 - (void)startScan {
 
+    appStatus.manager.delegate = self;
+
     NSDictionary *options = @{CBCentralManagerScanOptionAllowDuplicatesKey: @YES};
-    [self.manager scanForPeripheralsWithServices:nil options:options];
+    [appStatus.manager scanForPeripheralsWithServices:nil options:options];
 
     NSLog(@"Scanning Bluetooth");
     
 }
 - (void)stopScan {
-    [self.manager stopScan];
+    NSLog(@"STOPPING SCAN!!!!!!!!!!!!!!!!!!");
+    [appStatus.manager stopScan];
 }
 
 - (NSString *) uuidToString:(CFUUIDRef)UUID {
@@ -599,11 +637,11 @@ static const NSTimeInterval kLXCBActivateTimeout = 5.0;
     
     NSData* versionInfo = [advertisementData objectForKey:CBAdvertisementDataManufacturerDataKey];
     
-    //NSLog(@"versionInfo u %@",versionInfo);
+    NSLog(@"versionInfo u %@",versionInfo);
 
     NSNumber* isconnectable = [advertisementData objectForKey:CBAdvertisementDataIsConnectable];
     
-    //NSLog(@"isconnectable u %@",isconnectable);
+    NSLog(@"isconnectable u %@",isconnectable);
 
     NSDictionary* servicedata = [advertisementData objectForKey:CBAdvertisementDataServiceDataKey];
     //NSLog(@"servicedata u %@",servicedata);
@@ -1202,7 +1240,7 @@ static const NSTimeInterval kLXCBActivateTimeout = 5.0;
     if (currentPeripheral != Nil) {
         if (!peripheralIsConnected && !peripheralIsConnecting) {
             if (!connectActive) {
-                [self.manager connectPeripheral:currentPeripheral.peripheral options:nil];
+                [appStatus.manager connectPeripheral:currentPeripheral.peripheral options:nil];
                 connectActive = YES;
             }
         }
@@ -1220,6 +1258,11 @@ static const NSTimeInterval kLXCBActivateTimeout = 5.0;
 */
     self.p_uuid.layer.borderColor = [[UIColor grayColor]CGColor];
     
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    appStatus = [AppStatus sharedManager];
 }
 
 /*
@@ -1278,6 +1321,7 @@ bool peripheralIsConnectedButNotRead = NO;
     peripheralIsConnecting = NO;
     peripheralIsConnectedButNotRead = YES;
     [self stopScan];
+
     [aPeripheral setDelegate:self];
     [aPeripheral discoverServices:nil];
 }
@@ -1293,10 +1337,11 @@ bool peripheralIsConnectedButNotRead = NO;
 
 - (void)peripheral:(CBPeripheral *)aPeripheral didDiscoverServices:(NSError *)error {
     
-    NSLog(@" servicesDISCOVERED ( %@ )", [aPeripheral name]);
+    NSLog(@" NAT servicesDISCOVERED ( %@ )", [aPeripheral name]);
+    NSLog(@" NAT servicesDISCOVERED ( %@ )", [aPeripheral services]);
     for (CBService *service in aPeripheral.services) {
-        NSLog(@"Discovered service s: %@", service);
-        NSLog(@"Discovered service u: %@", service.UUID);
+        NSLog(@"NAT Discovered service s: %@", service);
+        NSLog(@"NAT Discovered service u: %@", service.UUID);
         
         /* connect to serial bluetooth */
         if ([service.UUID isEqual:[CBUUID UUIDWithString:@"FFE0"]])
@@ -1404,12 +1449,26 @@ NSString *incoming_uuid = @"00000000-0000-0000-0000-000000000000";
                 NSArray *array = [str componentsSeparatedByString:@":"];
                 NSLog(@"GB returns %@",str);
                 if (array.count > 1) {
-                    
+                    BTYPE = array[1];
                 } else {
                     NSLog(@"ERR returns %@",str);
                 }
             }
             
+            if ([currentcommand isEqualToString:@"GB+PDATE"]) {
+                NSLog(@"GB returns %@",str);
+                if (str.length > 1) {
+                    PDATE = [[NSString alloc] initWithFormat:@"%@", str];
+                    PDATELONG = [str longLongValue];
+                    self.p_pdate.text = PDATE;
+                } else {
+                    PDATELONG = 0;
+                    PDATE = @"";
+                    self.p_pdate.text = @"";
+                    NSLog(@"ERR returns %@",str);
+                }
+            }
+
             if ([currentcommand isEqualToString:@"AT+VERS?"]) {
                 
                 peripheralIsConnectedButNotRead = NO;
@@ -1421,21 +1480,15 @@ NSString *incoming_uuid = @"00000000-0000-0000-0000-000000000000";
                 
                     if ([currentfirmware isEqualToString:@"V517"]) {
                         // dvert 0 = 100 , 1 = 1280
-                        
                     } else if ([currentfirmware isEqualToString:@"V518"]) {
-                        
                     } else if ([currentfirmware isEqualToString:@"V519"]) {
-                        
                     } else if ([currentfirmware isEqualToString:@"V520"]) {
-                        
                     } else if ([currentfirmware isEqualToString:@"V521"]) {
-                        
                     } else if ([currentfirmware isEqualToString:@"V522"]) {
                     } else if ([currentfirmware isEqualToString:@"V523"]) {
                     } else if ([currentfirmware isEqualToString:@"V524"]) {
                     } else if ([currentfirmware isEqualToString:@"V525"]) {
                     } else if ([currentfirmware isEqualToString:@"V526"]) {
-                        
                     }
                 } else {
                     NSLog(@"ERR returns %@",str);
@@ -1587,7 +1640,7 @@ NSString *incoming_uuid = @"00000000-0000-0000-0000-000000000000";
                 if (array.count > 1) {
                 
                     NSLog(@"array %@",array[1]);
-                    int val = [array[1] intValue];
+//                    int val = [array[1] intValue];
                     NSString *Val = array[1];
                     
                     //                [self clearadvertisingbuttonstates];
@@ -1648,7 +1701,8 @@ NSString *incoming_uuid = @"00000000-0000-0000-0000-000000000000";
             
             
             
-            [self q_next];
+            [self performSelector:@selector(q_next) withObject:self afterDelay:0.2];
+//            [self q_next];
             
         }
     }
@@ -1766,11 +1820,14 @@ NSString *currentInterval = @"";
     
 }
 
+
 - (void)q_readall_auto {
+    
 
-    AppStatus *Status = [AppStatus sharedManager];
-
-    if ([Status.currentStatus isEqualToString:@"active"]) {
+//    AppStatus *Status = [AppStatus sharedManager];
+//
+//    if ([Status.currentStatus isEqualToString:@"active"]) {
+    if ([appStatus.currentStatus isEqualToString:@"active"]) {
         [self q_readall];
     }
     
@@ -1779,6 +1836,7 @@ NSString *currentInterval = @"";
     
     
     NSString *get0 = [[NSString alloc] initWithFormat:@"GB+BTYPE"];
+    NSString *get0a = [[NSString alloc] initWithFormat:@"GB+PDATE"];
     NSString *get1 = [[NSString alloc] initWithFormat:@"AT+VERS?"];
     NSString *get2 = [[NSString alloc] initWithFormat:@"AT+BATT?"];
     NSString *get3 = [[NSString alloc] initWithFormat:@"AT+ADVI?"];
@@ -1797,7 +1855,7 @@ NSString *currentInterval = @"";
     
     //    NSString *get6 = [[NSString alloc] initWithFormat:@"AT+MEAS?"]; // Value
     
-    Queue = [NSMutableArray arrayWithObjects:@"clearerror",get0,get1,get2,get3,get4,get4a,get5,get6,get7,get8,get9,get10,get11,get12,get13,@"checkerror",nil];
+    Queue = [NSMutableArray arrayWithObjects:@"clearerror",get0,get0a,get1,get2,get3,get4,get4a,get5,get6,get7,get8,get9,get10,get11,get12,get13,@"checkerror",nil];
     
     [self q_next];
 }
@@ -1813,12 +1871,13 @@ NSString *currentInterval = @"";
         [self performSelector:@selector(requestDidTimeout:)
                    withObject:characteristic
                    afterDelay:kLXCBRequestTimeout];
+        NSLog(@"startRequestTimeout : timeout spawned");
     }
     @catch (NSException * e) {
-        NSLog(@"Exception: %@", e);
+        NSLog(@"startRequestTimeout : Exception: %@", e);
     }
     @finally {
-        NSLog(@"finally");
+        NSLog(@"startRequestTimeout : finally");
     }
 }
 
@@ -1850,6 +1909,28 @@ NSString *currentInterval = @"";
 
 #pragma mark - sending queue
 
+- (NSString *) displayFriendlyValueOf:(NSString *)CMD {
+    if ([CMD isEqualToString:@"skip"]) return @" ";
+    if ([CMD isEqualToString:@"checkerror"]) return @"checking errors";
+    if ([CMD isEqualToString:@"GB+BTYPE"]) return @"checking beacon type";
+    if ([CMD isEqualToString:@"GB+PDATE"]) return @"checking production date";
+    if ([CMD isEqualToString:@"AT+VERS?"]) return @"version";
+    if ([CMD isEqualToString:@"AT+BATT?"]) return @"battery";
+    if ([CMD isEqualToString:@"AT+ADVI?"]) return @"advertisement";
+    if ([CMD isEqualToString:@"AT+POWE?"]) return @"power";
+    if ([CMD isEqualToString:@"AT+MEA?"]) return @"measure";
+    if ([CMD isEqualToString:@"AT+PASS?"]) return @"password";
+    if ([CMD isEqualToString:@"AT+MARJ?"]) return @"major";
+    if ([CMD isEqualToString:@"AT+MINO?"]) return @"minor";
+    if ([CMD isEqualToString:@"AT+IBE0?"]) return @"UUID";
+    if ([CMD isEqualToString:@"AT+IBE1?"]) return @"UUID";
+    if ([CMD isEqualToString:@"AT+IBE2?"]) return @"UUID";
+    if ([CMD isEqualToString:@"AT+IBE3?"]) return @"UUID";
+    if ([CMD isEqualToString:@"AT+TYPE?"]) return @"TYPE";
+    if ([CMD isEqualToString:@"AT+NAME?"]) return @"name";
+    return CMD;
+}
+
 NSMutableArray *Queue;
 bool q_error = NO;
 
@@ -1865,6 +1946,8 @@ bool q_error = NO;
         NSString *q_str = [Queue objectAtIndex:0];
         [Queue removeObjectAtIndex:(0)];
         NSLog(@"Q_NEXT STR %@", q_str);
+        
+        connectingStringDisplay.text = [NSString stringWithFormat:@"%@", [self displayFriendlyValueOf:q_str]];
         
         if ([q_str isEqualToString:@"close"]) {
             currentcommand = @"";
@@ -1890,6 +1973,9 @@ bool q_error = NO;
         }
         if ([q_str isEqualToString:@"clearerror"]) {
             q_error = NO;
+            PDATELONG = 0;
+            PDATE = @"";
+            self.p_pdate.text = @"";
             [self q_next];
             return;
         }
@@ -1987,6 +2073,40 @@ bool q_error = NO;
     NSString *adv = [NSString stringWithFormat:@"AT+ADVI%@",currentInterval];
 
     NSString *range = [NSString stringWithFormat:@"AT+POWE%@",currentRange];
+    NSString *srange = @"GB+SRANGE";
+    NSString *stopsleepmode = @"AT+PWRM1";
+    
+    NSLog(@"AAAAAAAAAA :: STR %@",currentRange);
+    NSLog(@"AAAAAAAAAA :: PDATE %@",PDATE);
+    NSLog(@"AAAAAAAAAA :: LONG %ld",PDATELONG);
+    
+    if ([currentRange isEqualToString:@"2"]) {
+        NSLog(@"AAAAAAAAAA :: CASE 1 ");
+        srange = @"skip";
+        stopsleepmode = @"skip";
+    }
+    if (PDATELONG < 1406451969) {
+        // this version we started with the SRANGE
+        NSLog(@"AAAAAAAAAA :: CASE 2 ");
+        srange = @"skip";
+        stopsleepmode = @"skip";
+    }
+
+    NSString *power = @"skip";
+    if ([currentRange isEqualToString:@"0"]) {
+        power = @"AT+MEAA8";    //
+        power = @"AT+MEAAE";
+    } else if ([currentRange isEqualToString:@"1"]) {
+        power = @"AT+MEAB8";    // 72
+        //power = @"AT+MEABF";
+    } else if ([currentRange isEqualToString:@"2"]) {
+        power = @"AT+MEAC5";    // 59
+        power = @"AT+MEAC0";
+    } else if ([currentRange isEqualToString:@"3"]) {
+        power = @"AT+MEAC5";
+    }
+    
+
 
     
     NSString *name_str = [[NSString alloc] initWithFormat:@"AT+NAME%@           ",
@@ -2028,18 +2148,21 @@ bool q_error = NO;
                          [[self.p_uuid.text uppercaseString] substringWithRange:NSMakeRange(28, 8)]
                          ];
         
-        Queue = [NSMutableArray arrayWithObjects:@"clearerror",ibmajor_str,ibminor_str,ib0,ib1,ib2,ib3,adv,pass0,pass1,pass2,name_str,showbatt,range,@"checkerror",nil];
+        Queue = [NSMutableArray arrayWithObjects:@"clearerror",ibmajor_str,ibminor_str,ib0,ib1,ib2,ib3,adv,pass0,pass1,pass2,name_str,showbatt,range,power,srange,stopsleepmode,@"checkerror",nil];
         
 
     } else {
-        Queue = [NSMutableArray arrayWithObjects:@"clearerror",ibmajor_str,ibminor_str,adv,pass0,pass1,pass2,name_str,showbatt,range,@"checkerror",nil];
+        Queue = [NSMutableArray arrayWithObjects:@"clearerror",ibmajor_str,ibminor_str,adv,pass0,pass1,pass2,name_str,showbatt,range,power,srange,stopsleepmode,@"checkerror",nil];
         
     }
     
 //    Queue = [NSMutableArray arrayWithObjects:ibmajor_str,ibminor_str,ib0,ib1,ib2,ib3,nil];
 //    Queue = [NSMutableArray arrayWithObjects:ibmajor_str,ibminor_str,ib0,ib1,ib2,ib3,name_str,nil];
     
-    [self q_next];
+//    [self q_next];
+
+    [self performSelector:@selector(q_next) withObject:self afterDelay:0.2];
+    
     
     /*
      NSAlert *alert = [[NSAlert alloc] init];
@@ -2065,7 +2188,7 @@ bool q_error = NO;
     if (currentPeripheral != Nil) {
         
         if(currentPeripheral.peripheral && ([currentPeripheral.peripheral state] == CBPeripheralStateConnecting )) {
-            [self.manager cancelPeripheralConnection:currentPeripheral.peripheral];
+            [appStatus.manager cancelPeripheralConnection:currentPeripheral.peripheral];
         }
         if(currentPeripheral.peripheral && ([currentPeripheral.peripheral state] == CBPeripheralStateConnected ))
         {
@@ -2073,7 +2196,7 @@ bool q_error = NO;
             if (_currentChar != Nil) {
                 [currentPeripheral.peripheral setNotifyValue:NO forCharacteristic:_currentChar];
             }
-            [self.manager cancelPeripheralConnection:currentPeripheral.peripheral];
+            [appStatus.manager cancelPeripheralConnection:currentPeripheral.peripheral];
         }
     }
     
@@ -2084,7 +2207,7 @@ bool q_error = NO;
     peripheralIsConnectedButNotRead = NO;
 
     [self stopConfigurationMonitoring];
-    [self startConfigurationMonitoring];
+//    [self startConfigurationMonitoring];
     
     [ConfigView endEditing:YES];
     ConfigView.hidden = YES;
@@ -2129,7 +2252,7 @@ bool q_error = NO;
     self.p_minor.text = [[NSString alloc] initWithFormat:@"%d",MIN];
     self.p_uuid.text = @"74278bda-b644-4520-8f0c-720eaf059935";
     self.p_advintslider.value = 9;
-    self.p_name.text = [[NSString alloc] initWithFormat:@"GWB_%@_%@",self.p_major.text,self.p_minor.text];
+    self.p_name.text = [[NSString alloc] initWithFormat:@"ADVGB_%@_%@",self.p_major.text,self.p_minor.text];
     self.p_rangeslider.value = 2;
     [self setAdvIntervalFromSlider];
     [self setRangeLabelFromSlider];
@@ -2163,7 +2286,7 @@ bool q_error = NO;
             }
         } else if (currentPeripheral.peripheral && peripheralIsConnected == NO) {
             if (currentPeripheral != Nil) {
-                [self.manager cancelPeripheralConnection:currentPeripheral.peripheral];
+                [appStatus.manager cancelPeripheralConnection:currentPeripheral.peripheral];
             }
         }
     }
@@ -2194,7 +2317,7 @@ bool q_error = NO;
 - (void)cancel_and_close_window {
     if (currentPeripheral != Nil) {
         if(currentPeripheral.peripheral && ([currentPeripheral.peripheral state] == CBPeripheralStateConnecting )) {
-            [self.manager cancelPeripheralConnection:currentPeripheral.peripheral];
+            [appStatus.manager cancelPeripheralConnection:currentPeripheral.peripheral];
             peripheralIsConnecting = NO;
             peripheralIsConnected = NO;
             peripheralIsConnectedButNotRead = NO;

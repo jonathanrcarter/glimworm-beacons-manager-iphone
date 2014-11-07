@@ -25,12 +25,37 @@
 //
 
 #import "NATHiBeaconsDelegate.h"
+#import "BTDeviceModel.h"
 #import "AppStatus.h"
 
 @implementation NATHiBeaconsDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+
+    
+//    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                                       [UIColor grayColor], NSForegroundColorAttributeName,
+//                                                       nil] forState:UIControlStateNormal];
+//
+//    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                                       [UIColor whiteColor], NSForegroundColorAttributeName,
+//                                                       nil] forState:UIControlStateHighlighted];
+
+//    UIColor *titleHighlightedColor = [UIColor colorWithRed:109/255.0 green:136/255.0 blue:26/255.0 alpha:1.0];
+//    [[UITabBar appearance] setSelectedImageTintColor:titleHighlightedColor];
+    [[UITabBar appearance] setSelectedImageTintColor:[UIColor whiteColor]];
+    
+    
+    //        [self setSelectedImageTintColor:[UIColor whiteColor]];
+
+    
+//    UIColor *titleHighlightedColor = [UIColor colorWithRed:153/255.0 green:192/255.0 blue:48/255.0 alpha:1.0];
+//
+//    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                                       titleHighlightedColor, NSForegroundColorAttributeName,
+//                                                       nil] forState:UIControlStateHighlighted];
+    
     return YES;
 }
 

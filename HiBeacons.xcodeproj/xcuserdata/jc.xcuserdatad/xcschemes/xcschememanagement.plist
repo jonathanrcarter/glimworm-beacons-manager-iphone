@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>HiBeacons copy 2.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>HiBeacons copy.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -17,6 +22,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>490DACA519ED42EB00B7E936</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>494C6A131940A4A900E2EC69</key>
 		<dict>
 			<key>primary</key>
