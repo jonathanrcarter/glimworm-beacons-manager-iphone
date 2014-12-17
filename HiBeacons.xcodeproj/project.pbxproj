@@ -908,6 +908,7 @@
 				INFOPLIST_FILE = "HiBeacons copy-Info.plist";
 				PRODUCT_NAME = "HiBeacons copy";
 				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "arm64 armv7";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -924,6 +925,7 @@
 				INFOPLIST_FILE = "HiBeacons copy-Info.plist";
 				PRODUCT_NAME = "HiBeacons copy";
 				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "arm64 armv7";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>318E1184-D8FA-4A53-A860-B90BDE1F7E40</string>
+	<key>IDESourceControlProjectName</key>
+	<string>HiBeacons</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>FA8B6E1CCBC15D14A4DBAE1C2979ECD38F181226</key>
+		<string>https://github.com/jonathanrcarter/glimworm-beacons-manager-iphone.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>HiBeacons.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>FA8B6E1CCBC15D14A4DBAE1C2979ECD38F181226</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/jonathanrcarter/glimworm-beacons-manager-iphone.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>FA8B6E1CCBC15D14A4DBAE1C2979ECD38F181226</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FA8B6E1CCBC15D14A4DBAE1C2979ECD38F181226</string>
+			<key>IDESourceControlWCCName</key>
+			<string>HiBeacons-master</string>
+		</dict>
+	</array>
+</dict>
+</plist>
