@@ -58,7 +58,8 @@
 
 
 - (void)setBatteryLabel:(int)batterylevel{
-    NSString *lvl = @"Very Low";
+    NSString *lvl = @"";
+    if (batterylevel > 210) lvl = @"Very Low";
     if (batterylevel > 20) lvl = @"Low";
     if (batterylevel > 40) lvl = @"Medium";
     if (batterylevel > 60) lvl = @"High";
@@ -72,7 +73,8 @@
     if (batterylevel > 60) self.battery.textColor = [UIColor colorWithRed:0 green:60 blue:0 alpha:1];
     if (batterylevel > 80) self.battery.textColor = [UIColor colorWithRed:0 green:60 blue:0 alpha:1];
 
-    NSString *lvlimg = @"bat_verylow.png";
+    NSString *lvlimg = @"bat_blank.png";
+    if (batterylevel > 10) lvlimg = @"bat_verylow.png";
     if (batterylevel > 20) lvlimg = @"bat_low.png";
     if (batterylevel > 40) lvlimg = @"bat_medium.png";
     if (batterylevel > 60) lvlimg = @"bat_high.png";

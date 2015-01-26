@@ -16,6 +16,7 @@
 		49194B5F1994EC2A0057C2C1 /* bat_medium.png in Resources */ = {isa = PBXBuildFile; fileRef = 49194B5B1994EC2A0057C2C1 /* bat_medium.png */; };
 		49194B601994EC2A0057C2C1 /* bat_veryhigh.png in Resources */ = {isa = PBXBuildFile; fileRef = 49194B5C1994EC2A0057C2C1 /* bat_veryhigh.png */; };
 		49194B611994EC2A0057C2C1 /* bat_verylow.png in Resources */ = {isa = PBXBuildFile; fileRef = 49194B5D1994EC2A0057C2C1 /* bat_verylow.png */; };
+		49380F461A76686D00DCD106 /* bat_none.png in Resources */ = {isa = PBXBuildFile; fileRef = 49380F451A76686D00DCD106 /* bat_none.png */; };
 		494B68D819F6DF77003914C9 /* NewAboutBeaconsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 494B68D719F6DF77003914C9 /* NewAboutBeaconsViewController.m */; };
 		4955666C18F1503800DA3A12 /* BTDeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4955666B18F1503800DA3A12 /* BTDeviceModel.m */; };
 		498961191A0CC9E000F3A445 /* RoundedCornerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 498961181A0CC9E000F3A445 /* RoundedCornerView.m */; };
@@ -74,6 +75,7 @@
 		49194B5B1994EC2A0057C2C1 /* bat_medium.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bat_medium.png; sourceTree = "<group>"; };
 		49194B5C1994EC2A0057C2C1 /* bat_veryhigh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bat_veryhigh.png; sourceTree = "<group>"; };
 		49194B5D1994EC2A0057C2C1 /* bat_verylow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bat_verylow.png; sourceTree = "<group>"; };
+		49380F451A76686D00DCD106 /* bat_none.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bat_none.png; sourceTree = "<group>"; };
 		494B68D619F6DF77003914C9 /* NewAboutBeaconsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewAboutBeaconsViewController.h; sourceTree = "<group>"; };
 		494B68D719F6DF77003914C9 /* NewAboutBeaconsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewAboutBeaconsViewController.m; sourceTree = "<group>"; };
 		494C6A281940A4AB00E2EC69 /* HiBeacons copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "HiBeacons copy-Info.plist"; path = "/Users/jc/Downloads/HiBeacons-master/HiBeacons copy-Info.plist"; sourceTree = "<absolute>"; };
@@ -368,6 +370,7 @@
 				49E4EE3219F56430008962FF /* tabs */,
 				499684F819F3193C00B8EE25 /* Bacgrounds */,
 				49194B5C1994EC2A0057C2C1 /* bat_veryhigh.png */,
+				49380F451A76686D00DCD106 /* bat_none.png */,
 				49194B5D1994EC2A0057C2C1 /* bat_verylow.png */,
 				49194B581994EC0B0057C2C1 /* bat_high.png */,
 				49C315A91988B6980077B6E3 /* icon_128.png */,
@@ -492,6 +495,7 @@
 				49E4EE3619F564D4008962FF /* glyphicons_023_cogwheels.png in Resources */,
 				49194B611994EC2A0057C2C1 /* bat_verylow.png in Resources */,
 				49194B5E1994EC2A0057C2C1 /* bat_low.png in Resources */,
+				49380F461A76686D00DCD106 /* bat_none.png in Resources */,
 				49C315A4198845330077B6E3 /* frontslider-2.jpg in Resources */,
 				499684ED19F2359400B8EE25 /* appicon.png in Resources */,
 			);
@@ -598,6 +602,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -636,6 +641,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
