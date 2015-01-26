@@ -12,8 +12,6 @@
 
 @interface AutoSetupViewController : UIViewController
 
-@property (nonatomic, weak) GlimwormBeaconEdit *gbedit;
-@property (nonatomic, retain) AppStatus *appStatus;
 @property (weak, nonatomic) IBOutlet UITextField *p_uuid;
 @property (weak, nonatomic) IBOutlet UITextField *p_major;
 @property (weak, nonatomic) IBOutlet UITextField *p_minor;

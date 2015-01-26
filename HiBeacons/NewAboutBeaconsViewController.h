@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 
-@interface NewAboutBeaconsViewController : UIViewController
+@interface NewAboutBeaconsViewController : UIViewController <
+    MFMailComposeViewControllerDelegate
+>
+
 - (IBAction)p_buy_button:(id)sender;
 - (IBAction)p_faq_button:(id)sender;
 - (IBAction)p_email_support_button:(id)sender;

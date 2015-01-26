@@ -12,6 +12,7 @@
 #import "AppStatus.h"
 #import "GlimwormBeaconEdit.h"
 #import "SpinnerView.h"
+#include <objc/runtime.h>
 
 @class NewScanBeaconViewController;
 
@@ -20,22 +21,20 @@
 @end
 
 @interface NewScanBeaconViewController : UIViewController <
-    CLLocationManagerDelegate,
-//    CBPeripheralManagerDelegate,
-    CBCentralManagerDelegate,
-//    CBPeripheralDelegate,
+//    CLLocationManagerDelegate,
+//    CBCentralManagerDelegate,
+    SpinnerViewDelegate,
+    UIScrollViewDelegate,
     UIApplicationDelegate,
     GlimwormBeaconEditDelegate> {
-    AppStatus *appStatus;
 }
 @property (weak, nonatomic) IBOutlet UIView *innerView;
 
 @property (nonatomic, weak) id <NewScanBeaconViewControllerDelegate> delegate;
 @property (nonatomic, weak) id <GlimwormBeaconEditDelegate> gbedit_delegate;
 @property (nonatomic, weak) id <SpinnerViewDelegate> spinner_delegate;
-@property (nonatomic, weak) GlimwormBeaconEdit *gbedit;
 
-@property (nonatomic, retain) AppStatus *appStatus;
+//@property (nonatomic, retain) AppStatus *appStatus;
 @property (nonatomic, strong) CBPeripheral *peripheral;
 
 /* added by j carter for glimworm beacons - end */
@@ -48,7 +47,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *p_measuredpower;
 @property (weak, nonatomic) IBOutlet UILabel *p_firmware;
 @property (weak, nonatomic) IBOutlet UILabel *p_battlevel;
+@property (weak, nonatomic) IBOutlet UILabel *p_build;
+@property (weak, nonatomic) IBOutlet UILabel *p_rel;
+@property (weak, nonatomic) IBOutlet UILabel *p_beacontype;
 
+@property (weak, nonatomic) IBOutlet UIView *v_view1;
+@property (weak, nonatomic) IBOutlet UIScrollView *v_scrollview;
 
 
 @property (weak, nonatomic) IBOutlet UILabel *p_advint;
@@ -58,6 +62,15 @@
 - (IBAction)p_rangeslider:(id)sender;
 @property (weak, nonatomic) IBOutlet UISlider *p_rangeslider;
 @property (weak, nonatomic) IBOutlet UILabel *p_rangelabel;
+
+
+- (IBAction)p_modeslider:(id)sender;
+@property (weak, nonatomic) IBOutlet UISlider *p_modeslider;
+@property (weak, nonatomic) IBOutlet UILabel *p_modelabel;
+
+- (IBAction)p_battslider:(id)sender;
+@property (weak, nonatomic) IBOutlet UISlider *p_battslider;
+@property (weak, nonatomic) IBOutlet UILabel *p_battslider_label;
 
 @property (weak, nonatomic) IBOutlet UILabel *p_currentcommandlabel;
 
@@ -78,11 +91,13 @@
 @property (weak, nonatomic) IBOutlet UIView *ConfigView;
 @property (weak, nonatomic) IBOutlet UIView *WorkingView;
 
-@property  (nonatomic, strong) NSString *currentInterval, *currentRange, *currentfirmware;
+@property  (nonatomic, strong) NSString *currentInterval, *currentRange, *currentfirmware, *currentMode, *currentBatt;
 
 
 /* spinner */
 -(IBAction)didPressSpinnerButton:(id)sender;
+
+
 
 
 @end

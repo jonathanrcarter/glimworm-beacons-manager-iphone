@@ -79,7 +79,6 @@ NSString *currentfirmware = @"";
 bool isWorking = FALSE;
 int MIN = 0;
 NSString *LASTPASS = @"";
-AppStatus *appStatus = nil;
 
 
 NSString *BTYPE = @"";
@@ -536,14 +535,21 @@ NSString *currentlyUsedUUID = @"";
     
     [self clearItemArray];
 
-    if (!appStatus.manager) {
-        appStatus.manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:nil];
-        appStatus.manager.delegate = self;
+    if (![AppStatus sharedInstance].manager) {
+//        [AppStatus sharedInstance].manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:nil];
+        [AppStatus sharedInstance].manager = [[CBCentralManager alloc] initWithDelegate:self
+                                                                                  queue:nil
+                                                                                options:@{CBCentralManagerOptionRestoreIdentifierKey : @"00000000-0000-0000-0000-000000000003"}];
+
+        [AppStatus sharedInstance].manager.delegate = self;
         self.beaconTableView.delegate = self;
     } else {
         [self startScan];
         
     }
+}
+- (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary *)dict {
+    NSLog(@"Will restore state %@",dict);
 }
 
 - (void)stopConfigurationMonitoring
@@ -563,17 +569,17 @@ NSString *currentlyUsedUUID = @"";
 }
 - (void)startScan {
 
-    appStatus.manager.delegate = self;
+    [AppStatus sharedInstance].manager.delegate = self;
 
     NSDictionary *options = @{CBCentralManagerScanOptionAllowDuplicatesKey: @YES};
-    [appStatus.manager scanForPeripheralsWithServices:nil options:options];
+    [[AppStatus sharedInstance].manager scanForPeripheralsWithServices:nil options:options];
 
     NSLog(@"Scanning Bluetooth");
     
 }
 - (void)stopScan {
     NSLog(@"STOPPING SCAN!!!!!!!!!!!!!!!!!!");
-    [appStatus.manager stopScan];
+    [[AppStatus sharedInstance].manager stopScan];
 }
 
 - (NSString *) uuidToString:(CFUUIDRef)UUID {
@@ -1051,7 +1057,7 @@ NSString *currentlyUsedUUID = @"";
         }
     }
     
-    if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
+    if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorizedAlways) {
         if (self.operationContext == kMonitoringOperationContext) {
             NSLog(@"Couldn't turn on monitoring: Location services not authorised.");
             self.monitoringSwitch.on = NO;
@@ -1240,7 +1246,7 @@ NSString *currentlyUsedUUID = @"";
     if (currentPeripheral != Nil) {
         if (!peripheralIsConnected && !peripheralIsConnecting) {
             if (!connectActive) {
-                [appStatus.manager connectPeripheral:currentPeripheral.peripheral options:nil];
+                [[AppStatus sharedInstance].manager connectPeripheral:currentPeripheral.peripheral options:nil];
                 connectActive = YES;
             }
         }
@@ -1262,7 +1268,6 @@ NSString *currentlyUsedUUID = @"";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    appStatus = [AppStatus sharedManager];
 }
 
 /*
@@ -1301,11 +1306,11 @@ NSString *currentlyUsedUUID = @"";
 //                                                 name:UIApplicationWillEnterForegroundNotification
 //                                               object:nil];
 
+    NSLog(@"NATViewController - did become active - trigger notification center!");
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(activate:)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
-    
 }
 
 bool connectActive = NO;
@@ -1337,11 +1342,11 @@ bool peripheralIsConnectedButNotRead = NO;
 
 - (void)peripheral:(CBPeripheral *)aPeripheral didDiscoverServices:(NSError *)error {
     
-    NSLog(@" NAT servicesDISCOVERED ( %@ )", [aPeripheral name]);
-    NSLog(@" NAT servicesDISCOVERED ( %@ )", [aPeripheral services]);
+    NSLog(@" NAT0 servicesDISCOVERED ( %@ )", [aPeripheral name]);
+    NSLog(@" NAT0 servicesDISCOVERED ( %@ )", [aPeripheral services]);
     for (CBService *service in aPeripheral.services) {
-        NSLog(@"NAT Discovered service s: %@", service);
-        NSLog(@"NAT Discovered service u: %@", service.UUID);
+        NSLog(@"NAT0 Discovered service s: %@", service);
+        NSLog(@"NAT0 Discovered service u: %@", service.UUID);
         
         /* connect to serial bluetooth */
         if ([service.UUID isEqual:[CBUUID UUIDWithString:@"FFE0"]])
@@ -1823,11 +1828,9 @@ NSString *currentInterval = @"";
 
 - (void)q_readall_auto {
     
-
-//    AppStatus *Status = [AppStatus sharedManager];
 //
 //    if ([Status.currentStatus isEqualToString:@"active"]) {
-    if ([appStatus.currentStatus isEqualToString:@"active"]) {
+    if ([[AppStatus sharedInstance].currentStatus isEqualToString:@"active"]) {
         [self q_readall];
     }
     
@@ -2188,7 +2191,7 @@ bool q_error = NO;
     if (currentPeripheral != Nil) {
         
         if(currentPeripheral.peripheral && ([currentPeripheral.peripheral state] == CBPeripheralStateConnecting )) {
-            [appStatus.manager cancelPeripheralConnection:currentPeripheral.peripheral];
+            [[AppStatus sharedInstance].manager cancelPeripheralConnection:currentPeripheral.peripheral];
         }
         if(currentPeripheral.peripheral && ([currentPeripheral.peripheral state] == CBPeripheralStateConnected ))
         {
@@ -2196,7 +2199,7 @@ bool q_error = NO;
             if (_currentChar != Nil) {
                 [currentPeripheral.peripheral setNotifyValue:NO forCharacteristic:_currentChar];
             }
-            [appStatus.manager cancelPeripheralConnection:currentPeripheral.peripheral];
+            [[AppStatus sharedInstance].manager cancelPeripheralConnection:currentPeripheral.peripheral];
         }
     }
     
@@ -2286,7 +2289,7 @@ bool q_error = NO;
             }
         } else if (currentPeripheral.peripheral && peripheralIsConnected == NO) {
             if (currentPeripheral != Nil) {
-                [appStatus.manager cancelPeripheralConnection:currentPeripheral.peripheral];
+                [[AppStatus sharedInstance].manager cancelPeripheralConnection:currentPeripheral.peripheral];
             }
         }
     }
@@ -2317,7 +2320,7 @@ bool q_error = NO;
 - (void)cancel_and_close_window {
     if (currentPeripheral != Nil) {
         if(currentPeripheral.peripheral && ([currentPeripheral.peripheral state] == CBPeripheralStateConnecting )) {
-            [appStatus.manager cancelPeripheralConnection:currentPeripheral.peripheral];
+            [[AppStatus sharedInstance].manager cancelPeripheralConnection:currentPeripheral.peripheral];
             peripheralIsConnecting = NO;
             peripheralIsConnected = NO;
             peripheralIsConnectedButNotRead = NO;

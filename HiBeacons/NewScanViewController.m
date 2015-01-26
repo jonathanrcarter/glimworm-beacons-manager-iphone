@@ -24,7 +24,6 @@
 
 @implementation NewScanViewController
 @synthesize LASTPASS;
-@synthesize appStatus;
 @synthesize Switch;
 @synthesize collectionView;
 
@@ -42,7 +41,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    appStatus = [AppStatus sharedManager];
     Switch.on = NO;
     [self.collectionView registerClass:[NewScanCollectionViewCell class] forCellWithReuseIdentifier:@"BeaconCell"];
 
@@ -96,7 +94,7 @@
 
 #pragma mark - UICollectionView Datasource
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
-    return [appStatus.ItemArray count];
+    return [[AppStatus sharedInstance].ItemArray count];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
@@ -107,7 +105,7 @@
 
     NewScanCollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"BeaconCell" forIndexPath:indexPath];
 
-    BTDeviceModel *btm = [appStatus.ItemArray objectAtIndex:indexPath.row];
+    BTDeviceModel *btm = [[AppStatus sharedInstance].ItemArray objectAtIndex:indexPath.row];
 
     [cell setNameLabel:btm.name];
     [cell setBatteryLabel:btm.batterylevel];
@@ -135,8 +133,8 @@ UINavigationController *navigationController;
 
     // TODO: Select Item
 
-    BTDeviceModel *btm = [appStatus.ItemArray objectAtIndex:indexPath.row];
-    appStatus.currentPeripheral = btm;
+    BTDeviceModel *btm = [[AppStatus sharedInstance].ItemArray objectAtIndex:indexPath.row];
+    [AppStatus sharedInstance].currentPeripheral = btm;
     
     NewScanBeaconViewController * userDetails = [[NewScanBeaconViewController alloc] init];
     
@@ -155,7 +153,7 @@ UINavigationController *navigationController;
 - (void)addItemViewController:(NewScanBeaconViewController *)controller didFinishEnteringItem:(NSString *)item
 {
     NSLog(@"This was returned from NewScanBeaconViewController BBB %@",item);
-    [self resumeConfigurationMonitoring];
+    //[self resumeConfigurationMonitoring];
 }
 
 
@@ -182,22 +180,22 @@ UINavigationController *navigationController;
 #pragma mark - Updating the ITEMS array
 
 -(void)insertObject:(BTDeviceModel *)p inItemArrayAtIndex:(NSUInteger)index {
-    [appStatus.ItemArray insertObject:p atIndex:index];
+    [[AppStatus sharedInstance].ItemArray insertObject:p atIndex:index];
 }
 
 -(void)removeObjectFromItemArrayAtIndex:(NSUInteger)index {
-    [appStatus.ItemArray removeObjectAtIndex:index];
+    [[AppStatus sharedInstance].ItemArray removeObjectAtIndex:index];
 }
 
 -(NSArray*)itemArray {
-    return appStatus.ItemArray;
+    return [AppStatus sharedInstance].ItemArray;
 }
 
 -(void)clearItemArray {
-    if (!appStatus.ItemArray) {
-        appStatus.ItemArray = [NSMutableArray arrayWithObjects:nil];
+    if (![AppStatus sharedInstance].ItemArray) {
+        [AppStatus sharedInstance].ItemArray = [NSMutableArray arrayWithObjects:nil];
     } else {
-        [appStatus.ItemArray removeAllObjects];
+        [[AppStatus sharedInstance].ItemArray removeAllObjects];
     }
 }
 
@@ -228,15 +226,23 @@ UINavigationController *navigationController;
     
     [self clearItemArray];
     
-    if (!appStatus.manager) {
-        appStatus.manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:nil];
-        appStatus.manager.delegate = self;
+    if (![AppStatus sharedInstance].manager) {
+        
+        [AppStatus sharedInstance].manager = [[CBCentralManager alloc] initWithDelegate:self
+                                                                                  queue:nil
+                                                                                options:@{CBCentralManagerOptionRestoreIdentifierKey : @"00000000-0000-0000-0000-000000000003"}];
+        [AppStatus sharedInstance].manager.delegate = self;
     } else {
         [self startScan];
         
     }
     [self updateBLEtable];
 }
+
+- (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary *)dict {
+    NSLog(@"Will restore state %@",dict);
+}
+
 - (void)pauseConfigurationMonitoring
 {
     if (Switch.on) {
@@ -277,16 +283,16 @@ UINavigationController *navigationController;
 //    ShapeView *myView = [[ShapeView alloc] initWithFrame: CGRectMake(20, 100, 280, 250)];
 //    [self.view addSubview:myView];
     
-    appStatus.manager.delegate = self;
+    [AppStatus sharedInstance].manager.delegate = self;
     NSDictionary *options = @{CBCentralManagerScanOptionAllowDuplicatesKey: @YES};
-    [appStatus.manager scanForPeripheralsWithServices:nil options:options];
+    [[AppStatus sharedInstance].manager scanForPeripheralsWithServices:nil options:options];
     Switch.on = YES;
 
     NSLog(@"Scanning Bluetooth");
     
 }
 - (void)stopScan {
-    [appStatus.manager stopScan];
+    [[AppStatus sharedInstance].manager stopScan];
 }
 
 - (NSString *) uuidToString:(CFUUIDRef)UUID {
@@ -318,7 +324,7 @@ UINavigationController *navigationController;
     
     if (central.state == CBCentralManagerStatePoweredOn) {
         NSLog( @"state update powered on");
-        [self startScan];
+//        [self startScan];
     }
     else if (central.state == CBCentralManagerStatePoweredOff) {
         NSLog(@"state update powered off");
@@ -388,8 +394,8 @@ int lock = 0;
         if (_uuid == NULL) _uuid = @"";
         if (_name == NULL) _name = @"";
         
-        for (int i=0; i < [appStatus.ItemArray count]; i++) {
-            BTDeviceModel *m = [appStatus.ItemArray objectAtIndex:i];
+        for (int i=0; i < [[AppStatus sharedInstance].ItemArray count]; i++) {
+            BTDeviceModel *m = [[AppStatus sharedInstance].ItemArray objectAtIndex:i];
             
             //NSLog(@"CFSTRINGREF MNAME %@",m.name);
             //NSLog(@"CFSTRINGREF UUID %@",m.UUID);
@@ -505,7 +511,7 @@ int lock = 0;
                 
             }
         }
-        [self insertObject:pm inItemArrayAtIndex:[appStatus.ItemArray count]];
+        [self insertObject:pm inItemArrayAtIndex:[[AppStatus sharedInstance].ItemArray count]];
         //        [self insertObject:pm inItemArrayAtIndex:0];
         //        [self findItemInAccountArray:pm];
         

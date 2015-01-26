@@ -12,17 +12,17 @@
 @implementation GlimwormBeaconEdit
 
 @synthesize delegate;
-@synthesize currentfirmware, incoming_uuid, BTYPE, PDATE, PDATELONG, q_error, appStatus;
-@synthesize p_advintslider_value, p_battlevel_text, p_firmware_text, p_major_text, p_measuredpower_text;
-@synthesize p_minor_text, p_name_text, p_pdate_text, p_pincode_text, p_rangeslider_value, p_uuid_text;
+@synthesize currentfirmware, incoming_uuid, BTYPE, PDATE, PDATELONG, q_error;
+@synthesize p_advintslider_value, p_battlevel_text, p_firmware_text, p_major_text, p_measuredpower_text,p_battslider_value;
+@synthesize p_minor_text, p_name_text, p_pdate_text, p_pincode_text, p_rangeslider_value, p_uuid_text, p_modeslider_value;
 @synthesize Queue;
 @synthesize currentChar, currentcommand, peripheral;
 @synthesize peripheralisconnected, peripheralisconnectedButNotRead, peripheralisconnecting;
 @synthesize connectActive;
-@synthesize currentInterval, currentRange;
+@synthesize currentInterval, currentRange, currentMode, currentBatt;
 
 
-+ (id)sharedManager {
++ (GlimwormBeaconEdit *)sharedInstance {
     static GlimwormBeaconEdit *sharedMyManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -40,7 +40,6 @@
         PDATE = @"";
         PDATELONG = 0;
         q_error = NO;
-        appStatus = [AppStatus sharedManager];
 
         p_firmware_text = @"";
         p_pdate_text = @"";
@@ -52,6 +51,8 @@
         p_measuredpower_text = @"";
         p_rangeslider_value = 0;
         p_advintslider_value = 0;
+        p_modeslider_value = 0;
+        p_battslider_value = 0;
         p_battlevel_text = @"";
     }
     return self;
@@ -85,10 +86,12 @@
 }
 
 - (void) cancel_and_close_window {
+
+    [self cancelLookForPeripheralServices];
     
-    if (appStatus.currentPeripheral != Nil) {
+    if ([AppStatus sharedInstance].currentPeripheral != Nil) {
         if(peripheral && ([peripheral state] == CBPeripheralStateConnecting )) {
-            [appStatus.manager cancelPeripheralConnection:peripheral];
+            [[AppStatus sharedInstance].manager cancelPeripheralConnection:peripheral];
             peripheralisconnecting = NO;
             peripheralisconnected = NO;
             peripheralisconnectedButNotRead = NO;
@@ -155,29 +158,76 @@
  
  */
 
--(void)connect {
+-(void)tryToConnect {
+    [[AppStatus sharedInstance].manager connectPeripheral:[AppStatus sharedInstance].currentPeripheral.peripheral
+                                                  options:@{CBConnectPeripheralOptionNotifyOnConnectionKey: @NO,
+                                                            CBConnectPeripheralOptionNotifyOnDisconnectionKey: @NO,
+                                                            CBConnectPeripheralOptionNotifyOnNotificationKey: @NO}];
+    connectActive = YES;
+
+}
+-(void)tryToLookForServies {
+    lookForPeripheralServicesCounter = 0;
+    [self lookForPeripheralServices:[AppStatus sharedInstance].currentPeripheral.peripheral];
+}
+-(BOOL)connect {
     
     
     NSLog(@"gb connect 01");
-    if (appStatus.currentPeripheral != Nil) {
+    if ([AppStatus sharedInstance].currentPeripheral != Nil) {
         NSLog(@"gb connect 02");
+        
+
+        NSUUID *nsUUID = [[NSUUID UUID] initWithUUIDString:[[[AppStatus sharedInstance] currentPeripheral] UUID]];
+        NSArray *peripheralArray = [[[AppStatus sharedInstance] manager] retrievePeripheralsWithIdentifiers:@[nsUUID]];
+        NSLog(@"MCS %@",peripheralArray);
+        
+        if ([peripheralArray count] > 0) {
+            NSLog(@"found");
+            peripheralisconnected = false;
+            peripheralisconnecting = true;
+            connectActive = true;
+            [AppStatus sharedInstance].currentPeripheral.peripheral = [peripheralArray objectAtIndex:0];
+            [AppStatus sharedInstance].currentPeripheral.peripheral.delegate = self;
+            [self tryToConnect];
+            [self tryToLookForServies];
+            [self manageConnectionStateStart];
+            return true;
+        }
+        
+        
         
         if (!peripheralisconnected && !peripheralisconnecting) {
             NSLog(@"gb connect 03");
 
             if (!connectActive) {
                 NSLog(@"gb connect 04a");
-                appStatus.manager.delegate = self;
+                [AppStatus sharedInstance].manager.delegate = self;
                 NSLog(@"gb connect 04b");
-                appStatus.currentPeripheral.peripheral.delegate = self;
+                [AppStatus sharedInstance].currentPeripheral.peripheral.delegate = self;
                 NSLog(@"gb connect 04c");
-                [appStatus.manager connectPeripheral:appStatus.currentPeripheral.peripheral options:nil];
+                [self tryToConnect];
+//                [[AppStatus sharedInstance].manager connectPeripheral:[AppStatus sharedInstance].currentPeripheral.peripheral options:nil];
+//                [[AppStatus sharedInstance].manager connectPeripheral:[AppStatus sharedInstance].currentPeripheral.peripheral
+//                                              options:@{CBConnectPeripheralOptionNotifyOnConnectionKey: @NO,
+//                                                        CBConnectPeripheralOptionNotifyOnDisconnectionKey: @NO,
+//                                                        CBConnectPeripheralOptionNotifyOnNotificationKey: @NO}];
+
+            
+                
                 NSLog(@"gb connect 04d");
-                connectActive = YES;
+//                connectActive = YES;
                 NSLog(@"gb connect 04e");
+                [self tryToLookForServies];
+                //[self lookForPeripheralServices:[AppStatus sharedInstance].currentPeripheral.peripheral];
+
+                [self manageConnectionStateStart];
+                
+                return true;
             }
         }
     }
+    return false;
     /*
      NSLog(@"DIDSELECTROWATINDEXPATH %@", btm);
      NSLog(@"DIDSELECTROWATINDEXPATH %@", btm.ib_uuid);
@@ -193,6 +243,24 @@
     
 }
 
+static const NSTimeInterval kLXCBConnectingTimeout = 10.0;
+
+- (void)startConnectionTimeoutMonitor:(CBPeripheral *)aperipheral {
+    [self cancelConnectionTimeoutMonitor:aperipheral];
+    [self performSelector:@selector(connectionDidTimeout:)
+               withObject:peripheral
+               afterDelay:kLXCBConnectingTimeout];
+}
+
+- (void)cancelConnectionTimeoutMonitor:(CBPeripheral *)aperipheral {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self
+                                             selector:@selector(connectionDidTimeout:)
+                                               object:aperipheral];
+}
+
+- (void)connectionDidTimeout:(CBPeripheral *)aperipheral {
+    [[AppStatus sharedInstance].manager cancelPeripheralConnection:aperipheral];
+}
 
 /**
 
@@ -200,15 +268,132 @@
  
  */
 
+CBPeripheral *tempPeripheral = nil;
+
+-(void) cancelLookForPeripheralServices {
+    if (tempPeripheral != nil) {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self
+                                                 selector:@selector(lookForPeripheralServices:)
+                                                   object:tempPeripheral];
+    }
+    tempPeripheral = nil;
+    
+}
+
+bool manageConnectionStateRunning = false;
+bool manageConnectionStateDebug = false;
+
+- (void) manageConnectionStateStart {
+    if (manageConnectionStateRunning == false) {
+        manageConnectionStateRunning = true;
+        [self manageConnectionState];
+    }
+}
+
+- (void) manageConnectionState {
+    
+    if (manageConnectionStateDebug) NSLog(@"gb GBE MCS (tp: %@)",[AppStatus sharedInstance].currentPeripheral.peripheral);
+    
+
+
+    NSUUID *nsUUID = [[NSUUID UUID] initWithUUIDString:[[[AppStatus sharedInstance] currentPeripheral] UUID]];
+    NSArray *peripheralArray = [[[AppStatus sharedInstance] manager] retrievePeripheralsWithIdentifiers:@[nsUUID]];
+    if (manageConnectionStateDebug)  NSLog(@"MCS %@",peripheralArray);
+
+    NSArray *array = [@"FFE0,FFE1,ffe0,ffe1" componentsSeparatedByString:@","];
+    if (manageConnectionStateDebug)  NSLog(@"MCS %@",[[[AppStatus sharedInstance] manager]retrieveConnectedPeripheralsWithServices:array]);
+
+    
+//    NSLog(@"MCS %@",[[[AppStatus sharedInstance] manager]retrievePeripheralsWithIdentifiers:array]);
+//    NSLog(@"MCS %@",[[[AppStatus sharedInstance] manager]retrieveConnectedPeripheralsWithServices:array]);
+    
+    
+    
+    if ([AppStatus sharedInstance].currentPeripheral.peripheral != nil) {
+        if (manageConnectionStateDebug) NSLog(@"gb GBE MCS (p:d: %@ )", [[AppStatus sharedInstance].currentPeripheral.peripheral description]);
+        if (manageConnectionStateDebug) NSLog(@"gb GBE MCS (p:s:d: %@ )", [[[AppStatus sharedInstance].currentPeripheral.peripheral services] description]);
+    }
+    [self performSelector:@selector(manageConnectionState) withObject:nil afterDelay:1.0];
+}
+
+
+int lookForPeripheralServicesCounter = 0;
+
+- (void) lookForPeripheralServices:(CBPeripheral *)aPeripheral {
+    
+//    NSLog(@"gb GBE connectED-delay (name: %@ )", [aPeripheral name]);
+    NSLog(@"gb GBE connectED-delay (description: %@ )", [aPeripheral description]);
+//    NSLog(@"gb GBE connectED-delay (state: %d )", [aPeripheral state]);
+    NSLog(@"gb GBE connectED-delay (appstate: %@ )", [AppStatus sharedInstance].currentStatus);
+    lookForPeripheralServicesCounter++;
+    NSLog(@"gb GBE connectED-delay (counter: %d )", lookForPeripheralServicesCounter);
+    
+
+    [self cancelLookForPeripheralServices];
+    
+    if ([[AppStatus sharedInstance].currentStatus isEqualToString:@"active"]) {
+        if (aPeripheral.state == 0) {
+            NSLog(@"gb GBE connectED-delay :: NOT CONNECTED ");
+            if (lookForPeripheralServicesCounter > 10) {
+                [self tryToConnect];
+                [self tryToLookForServies];
+                return;
+            }
+        } else if (aPeripheral.state == 1) {
+            NSLog(@"gb GBE connectED-delay :: CONNECTING ");
+            if (lookForPeripheralServicesCounter > 10) {
+                [self tryToConnect];
+                [self tryToLookForServies];
+                return;
+            }
+        } else if (aPeripheral.state == 2) {
+            NSLog(@"gb GBE connectED-delay :: CONNECTED ");
+            connectActive = NO;
+            peripheralisconnected = YES;
+            peripheralisconnecting = NO;
+            peripheralisconnectedButNotRead = YES;
+            [aPeripheral setDelegate:self];
+            [aPeripheral discoverServices:nil];
+            return;
+        }
+    }
+
+    NSLog(@"gb GBE connectED-delay (** TRY AGAIN IN 2s)");
+
+    tempPeripheral = aPeripheral;
+    [self performSelector:@selector(lookForPeripheralServices:) withObject:aPeripheral afterDelay:0.5];
+    
+}
+
+- (void) centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)aPeripheral error:(NSError *)error {
+    NSLog(@"gb GBE FAILED(p: %@ )", aPeripheral);
+    NSLog(@"gb GBE FAILED(e: %@ )", error);
+    [self cancelConnectionTimeoutMonitor:peripheral];
+}
+
 - (void) centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)aPeripheral
 {
-    NSLog(@"gb connectED ( %@ )", [aPeripheral name]);
-    connectActive = NO;
-    peripheralisconnected = YES;
-    peripheralisconnecting = NO;
-    peripheralisconnectedButNotRead = YES;
-    [aPeripheral setDelegate:self];
-    [aPeripheral discoverServices:nil];
+//    NSLog(@"gb GBE connectED (name: %@ )", [aPeripheral name]);
+    NSLog(@"gb GBE connectED (description: %@ )", [aPeripheral description]);
+    [self cancelConnectionTimeoutMonitor:peripheral];
+    
+    //    NSLog(@"gb GBE connectED (state: %d )", [aPeripheral state]);
+
+//    if (aPeripheral.state != 0) {
+//        tempPeripheral = aPeripheral;
+//        [self performSelector:@selector(lookForPeripheralServices:) withObject:aPeripheral afterDelay:2.0];
+//    } else {
+//        NSLog(@"gb GBE connectED NOT PERFORMING SELECTOR");
+//        
+//    }
+//
+//
+//    connectActive = NO;
+//    peripheralisconnected = YES;
+//    peripheralisconnecting = NO;
+//    peripheralisconnectedButNotRead = YES;
+//    [aPeripheral setDelegate:self];
+//    [aPeripheral discoverServices:nil];
 }
 
 
@@ -233,16 +418,37 @@
  */
 
 - (void)peripheral:(CBPeripheral *)aPeripheral didDiscoverServices:(NSError *)error {
+
+    [self cancelLookForPeripheralServices];
     
-    NSLog(@"gb NAT servicesDISCOVERED ( %@ )", [aPeripheral name]);
-    NSLog(@"gb NAT servicesDISCOVERED ( %@ )", [aPeripheral services]);
+    NSLog(@"gb NAT GBE peripheral servicesDISCOVERED (n: %@ )", [aPeripheral name]);
+    NSLog(@"gb NAT GBE peripheral servicesDISCOVERED (d: %@ )", [aPeripheral description]);
+    NSLog(@"gb NAT GBE peripheral servicesDISCOVERED (s: %@ )", [aPeripheral services]);
+    if ([aPeripheral state] != 2) {
+        NSLog(@"gb NAT GBE peripheral Discovered service but state is disconnected");
+        [self tryToConnect];
+        [self tryToLookForServies];
+        
+    }
+    if ([aPeripheral services] == nil) {
+        NSLog(@"gb NAT GBE peripheral Discovered service TRYAGAIN NULL");
+        [aPeripheral discoverServices:nil];
+        return;
+    }
+    if ([aPeripheral services].count == 0) {
+        NSLog(@"gb NAT GBE peripheral Discovered service TRYAGAIN ZEROLENGTH");
+        [aPeripheral discoverServices:nil];
+        return;
+    }
     for (CBService *service in aPeripheral.services) {
-        NSLog(@"gb NAT Discovered service s: %@", service);
-        NSLog(@"gb NAT Discovered service u: %@", service.UUID);
+        NSLog(@"gb NAT GBE peripheral Discovered service s: %@", service);
+        NSLog(@"gb NAT GBE peripheral Discovered service u: %@", service.UUID);
+        NSLog(@"gb NAT GBE peripheral Discovered service d: %@", service.description);
         
         /* connect to serial bluetooth */
         if ([service.UUID isEqual:[CBUUID UUIDWithString:@"FFE0"]])
         {
+            NSLog(@"gb NAT GBE peripheral Discovered service FFE0 **n lookfor characteristics **");
             [aPeripheral discoverCharacteristics:nil forService:service];
         }
     }
@@ -258,22 +464,36 @@
 
 - (void) peripheral:(CBPeripheral *)aPeripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
+    NSLog(@"gb NAT GBE peripheral characteristicsDISCOVERED (s: %@ )", [service description]);
+    NSLog(@"gb NAT GBE peripheral characteristicsDISCOVERED (c: %@ )", [service characteristics]);
+
     if ([service.UUID isEqual:[CBUUID UUIDWithString:@"FFE0"]])
     {
+        NSLog(@"gb NAT GBE peripheral characteristicsDISCOVERED SUCCESS 01");
         for (CBCharacteristic *aChar in service.characteristics)
         {
+            NSLog(@"gb NAT GBE peripheral characteristicsDISCOVERED (aCHAR: %@ )", [aChar description]);
+
             /* Set notification on heart rate measurement */
             if ([aChar.UUID isEqual:[CBUUID UUIDWithString:@"FFE1"]])
             {
                 NSLog(@"gb Found a serial connectionCharacteristic, properties %@", aChar.UUID);
                 
                 //                [p_name_ml setStringValue:@"Found a serial connectionCharacteristic, enquiring about name"];
+                NSLog(@"gb serial 01");
                 
                 [aPeripheral setNotifyValue:YES forCharacteristic:aChar];
+                NSLog(@"gb serial 02");
                 currentChar = aChar;
+                NSLog(@"gb serial 03");
+                NSLog(@"gb serial 03 char:%@",[aChar description]);
                 peripheral = aPeripheral;
+                NSLog(@"gb serial 04");
+                NSLog(@"gb serial 04 per:%@",[peripheral description]);
                 [self working];
+                NSLog(@"gb serial 05");
                 [self performSelector:@selector(q_readall_auto) withObject:self afterDelay:3.0];
+                NSLog(@"gb serial 06");
             }
         }
     }
@@ -313,6 +533,26 @@
     if ([currentfirmware isEqualToString:@"V522"]) return FALSE;
     return TRUE;
 }
+
+- (BOOL) isUSBBeacon {
+    if ([BTYPE isEqualToString:@"000300030003"]) return TRUE;
+    return FALSE;
+}
+- (BOOL) isFirstBeaconType {
+    if ([BTYPE isEqualToString:@"000100010001"]) return TRUE;
+    return FALSE;
+}
+- (BOOL) isCapableOfSettingModes {
+    if ([BTYPE isEqualToString:@"000100020001"]) return TRUE;
+    if ([BTYPE isEqualToString:@"000300030003"]) return TRUE;
+    return FALSE;
+}
+- (BOOL) isCapableOfSettingBatteryLevel {
+    if ([BTYPE isEqualToString:@"000100020001"]) return TRUE;
+    if ([BTYPE isEqualToString:@"000300030003"]) return TRUE;
+    return FALSE;
+}
+
 
 /**
  static variables for queue management
@@ -507,6 +747,14 @@ static const NSTimeInterval kLXCBRequestTimeout = 1.0;
                 p_measuredpower_text = [self hex2dec_min256:array[1]];
                 
             }
+            if ([currentcommand isEqualToString:@"AT+ADTY?"]) {
+                NSArray *array = [str componentsSeparatedByString:@":"];
+                int val = [array[1] intValue];
+                NSLog(@"gb mode %@",array[1]);
+                p_modeslider_value = val;
+            }
+            
+            
             if ([currentcommand isEqualToString:@"AT+POWE?"]) {
                 NSArray *array = [str componentsSeparatedByString:@":"];
                 NSLog(@"gb array %@",array[1]);
@@ -575,6 +823,12 @@ static const NSTimeInterval kLXCBRequestTimeout = 1.0;
             }
             
             
+            if ([currentcommand isEqualToString:@"AT+BATC?"]) {
+                NSArray *array = [str componentsSeparatedByString:@":"];
+                int val = [array[1] intValue];
+                NSLog(@"gb batc %@",array[1]);
+                p_battslider_value = val;
+            }
             
             if ([currentcommand isEqualToString:@"AT+BATT?"]) {
                 
@@ -652,11 +906,14 @@ static const NSTimeInterval kLXCBRequestTimeout = 1.0;
 - (void)q_readall_auto {
     
     
-    //    AppStatus *Status = [AppStatus sharedManager];
     //
     //    if ([Status.currentStatus isEqualToString:@"active"]) {
-    if ([appStatus.currentStatus isEqualToString:@"active"]) {
+    NSLog(@"q_readall_auto : application was in state [%@]",[AppStatus sharedInstance].currentStatus);
+    
+    if ([[AppStatus sharedInstance].currentStatus isEqualToString:@"active"]) {
         [self q_readall];
+    } else {
+        NSLog(@"q_readall_auto : application was NOT active");
     }
     
 }
@@ -667,9 +924,11 @@ static const NSTimeInterval kLXCBRequestTimeout = 1.0;
     NSString *get0a = [[NSString alloc] initWithFormat:@"GB+PDATE"];
     NSString *get1 = [[NSString alloc] initWithFormat:@"AT+VERS?"];
     NSString *get2 = [[NSString alloc] initWithFormat:@"AT+BATT?"];
+    NSString *get2a = [[NSString alloc] initWithFormat:@"AT+BATC?"];
     NSString *get3 = [[NSString alloc] initWithFormat:@"AT+ADVI?"];
     NSString *get4 = [[NSString alloc] initWithFormat:@"AT+POWE?"]; // 0 1 2 3 2 = std
     NSString *get4a = [[NSString alloc] initWithFormat:@"AT+MEA??"]; // 0 1 2 3 2 = std
+    NSString *get4b = [[NSString alloc] initWithFormat:@"AT+ADTY?"]; // 0 1 2 3 2 = std
     NSString *get5 = [[NSString alloc] initWithFormat:@"AT+PASS?"]; // 2 PIN
     NSString *get6 = [[NSString alloc] initWithFormat:@"AT+MARJ?"]; // 2 PIN
     NSString *get7 = [[NSString alloc] initWithFormat:@"AT+MINO?"]; // 2 PIN
@@ -683,7 +942,7 @@ static const NSTimeInterval kLXCBRequestTimeout = 1.0;
     
     //    NSString *get6 = [[NSString alloc] initWithFormat:@"AT+MEAS?"]; // Value
     
-    Queue = [NSMutableArray arrayWithObjects:@"clearerror",get0,get0a,get1,get2,get3,get4,get4a,get5,get6,get7,get8,get9,get10,get11,get12,get13,@"checkerror",@"done",nil];
+    Queue = [NSMutableArray arrayWithObjects:@"clearerror",get0,get0a,get1,get2,get2a,get3,get4,get4a,get4b,get5,get6,get7,get8,get9,get10,get11,get12,get13,@"checkerror",@"done",nil];
     
     NSLog(@"\ngb ----- END GET VALUE  ----- ");
     [self q_next];
@@ -813,6 +1072,7 @@ static const NSTimeInterval kLXCBRequestTimeout = 1.0;
         NSLog(@"gb Q_NEXT ON TO THE COMMAND END");
     } else {
         currentcommand = @"";
+        [self connectingStringDisplay: @""];
         [self donewriting];
         [self done];
     }
@@ -841,8 +1101,14 @@ static const NSTimeInterval kLXCBRequestTimeout = 1.0;
     NSString *adv = [NSString stringWithFormat:@"AT+ADVI%@",currentInterval];
     
     NSString *range = [NSString stringWithFormat:@"AT+POWE%@",currentRange];
+    NSString *mode = @"skip";
+    if ([self isCapableOfSettingModes]) {
+        mode = [NSString stringWithFormat:@"AT+ADTY%@",currentMode];
+    }
+    
     NSString *srange = @"GB+SRANGE";
     NSString *stopsleepmode = @"AT+PWRM1";
+    NSString *showbatt = @"AT+BATC1";
     
     NSLog(@"AAAAAAAAAA :: STR %@",currentRange);
     NSLog(@"AAAAAAAAAA :: PDATE %@",PDATE);
@@ -853,12 +1119,25 @@ static const NSTimeInterval kLXCBRequestTimeout = 1.0;
         srange = @"skip";
         stopsleepmode = @"skip";
     }
-    if (PDATELONG < 1406451969) {
-        // this version we started with the SRANGE
-        NSLog(@"AAAAAAAAAA :: CASE 2 ");
-        srange = @"skip";
+    if ([self isFirstBeaconType]) {
+        if (PDATELONG < 1406451969) {
+            // this version we started with the SRANGE
+            NSLog(@"AAAAAAAAAA :: CASE 2 ");
+            srange = @"skip";
+            stopsleepmode = @"skip";
+        } else {
+            showbatt = @"AT+BATC0";
+        }
+    } else {
         stopsleepmode = @"skip";
+        srange = @"skip";
+        showbatt = @"AT+BATC0";
     }
+    if ([self isCapableOfSettingBatteryLevel]) {
+        showbatt = [NSString stringWithFormat:@"AT+BATC%@",currentBatt];
+    }
+    
+    /////
     
     NSString *power = @"skip";
     if ([currentRange isEqualToString:@"0"]) {
@@ -892,7 +1171,6 @@ static const NSTimeInterval kLXCBRequestTimeout = 1.0;
         pass0 = @"AT+TYPE0";
     }
     
-    NSString *showbatt = @"AT+BATC1";
     
     // format   74278bda-b644-4520-8f0c-720eaf059935
     //          0        9    14   19   24  28
@@ -916,11 +1194,11 @@ static const NSTimeInterval kLXCBRequestTimeout = 1.0;
                          [[self.p_uuid_text uppercaseString] substringWithRange:NSMakeRange(28, 8)]
                          ];
         
-        Queue = [NSMutableArray arrayWithObjects:@"clearerror",ibmajor_str,ibminor_str,ib0,ib1,ib2,ib3,adv,pass0,pass1,pass2,name_str,showbatt,range,power,srange,stopsleepmode,@"checkerror",nil];
+        Queue = [NSMutableArray arrayWithObjects:@"clearerror",ibmajor_str,ibminor_str,ib0,ib1,ib2,ib3,adv,pass0,pass1,pass2,name_str,showbatt,range,power,mode,srange,stopsleepmode,@"checkerror",nil];
         
         
     } else {
-        Queue = [NSMutableArray arrayWithObjects:@"clearerror",ibmajor_str,ibminor_str,adv,pass0,pass1,pass2,name_str,showbatt,range,power,srange,stopsleepmode,@"checkerror",nil];
+        Queue = [NSMutableArray arrayWithObjects:@"clearerror",ibmajor_str,ibminor_str,adv,pass0,pass1,pass2,name_str,showbatt,range,power,mode,srange,stopsleepmode,@"checkerror",nil];
         
     }
     
@@ -954,10 +1232,12 @@ static const NSTimeInterval kLXCBRequestTimeout = 1.0;
 
 
 - (void)cleanupconnection {
-    if (appStatus.currentPeripheral != Nil) {
+    [self cancelLookForPeripheralServices];
+
+    if ([AppStatus sharedInstance].currentPeripheral != Nil) {
 
         if(peripheral && ([peripheral state] == CBPeripheralStateConnecting )) {
-            [appStatus.manager cancelPeripheralConnection:peripheral];
+            [[AppStatus sharedInstance].manager cancelPeripheralConnection:peripheral];
         }
         if(peripheral && ([peripheral state] == CBPeripheralStateConnected ))
         {
@@ -965,13 +1245,15 @@ static const NSTimeInterval kLXCBRequestTimeout = 1.0;
             if (currentChar != Nil) {
                 [peripheral setNotifyValue:NO forCharacteristic:currentChar];
             }
-            [appStatus.manager cancelPeripheralConnection:peripheral];
+            [[AppStatus sharedInstance].manager cancelPeripheralConnection:peripheral];
         }
     }
 
+    connectActive = NO;
+    
     currentChar = Nil;
     peripheral = Nil;
-    appStatus.currentPeripheral = Nil;
+    [AppStatus sharedInstance].currentPeripheral = Nil;
     peripheralisconnected = NO;
     peripheralisconnecting = NO;
     peripheralisconnectedButNotRead = NO;
@@ -979,9 +1261,9 @@ static const NSTimeInterval kLXCBRequestTimeout = 1.0;
 
 - (void)cleacupcancelledconnection {
 
-    if (appStatus.currentPeripheral != Nil) {
+    if ([AppStatus sharedInstance].currentPeripheral != Nil) {
         
-        if(appStatus.currentPeripheral.peripheral && peripheralisconnected == YES && peripheralisconnectedButNotRead == NO)
+        if([AppStatus sharedInstance].currentPeripheral.peripheral && peripheralisconnected == YES && peripheralisconnectedButNotRead == NO)
         {
             
             @try {
@@ -1001,9 +1283,9 @@ static const NSTimeInterval kLXCBRequestTimeout = 1.0;
             }
             @finally {
             }
-        } else if (appStatus.currentPeripheral.peripheral && peripheralisconnected == NO) {
+        } else if ([AppStatus sharedInstance].currentPeripheral.peripheral && peripheralisconnected == NO) {
             if (peripheral && peripheral != Nil) {
-                [appStatus.manager cancelPeripheralConnection:peripheral];
+                [[AppStatus sharedInstance].manager cancelPeripheralConnection:peripheral];
             }
         }
     }

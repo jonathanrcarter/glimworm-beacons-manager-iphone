@@ -44,7 +44,9 @@
 
 //    UIColor *titleHighlightedColor = [UIColor colorWithRed:109/255.0 green:136/255.0 blue:26/255.0 alpha:1.0];
 //    [[UITabBar appearance] setSelectedImageTintColor:titleHighlightedColor];
-    [[UITabBar appearance] setSelectedImageTintColor:[UIColor whiteColor]];
+//    [[UITabBar appearance] setSelectedImageTintColor:[UIColor whiteColor]];
+    
+    [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
     
     
     //        [self setSelectedImageTintColor:[UIColor whiteColor]];
@@ -59,10 +61,12 @@
     return YES;
 }
 
+- (void)test {
+    NSLog(@"test");
+}
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-    AppStatus *Status = [AppStatus sharedManager];
-    Status.currentStatus = @"not active";
+    [AppStatus sharedInstance].currentStatus = @"not active";
     
     NSLog(@"application RESIGNED ACTIVE ");
 
@@ -83,9 +87,8 @@
     /*
      this is called when the application returns from hacing the pairing window
      */
-    NSLog(@"applicationDidBecomeActive");
-    AppStatus *Status = [AppStatus sharedManager];
-    Status.currentStatus = @"active";
+    NSLog(@"** applicationDidBecomeActive");
+    [AppStatus sharedInstance].currentStatus = @"active";
 
 //    UIViewController* root = _window.rootViewController;
 //    UINavigationController* navController = (UINavigationController*)root;

@@ -8,9 +8,6 @@
 
 #import "NewScanBeaconViewController.h"
 #import "BTDeviceModel.h"
-#import "AppStatus.h"
-#import "GlimwormBeaconEdit.h"
-#import "SpinnerView.h"
 #include <QuartzCore/QuartzCore.h>
 //#include <QuartzCore/QuartzCore.framework>
 
@@ -32,10 +29,10 @@ static void * const kRangingOperationContext = (void *)&kRangingOperationContext
 @implementation NewScanBeaconViewController
 
 @synthesize delegate;
-@synthesize gbedit, gbedit_delegate;
+@synthesize gbedit_delegate;
 @synthesize spinner_delegate;
 
-@synthesize appStatus;
+//@synthesize appStatus;
 @synthesize peripheral;
 @synthesize p_advint;
 @synthesize p_advintslider;
@@ -49,12 +46,18 @@ static void * const kRangingOperationContext = (void *)&kRangingOperationContext
 @synthesize p_rangelabel;
 @synthesize p_rangeslider;
 @synthesize p_uuid;
+@synthesize p_build;
+@synthesize p_rel;
+@synthesize p_beacontype;
 //@synthesize w_spinner;
 //@synthesize WorkingView;
 //@synthesize write_spinner;
 //@synthesize WriteView;
 @synthesize p_currentcommandlabel;
-@synthesize currentRange, currentInterval, currentfirmware;
+@synthesize currentRange, currentInterval, currentfirmware, currentMode, currentBatt;
+@synthesize p_modelabel, p_modeslider;
+@synthesize v_scrollview, v_view1;
+
 
 @synthesize innerView;
 
@@ -63,9 +66,7 @@ static void * const kRangingOperationContext = (void *)&kRangingOperationContext
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        appStatus = [AppStatus sharedManager];
-        gbedit = [GlimwormBeaconEdit sharedManager];
-        gbedit.delegate = self;
+        [GlimwormBeaconEdit sharedInstance].delegate = self;
     }
     return self;
 }
@@ -73,13 +74,11 @@ static void * const kRangingOperationContext = (void *)&kRangingOperationContext
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     NSLog(@"DID LOAD");
-    // Do any additional setup after loading the view.
-//    innerView.layer.cornerRadius = 30.0f;
-//    innerView.layer.borderWidth = 4.0f;
-//    innerView.layer.borderColor = [UIColor redColor].CGColor;
     [self connect];
 }
+
 
 - (void)viewDidAppear:(BOOL)animated {
     NSLog(@"DID APPEAR");
@@ -91,65 +90,50 @@ static void * const kRangingOperationContext = (void *)&kRangingOperationContext
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 #pragma mark - Beacon configuration
 
-- (void)centralManagerDidUpdateState:(CBCentralManager *)central
-{
-    NSLog(@"state update");
-    
-    if (central.state == CBCentralManagerStatePoweredOn) {
-        NSLog( @"state update powered on");
-        //        [self startScan];
-    }
-    else if (central.state == CBCentralManagerStatePoweredOff) {
-        NSLog(@"state update powered off");
-    }
-    else if (central.state == CBCentralManagerStateUnauthorized) {
-        NSLog(@"state update powered unauthorized");
-    }
-    else if (central.state == CBCentralManagerStateUnsupported) {
-        NSLog(@"state update powered unsupported");
-    }
-}
-//- (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)pm
+//- (void)centralManagerDidUpdateState:(CBCentralManager *)central
 //{
-//    NSLog(@"peripheral state update %d",pm.state);
+//    NSLog(@"state update");
+//    
+//    if (central.state == CBCentralManagerStatePoweredOn) {
+//        NSLog( @"state update powered on");
+//        //        [self startScan];
+//    }
+//    else if (central.state == CBCentralManagerStatePoweredOff) {
+//        NSLog(@"state update powered off");
+//    }
+//    else if (central.state == CBCentralManagerStateUnauthorized) {
+//        NSLog(@"state update powered unauthorized");
+//    }
+//    else if (central.state == CBCentralManagerStateUnsupported) {
+//        NSLog(@"state update powered unsupported");
+//    }
 //}
 
 
--(void) activate:(NSNotification *)pNotification {
-    NSLog(@"application activate ");
-    if (gbedit.peripheralisconnectedButNotRead) {
-        NSLog(@"application activate READ");
-        [self q_readall];
-    }
-}
+//-(void) activate:(NSNotification *)pNotification {
+//    NSLog(@"application activate ");
+//    if ([GlimwormBeaconEdit sharedInstance].peripheralisconnectedButNotRead) {
+//        NSLog(@"application activate READ");
+//        [self q_readall];
+//    }
+//}
 
 
-#pragma mark - Local notifications
-- (void)sendLocalNotificationForBeaconRegion:(CLBeaconRegion *)region
-{
-    UILocalNotification *notification = [UILocalNotification new];
-    
-    // Notification details
-    notification.alertBody = [NSString stringWithFormat:@"Entered beacon region for UUID: %@",
-                              region.proximityUUID.UUIDString];   // Major and minor are not available at the monitoring stage
-    notification.alertAction = NSLocalizedString(@"View Details", nil);
-    notification.soundName = UILocalNotificationDefaultSoundName;
-    
-    [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
-}
+//#pragma mark - Local notifications
+//- (void)sendLocalNotificationForBeaconRegion:(CLBeaconRegion *)region
+//{
+//    UILocalNotification *notification = [UILocalNotification new];
+//    
+//    // Notification details
+//    notification.alertBody = [NSString stringWithFormat:@"Entered beacon region for UUID: %@",
+//                              region.proximityUUID.UUIDString];   // Major and minor are not available at the monitoring stage
+//    notification.alertAction = NSLocalizedString(@"View Details", nil);
+//    notification.soundName = UILocalNotificationDefaultSoundName;
+//    
+//    [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+//}
 
 - (BOOL) has16advertisments {
     if ([currentfirmware isEqualToString:@"V517"]) return FALSE;
@@ -166,9 +150,10 @@ static void * const kRangingOperationContext = (void *)&kRangingOperationContext
 
 -(void)connect {
 
-    [self working];
-    [gbedit connect];
-    self.p_uuid.layer.borderColor = [[UIColor grayColor]CGColor];
+    if ( [[GlimwormBeaconEdit sharedInstance] connect]) {
+        [self working];
+        self.p_uuid.layer.borderColor = [[UIColor grayColor]CGColor];
+    }
     
 }
 
@@ -185,7 +170,11 @@ static void * const kRangingOperationContext = (void *)&kRangingOperationContext
 - (void)GlimwormBeaconEdit:(GlimwormBeaconEdit *)controller connectingStringDisplay:(NSString *)item
 {
     NSLog(@"BeaconViewController - connectingStringDisplay callback - %@",item);
-    p_currentcommandlabel.text = item;
+    if ([item isEqualToString:@"done"]) {
+        p_currentcommandlabel.text = @"";
+    } else {
+        p_currentcommandlabel.text = item;
+    }
 }
 - (void)GlimwormBeaconEdit:(GlimwormBeaconEdit *)controller sendMessage:(NSString *)item
 {
@@ -217,35 +206,67 @@ static void * const kRangingOperationContext = (void *)&kRangingOperationContext
 }
 
 -(void)setFormvaluesFromGBedit {
-    self.p_firmware.text = gbedit.p_firmware_text;
-    self.p_major.text = gbedit.p_major_text;
-    self.p_minor.text = gbedit.p_minor_text;
-    self.p_uuid.text = gbedit.p_uuid_text;
-    self.p_name.text = gbedit.p_name_text;
-    self.p_pincode.text = gbedit.p_pincode_text;
-    self.p_measuredpower.text = gbedit.p_measuredpower_text;
-    self.p_rangeslider.value = gbedit.p_rangeslider_value;
+    self.p_firmware.text = [GlimwormBeaconEdit sharedInstance].p_firmware_text;
+    self.p_major.text = [GlimwormBeaconEdit sharedInstance].p_major_text;
+    self.p_minor.text = [GlimwormBeaconEdit sharedInstance].p_minor_text;
+    self.p_uuid.text = [GlimwormBeaconEdit sharedInstance].p_uuid_text;
+    self.p_name.text = [GlimwormBeaconEdit sharedInstance].p_name_text;
+    self.p_pincode.text = [GlimwormBeaconEdit sharedInstance].p_pincode_text;
+    self.p_measuredpower.text = [GlimwormBeaconEdit sharedInstance].p_measuredpower_text;
+    self.p_rangeslider.value = [GlimwormBeaconEdit sharedInstance].p_rangeslider_value;
     [self setRangeLabelFromSlider];
-    self.p_advintslider.value = gbedit.p_advintslider_value;
+    self.p_advintslider.value = [GlimwormBeaconEdit sharedInstance].p_advintslider_value;
     [self setAdvIntervalFromSlider];
-    self.p_battlevel.text = gbedit.p_battlevel_text;
-    self.currentfirmware = gbedit.currentfirmware;
+    self.p_battlevel.text = [GlimwormBeaconEdit sharedInstance].p_battlevel_text;
+    self.currentfirmware = [GlimwormBeaconEdit sharedInstance].currentfirmware;
+    self.p_rel.text = [GlimwormBeaconEdit sharedInstance].PDATE;
+    self.p_build.text = [GlimwormBeaconEdit sharedInstance].BTYPE;
+    if ([GlimwormBeaconEdit sharedInstance].isUSBBeacon) {
+        self.p_beacontype.text = @"USB Beacon";
+    } else {
+        self.p_beacontype.text = @"Battery Beacon";
+    }
+    if ([GlimwormBeaconEdit sharedInstance].isCapableOfSettingModes) {
+        [self.p_modeslider setEnabled:TRUE];
+        self.p_modeslider.value = [self ModeSliderValueFromActualValue:[GlimwormBeaconEdit sharedInstance].p_modeslider_value];
+        [self setModeSliderFromSlider];
+    } else {
+        self.p_modeslider.value = 0;
+        self.currentMode = @"0";
+        self.p_modelabel.text = @"connectable";
+        [self.p_modeslider setEnabled:false];
+    }
+    if ([GlimwormBeaconEdit sharedInstance].isCapableOfSettingBatteryLevel) {
+        [self.p_battslider setEnabled:TRUE];
+        self.p_battslider.value = [GlimwormBeaconEdit sharedInstance].p_battslider_value;
+        [self setBatterySliderFromSlider];
+    } else {
+        self.p_battslider.value = [GlimwormBeaconEdit sharedInstance].p_battslider_value;
+        [self setBatterySliderFromSlider];
+        [self.p_battslider setEnabled:false];
+    }
+    
 }
 -(void)setGBeditValuesFromForm {
-    gbedit.p_firmware_text = self.p_firmware.text;
-    gbedit.p_major_text = self.p_major.text;
-    gbedit.p_minor_text = self.p_minor.text;
-    gbedit.p_uuid_text = self.p_uuid.text;
-    gbedit.p_name_text = self.p_name.text;
-    gbedit.p_pincode_text = self.p_pincode.text;
-    gbedit.p_measuredpower_text = self.p_measuredpower.text;
-    gbedit.p_rangeslider_value = self.p_rangeslider.value;
-    gbedit.currentInterval = currentInterval;
+    [GlimwormBeaconEdit sharedInstance].p_firmware_text = self.p_firmware.text;
+    [GlimwormBeaconEdit sharedInstance].p_major_text = self.p_major.text;
+    [GlimwormBeaconEdit sharedInstance].p_minor_text = self.p_minor.text;
+    [GlimwormBeaconEdit sharedInstance].p_uuid_text = self.p_uuid.text;
+    [GlimwormBeaconEdit sharedInstance].p_name_text = self.p_name.text;
+    [GlimwormBeaconEdit sharedInstance].p_pincode_text = self.p_pincode.text;
+    [GlimwormBeaconEdit sharedInstance].p_measuredpower_text = self.p_measuredpower.text;
+    [GlimwormBeaconEdit sharedInstance].p_rangeslider_value = self.p_rangeslider.value;
+    [GlimwormBeaconEdit sharedInstance].p_modeslider_value = [self ActualValueFromModeSliderValue:(int)self.p_modeslider.value];
+    [GlimwormBeaconEdit sharedInstance].p_battslider_value = self.p_battslider.value;
+    [GlimwormBeaconEdit sharedInstance].currentInterval = currentInterval;
+    [GlimwormBeaconEdit sharedInstance].currentRange = currentRange;
+    [GlimwormBeaconEdit sharedInstance].currentMode = currentMode;
+    [GlimwormBeaconEdit sharedInstance].currentBatt = currentBatt;
 //    gbedit.currentRange =
 
     
-    gbedit.p_advintslider_value = self.p_advintslider.value;
-    gbedit.p_battlevel_text = self.p_battlevel.text;
+    [GlimwormBeaconEdit sharedInstance].p_advintslider_value = self.p_advintslider.value;
+    [GlimwormBeaconEdit sharedInstance].p_battlevel_text = self.p_battlevel.text;
 }
 
 
@@ -253,20 +274,88 @@ static void * const kRangingOperationContext = (void *)&kRangingOperationContext
     self.p_rangeslider.value = roundf(self.p_rangeslider.value);
     switch ((int)self.p_rangeslider.value) {
         case 0:
-            self.p_rangelabel.text = @"10m";
+            self.p_rangelabel.text = @"range : 10m";
             currentRange = @"0";
             break;
         case 1:
-            self.p_rangelabel.text = @"20m";
+            self.p_rangelabel.text = @"range : 20m";
             currentRange = @"1";
             break;
         case 2:
-            self.p_rangelabel.text = @"50m";
+            self.p_rangelabel.text = @"range : 50m";
             currentRange = @"2";
             break;
         case 3:
-            self.p_rangelabel.text = @"100m";
+            self.p_rangelabel.text = @"range : 100m";
             currentRange = @"3";
+            break;
+    }
+}
+-(int)ModeSliderValueFromActualValue:(int) val {
+    switch (val) {
+        case 1:
+            return 0;
+        case 2:
+            return 1;
+        case 3:
+            return 1;
+        default:
+            return 0;
+    }
+}
+-(int)ActualValueFromModeSliderValue:(int) val {
+    switch (val) {
+        case 2:
+            return 2;
+        case 3:
+            return 2;
+        case 1:
+            return 2;
+        default:
+            return 0;
+    }
+}
+
+-(void)setBatterySliderFromSlider {
+    self.p_battslider.value = roundf(self.p_battslider.value);
+    switch ((int)self.p_battslider.value) {
+        case 1:
+            self.p_battslider_label.text = @"battery level ON";
+            currentBatt = @"1";
+            break;
+        default:
+            self.p_battslider_label.text = @"battery level OFF";
+            currentBatt = @"0";
+            break;
+    }
+}
+
+-(void)setModeSliderFromSlider {
+    self.p_modeslider.value = roundf(self.p_modeslider.value);
+    switch ((int)self.p_modeslider.value) {
+        case 0:
+            self.p_modelabel.text = @"connectable";
+            currentMode = @"0";
+            break;
+//        case 1:
+//            self.p_modelabel.text = @"do not use";
+//            currentMode = @"1";
+//            break;
+        case 1:
+            self.p_modelabel.text = @"un-connectable";
+            currentMode = @"2";
+            break;
+        case 2:
+            self.p_modelabel.text = @"un-connectable";
+            currentMode = @"2";
+            break;
+        case 3:
+            self.p_modelabel.text = @"un-connectable";
+            currentMode = @"3";
+            break;
+        default:
+            self.p_modelabel.text = @"connectable";
+            currentMode = @"0";
             break;
     }
 }
@@ -362,12 +451,12 @@ static void * const kRangingOperationContext = (void *)&kRangingOperationContext
 
 - (void)q_readall_auto {
     
-    [gbedit q_readall_auto];
+    [[GlimwormBeaconEdit sharedInstance] q_readall_auto];
     
 }
 - (void)q_readall {
     
-    [gbedit q_readall];
+    [[GlimwormBeaconEdit sharedInstance] q_readall];
 
 }
 
@@ -453,7 +542,7 @@ static void * const kRangingOperationContext = (void *)&kRangingOperationContext
     //    Queue = [NSMutableArray arrayWithObjects:ibmajor_str,ibminor_str,ib0,ib1,ib2,ib3,nil];
     //    Queue = [NSMutableArray arrayWithObjects:ibmajor_str,ibminor_str,ib0,ib1,ib2,ib3,name_str,nil];
     
-    [gbedit p_writeall];
+    [[GlimwormBeaconEdit sharedInstance] p_writeall];
     
     /*
      NSAlert *alert = [[NSAlert alloc] init];
@@ -476,7 +565,7 @@ static void * const kRangingOperationContext = (void *)&kRangingOperationContext
 -(void)p_close_window {
     
     
-    [gbedit cleanupconnection];
+    [[GlimwormBeaconEdit sharedInstance] cleanupconnection];
     
     //    [self stopConfigurationMonitoring];
     //    [self startConfigurationMonitoring];
@@ -497,30 +586,19 @@ static void * const kRangingOperationContext = (void *)&kRangingOperationContext
 
 -(void) working {
     [self showSpinner];
-//    self.WorkingView.hidden = FALSE;
-//    [self.WorkingView setFrame: [self.view bounds]];
-//    [self.w_spinner startAnimating];
-    
 }
 
 -(void) done {
     [self hideSpinner];
-//    self.WorkingView.hidden = TRUE;
-//    [self.w_spinner stopAnimating];
 }
 
 
 - (void)writing {
     [self showSpinner];
-//    self.WriteView.hidden = FALSE;
-//    [self.WriteView setFrame: [self.view bounds]];
-//    [self.write_spinner startAnimating];
 }
 
 - (void)donewriting {
     [self hideSpinner];
-//    self.WriteView.hidden = TRUE;
-//    [self.write_spinner stopAnimating];
 }
 
 
@@ -538,23 +616,24 @@ static void * const kRangingOperationContext = (void *)&kRangingOperationContext
 
     if ([self.p_minor.text isEqualToString:@""]) self.p_minor.text =  d_minor;
 
-    appStatus.MIN = [self.p_minor.text intValue];
-    appStatus.MIN++;
+    [AppStatus sharedInstance].MIN = [self.p_minor.text intValue];
+    [AppStatus sharedInstance].MIN++;
     self.p_major.text = d_major;
-    self.p_pincode.text = appStatus.LASTPASS;
-    self.p_minor.text = [[NSString alloc] initWithFormat:@"%d",appStatus.MIN];
+    self.p_pincode.text = [AppStatus sharedInstance].LASTPASS;
+    self.p_minor.text = [[NSString alloc] initWithFormat:@"%d",[AppStatus sharedInstance].MIN];
     self.p_uuid.text = d_uuid;
     self.p_advintslider.value = 9;
     self.p_name.text = [[NSString alloc] initWithFormat:@"GWB_%@_%@",self.p_major.text,self.p_minor.text];
     self.p_rangeslider.value = 2;
     [self setAdvIntervalFromSlider];
     [self setRangeLabelFromSlider];
+    
 }
 
 -(void) close_update_window {
-    appStatus.MIN = [self.p_minor.text intValue];
-    appStatus.LASTPASS = self.p_pincode.text;
-    [gbedit cleacupcancelledconnection];
+    [AppStatus sharedInstance].MIN = [self.p_minor.text intValue];
+    [AppStatus sharedInstance].LASTPASS = self.p_pincode.text;
+    [[GlimwormBeaconEdit sharedInstance] cleacupcancelledconnection];
 //    [self p_close_window];
     
 }
@@ -566,18 +645,66 @@ static void * const kRangingOperationContext = (void *)&kRangingOperationContext
     
 }
 
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 1) { // UIAlertView with tag 1 detected
+        if (buttonIndex == 0)
+        {
+            NSLog(@"user pressed Button Indexed 0");
+            // Any action can be performed here
+        }
+        else
+        {
+            NSLog(@"user pressed Button Indexed 1");
+            // Any action can be performed here
+            [self p_set];
+        }
+    }
+}
 - (IBAction)p_sendchanges:(id)sender {
-    [self p_set];
+
+    NSString *mess = @"";
+    
+    if ([GlimwormBeaconEdit sharedInstance].isCapableOfSettingBatteryLevel) {
+        if ([currentBatt isEqualToString:@"1"]) {
+            if ([currentInterval intValue] > 3) {
+                mess = @"Displaying the battery level in the beacon signal drains the battery at the 211ms advertising interval.  \n\nAre you sure you want to use this combination of values?";
+            }
+        }
+    }
+    
+    if ([mess isEqualToString:@""]) {
+        if ([self.p_pincode.text isEqualToString:@""] == false) {
+            if ([GlimwormBeaconEdit sharedInstance].isCapableOfSettingModes) {
+                mess = @"Under IOS8 and above connecting to a beacon with a PINCODE can take a few attempts.  \n\nIf you are deploying in a production environment you can set the 'unconnectable' setting and then the beacons will be un-connctable from 60s after conencting battery or USB power.  \n\nThis is the reccommended setting for production installations in which case we reccommend removing the PINCODE";
+            }
+        }
+    }
+    
+    
+    if ([mess isEqualToString:@""]) {
+        [self p_set];
+        return;
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Warning"
+                                                       message: mess
+                                                      delegate: self
+                                             cancelButtonTitle:@"Cancel"
+                                             otherButtonTitles:@"Continue",nil];
+        
+        [alert setTag:1];
+        [alert show];
+    }
 }
 - (IBAction)p_reload:(id)sender {
     NSLog(@"SSS1");
-    if (appStatus.currentPeripheral != Nil) {
+    if ([AppStatus sharedInstance].currentPeripheral != Nil) {
         NSLog(@"SSS2");
-        if(gbedit.peripheral && ([gbedit.peripheral state] == CBPeripheralStateConnected )) {
+        if([GlimwormBeaconEdit sharedInstance].peripheral && ([[GlimwormBeaconEdit sharedInstance].peripheral state] == CBPeripheralStateConnected )) {
             NSLog(@"SSS3");
-            [gbedit working];
+            [[GlimwormBeaconEdit sharedInstance] working];
             NSLog(@"SSS4");
-            [gbedit q_readall];
+            [[GlimwormBeaconEdit sharedInstance] q_readall];
             NSLog(@"SSS5");
         }
     }
@@ -639,7 +766,10 @@ SpinnerView * spinner = nil;
 }
 
 #pragma mark - put away the keyboard
+
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    NSLog(@"touch begin %@",event);
     
     UITouch *touch = [[event allTouches] anyObject];
     if ([p_uuid isFirstResponder] && [touch view] != p_uuid) {
@@ -663,4 +793,11 @@ SpinnerView * spinner = nil;
 
 
 
+- (IBAction)p_modeslider:(id)sender {
+    [self setModeSliderFromSlider];
+    
+}
+- (IBAction)p_battslider:(id)sender {
+    [self setBatterySliderFromSlider];
+}
 @end

@@ -23,11 +23,9 @@
     UIApplicationDelegate,
     NewScanBeaconViewControllerDelegate> {
     NSString *LASTPASS;
-    AppStatus *appStatus;
 }
 
 @property (nonatomic, retain) NSString *LASTPASS;
-@property (nonatomic, retain) AppStatus *appStatus;
 @property (weak, nonatomic) IBOutlet UISwitch *Switch;
 - (IBAction)Switch:(id)sender;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;

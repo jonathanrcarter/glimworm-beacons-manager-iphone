@@ -27,15 +27,14 @@
 @property (nonatomic, retain) NSString *currentStatus;
 @property (nonatomic, strong) CBCentralManager *manager;
 @property  (nonatomic, strong) NSMutableArray *ItemArray;
-@property  (nonatomic, strong) BTDeviceModel* currentPeripheral;
+@property  (nonatomic, retain, strong) BTDeviceModel* currentPeripheral;
 @property  (nonatomic) bool isWorking;
 @property  (nonatomic) int MIN;
 @property  (nonatomic, strong) NSString *LASTPASS;
 @property  (nonatomic, strong) NSString *incoming_uuid;
 
 
-+ (id)sharedManager;
-
++ (AppStatus *)sharedInstance;
 
 
 @end

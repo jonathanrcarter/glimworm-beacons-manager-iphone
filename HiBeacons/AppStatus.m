@@ -33,7 +33,15 @@
 
 #pragma mark Singleton Methods
 
-+ (id)sharedManager {
+//    static AppStatus *sharedMyManager = nil;
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        sharedMyManager = [[self alloc] init];
+//    });
+//    return sharedMyManager;
+//}
+
++ (AppStatus *)sharedInstance {
     static AppStatus *sharedMyManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
