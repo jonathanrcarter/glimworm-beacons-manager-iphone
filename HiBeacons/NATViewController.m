@@ -925,7 +925,7 @@ NSString *currentlyUsedUUID = @"";
 
 -(void)clearItemArray {
     if (!self.ItemArray) {
-        self.ItemArray = [NSMutableArray arrayWithObjects:nil];
+        self.ItemArray = [NSMutableArray array];
     } else {
         [self.ItemArray removeAllObjects];
     }

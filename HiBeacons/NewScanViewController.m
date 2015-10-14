@@ -193,7 +193,7 @@ UINavigationController *navigationController;
 
 -(void)clearItemArray {
     if (![AppStatus sharedInstance].ItemArray) {
-        [AppStatus sharedInstance].ItemArray = [NSMutableArray arrayWithObjects:nil];
+        [AppStatus sharedInstance].ItemArray = [NSMutableArray array];
     } else {
         [[AppStatus sharedInstance].ItemArray removeAllObjects];
     }
