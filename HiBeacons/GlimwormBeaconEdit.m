@@ -98,7 +98,7 @@
         }
     }
     connectActive = NO;
-    Queue = [NSMutableArray arrayWithObjects:nil];
+    Queue = [NSMutableArray array];
     
     [self.delegate GlimwormBeaconEdit:self cancel_and_close_window: nil];
 }
@@ -141,11 +141,11 @@
 
 - (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)pm
 {
-    NSLog(@"peripheral state update %d",pm.state);
+    NSLog(@"peripheral state update %ld",(long)pm.state);
 }
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
-    NSLog(@"central state update %d",central.state);
+    NSLog(@"central state update %ld",(long)central.state);
 }
 
 
@@ -1058,9 +1058,9 @@ static const NSTimeInterval kLXCBRequestTimeout = 1.0;
             [self q_next];
             return;
         }
-        NSLog(@"gb PERIPHERALSTATE %d",[peripheral state]);
+        NSLog(@"gb PERIPHERALSTATE %ld",(long)[peripheral state]);
         if(peripheral && ([peripheral state] != CBPeripheralStateConnected )) {
-            NSLog(@"gb Q_NEXT CANCEL due to failure , state is not = %d",CBPeripheralStateConnected);
+            NSLog(@"gb Q_NEXT CANCEL due to failure , state is not = %ld",(long)CBPeripheralStateConnected);
             [self cancel_due_to_faulure];
             return;
         }

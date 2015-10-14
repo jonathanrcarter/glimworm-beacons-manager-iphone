@@ -64,7 +64,6 @@
 
 /* Begin PBXFileReference section */
 		10A7AEC3BE2A4AED93F9BBF6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		490DACD119ED42EC00B7E936 /* HiBeacons copy2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "HiBeacons copy2-Info.plist"; path = "/Users/jc/Downloads/HiBeacons-master/HiBeacons copy2-Info.plist"; sourceTree = "<absolute>"; };
 		49135B6B1A436AFD00E21375 /* NATViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NATViewController.h; sourceTree = "<group>"; };
 		49135B6C1A436AFD00E21375 /* NATViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NATViewController.m; sourceTree = "<group>"; };
 		49194B531992B1EC0057C2C1 /* NewScanBeaconViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewScanBeaconViewController.h; sourceTree = "<group>"; };
@@ -78,7 +77,6 @@
 		49380F451A76686D00DCD106 /* bat_none.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bat_none.png; sourceTree = "<group>"; };
 		494B68D619F6DF77003914C9 /* NewAboutBeaconsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewAboutBeaconsViewController.h; sourceTree = "<group>"; };
 		494B68D719F6DF77003914C9 /* NewAboutBeaconsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewAboutBeaconsViewController.m; sourceTree = "<group>"; };
-		494C6A281940A4AB00E2EC69 /* HiBeacons copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "HiBeacons copy-Info.plist"; path = "/Users/jc/Downloads/HiBeacons-master/HiBeacons copy-Info.plist"; sourceTree = "<absolute>"; };
 		4955666A18F1503100DA3A12 /* BTDeviceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTDeviceModel.h; sourceTree = "<group>"; };
 		4955666B18F1503800DA3A12 /* BTDeviceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTDeviceModel.m; sourceTree = "<group>"; };
 		498961171A0CC9E000F3A445 /* RoundedCornerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedCornerView.h; sourceTree = "<group>"; };
@@ -315,9 +313,7 @@
 				CF2BC94118019D6100C66D15 /* HiBeaconsTests */,
 				CF2BC92118019D6100C66D15 /* Frameworks */,
 				CF2BC92018019D6100C66D15 /* Products */,
-				494C6A281940A4AB00E2EC69 /* HiBeacons copy-Info.plist */,
 				F4E8D02EBE464A769A548061 /* Pods.xcconfig */,
-				490DACD119ED42EC00B7E936 /* HiBeacons copy2-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -434,11 +430,11 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = NT;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Nick Toumpelis";
 				TargetAttributes = {
 					CF2BC91E18019D6100C66D15 = {
-						DevelopmentTeam = L75YA92R5L;
+						DevelopmentTeam = 8EXZH89K22;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -605,6 +601,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -670,6 +667,7 @@
 				GCC_PREFIX_HEADER = "HiBeacons/HiBeacons-Prefix.pch";
 				INFOPLIST_FILE = "HiBeacons/HiBeacons-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.glimworm.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -688,6 +686,7 @@
 				GCC_PREFIX_HEADER = "HiBeacons/HiBeacons-Prefix.pch";
 				INFOPLIST_FILE = "HiBeacons/HiBeacons-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.glimworm.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;

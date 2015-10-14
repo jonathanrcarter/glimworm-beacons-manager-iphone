@@ -1,1466 +1,548 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>archiveVersion</key>
-	<string>1</string>
-	<key>classes</key>
-	<dict/>
-	<key>objectVersion</key>
-	<string>46</string>
-	<key>objects</key>
-	<dict>
-		<key>03727A4FA3B942B386CCADD6</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CSAnimationView.m</string>
-			<key>path</key>
-			<string>CanvasLibrary/CSAnimationView.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0408D676249041B28A227DAC</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>Pods-Canvas-dummy.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0752C4AA1341400BA4986915</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-Canvas-Private.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>08D92BD89639421DA434B74E</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>UIButton+TCCustomFont.h</string>
-			<key>path</key>
-			<string>CanvasLibrary/UIButton+TCCustomFont.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0977F30139D44523BB8044F6</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CSBlurView.m</string>
-			<key>path</key>
-			<string>CanvasLibrary/CSBlurView.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0AFA98E7B7A5416E8D74A704</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CSAnimationView.h</string>
-			<key>path</key>
-			<string>CanvasLibrary/CSAnimationView.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0B6EADCFD169429F8BD3E8C5</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>UITextField+PlaceholderColor.h</string>
-			<key>path</key>
-			<string>CanvasLibrary/UITextField+PlaceholderColor.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>133CECB3C4DD47C69B9E273B</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-Canvas.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>144B84F0E6C64FBFA2E23785</key>
-		<dict>
-			<key>fileRef</key>
-			<string>FE58ECECC5754EA58933D296</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>1686D44D6A38479CAE788FFF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>3FDF9936B48249C5BE23C90B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-fobjc-arc</string>
-			</dict>
-		</dict>
-		<key>1AF71AB85A5540FCA22342A5</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>Pods-acknowledgements.markdown</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>1E13F9568ECE4F79A423282E</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>Foundation.framework</string>
-			<key>path</key>
-			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework</string>
-			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
-		</dict>
-		<key>24B8A68E9DC54AA0BECDBEA3</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>C7E121EAD05A40B9AC76A35E</string>
-				<string>1AF71AB85A5540FCA22342A5</string>
-				<string>5367943B72D9452EA9BC19EA</string>
-				<string>AA378E72A5744841A5413BF8</string>
-				<string>90AC240B268C4197A0C4D1DE</string>
-				<string>303DDB90EBAB48E78DBE9ABD</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>255827BEBBFA443FAD99F60E</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>UINavigationBar+TCCustomFont.m</string>
-			<key>path</key>
-			<string>CanvasLibrary/UINavigationBar+TCCustomFont.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>2702D78D15FE413EADE75FE5</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>target</key>
-			<string>B70CBA2F16B44A49A9F2A56B</string>
-			<key>targetProxy</key>
-			<string>8B853845980745E397D0C30A</string>
-		</dict>
-		<key>27D6D1006F664D7182CAF14F</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>UINavigationBar+TCCustomFont.h</string>
-			<key>path</key>
-			<string>CanvasLibrary/UINavigationBar+TCCustomFont.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>2E3D31F823594BF092D2014C</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>C8B785F1D000428CBDF802AA</string>
-				<string>791C1B40F16D4DD79EF62CCE</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>2FBD595B1A31462A881D3551</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CSAnimation.m</string>
-			<key>path</key>
-			<string>CanvasLibrary/CSAnimation.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>303DDB90EBAB48E78DBE9ABD</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.script.sh</string>
-			<key>path</key>
-			<string>Pods-resources.sh</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>3B3FEDD4AEFB4584BAC44C6E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0408D676249041B28A227DAC</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>3EF0E3AC9A164249BBD443BC</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>731B8B2EDAD7405BA1DAB611</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>3F74F9879E3247E6A5AF8DF0</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>BE0682435B344F80851309D2</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>3FDF9936B48249C5BE23C90B</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>UITextView+TCCustomFont.m</string>
-			<key>path</key>
-			<string>CanvasLibrary/UITextView+TCCustomFont.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>40400C14B28E4207BDFD58AF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>03727A4FA3B942B386CCADD6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-fobjc-arc</string>
-			</dict>
-		</dict>
-		<key>415DE477907D4D2095B0532B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>2FBD595B1A31462A881D3551</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-fobjc-arc</string>
-			</dict>
-		</dict>
-		<key>44104927198D43BF84B852D3</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CSNavigationController.m</string>
-			<key>path</key>
-			<string>CanvasLibrary/CSNavigationController.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>442CAA5466B6415397CDC3E2</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>NO</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>ENABLE_NS_ASSERTIONS</key>
-				<string>NO</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>STRIP_INSTALLED_PRODUCT</key>
-				<string>NO</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>4B6E73AEBCE746FB8017EA1D</key>
-		<dict>
-			<key>fileRef</key>
-			<string>1E13F9568ECE4F79A423282E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>4D85995D2EF94FB4BF2F7611</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>24B8A68E9DC54AA0BECDBEA3</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Targets Support Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>506D25D1299D465383FCEC0F</key>
-		<dict>
-			<key>fileRef</key>
-			<string>D487F56570A34081BD65DBDD</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>518A7204417A4983AE4DD4D4</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>C03F81E4DCF04F6F8348D4F5</string>
-				<string>B263FFD109D640F1AC661042</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>5367943B72D9452EA9BC19EA</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Pods-acknowledgements.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5ACA030283E94EB9A9DE0164</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>UILabel+TCCustomFont.h</string>
-			<key>path</key>
-			<string>CanvasLibrary/UILabel+TCCustomFont.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>62650A4FD07A47AA9E35810E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0B6EADCFD169429F8BD3E8C5</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>66A0949955474200B68A24E2</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Pods-Canvas-prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>69038581C1FF4CC9987F76CF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>72B684705BEB4F8F95B8010E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6A325A07A7C5483E8EA68331</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>75993BD48A4D4C899ACECECA</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6B98D12C11674EF1816E74F5</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E7A8E8D955774C718AA76ABD</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6E2B40C56680435DB53EB700</key>
-		<dict>
-			<key>fileRef</key>
-			<string>1E13F9568ECE4F79A423282E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6FFA2BB1B553402F96550569</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>F952C9D442E74C2F900FA8A4</string>
-				<string>8794DE54D7AD43C4AA1F2649</string>
-				<string>506D25D1299D465383FCEC0F</string>
-				<string>E277A6BD7543449784842418</string>
-				<string>144B84F0E6C64FBFA2E23785</string>
-				<string>7C842C02361C428094FF3A0B</string>
-				<string>A19884667445419B970170CE</string>
-				<string>B7F1A73D4B0746C0B53B3DAF</string>
-				<string>62650A4FD07A47AA9E35810E</string>
-				<string>6B98D12C11674EF1816E74F5</string>
-				<string>69038581C1FF4CC9987F76CF</string>
-			</array>
-			<key>isa</key>
-			<string>PBXHeadersBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>716F852492264F09B12C8A69</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>4B6E73AEBCE746FB8017EA1D</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>72B684705BEB4F8F95B8010E</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>UITextView+TCCustomFont.h</string>
-			<key>path</key>
-			<string>CanvasLibrary/UITextView+TCCustomFont.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>731B8B2EDAD7405BA1DAB611</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>1E13F9568ECE4F79A423282E</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>iOS</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>74A241FC4BBB48F59D398D53</key>
-		<dict>
-			<key>fileRef</key>
-			<string>BE942C447203491FB6B75BBC</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-fobjc-arc</string>
-			</dict>
-		</dict>
-		<key>75993BD48A4D4C899ACECECA</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>8D2CA3096277451D8480E244</string>
-				<string>2FBD595B1A31462A881D3551</string>
-				<string>0AFA98E7B7A5416E8D74A704</string>
-				<string>03727A4FA3B942B386CCADD6</string>
-				<string>D487F56570A34081BD65DBDD</string>
-				<string>0977F30139D44523BB8044F6</string>
-				<string>9A381940B9DB44D5B76BAD43</string>
-				<string>44104927198D43BF84B852D3</string>
-				<string>FE58ECECC5754EA58933D296</string>
-				<string>08D92BD89639421DA434B74E</string>
-				<string>D14EE17FDDB74F9A9F1A0EB1</string>
-				<string>5ACA030283E94EB9A9DE0164</string>
-				<string>75CCC8294E924ABE9F9EBD72</string>
-				<string>27D6D1006F664D7182CAF14F</string>
-				<string>255827BEBBFA443FAD99F60E</string>
-				<string>0B6EADCFD169429F8BD3E8C5</string>
-				<string>C80834C7EBD546C39C42BB07</string>
-				<string>E7A8E8D955774C718AA76ABD</string>
-				<string>BE942C447203491FB6B75BBC</string>
-				<string>72B684705BEB4F8F95B8010E</string>
-				<string>3FDF9936B48249C5BE23C90B</string>
-				<string>C5E047FFBAA5491DBDBCCAF1</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Canvas</string>
-			<key>path</key>
-			<string>Canvas</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>75CCC8294E924ABE9F9EBD72</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>UILabel+TCCustomFont.m</string>
-			<key>path</key>
-			<string>CanvasLibrary/UILabel+TCCustomFont.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>791C1B40F16D4DD79EF62CCE</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>libPods-Canvas.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>7C842C02361C428094FF3A0B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>08D92BD89639421DA434B74E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>7EE5D5B7A57F4FB8A1D1CE45</key>
-		<dict>
-			<key>fileRef</key>
-			<string>255827BEBBFA443FAD99F60E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-fobjc-arc</string>
-			</dict>
-		</dict>
-		<key>846AA47C276141FEA4262350</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>0752C4AA1341400BA4986915</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
-				<key>DSTROOT</key>
-				<string>/tmp/xcodeproj.dst</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Pods-Canvas-prefix.pch</string>
-				<key>GCC_VERSION</key>
-				<string>com.apple.compilers.llvm.clang.1_0</string>
-				<key>INSTALL_PATH</key>
-				<string>$(BUILT_PRODUCTS_DIR)</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>OTHER_CFLAGS</key>
-				<array>
-					<string>-DNS_BLOCK_ASSERTIONS=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>OTHER_CPLUSPLUSFLAGS</key>
-				<array>
-					<string>-DNS_BLOCK_ASSERTIONS=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>8794DE54D7AD43C4AA1F2649</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0AFA98E7B7A5416E8D74A704</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8A1BC492905E4F3A80B76C57</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>F117FC49CEFF41068D468264</string>
-				<string>442CAA5466B6415397CDC3E2</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>8B853845980745E397D0C30A</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>AF2959E14DFA4629B9EF18F5</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>B70CBA2F16B44A49A9F2A56B</string>
-			<key>remoteInfo</key>
-			<string>Pods-Canvas</string>
-		</dict>
-		<key>8D2CA3096277451D8480E244</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CSAnimation.h</string>
-			<key>path</key>
-			<string>CanvasLibrary/CSAnimation.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>90AC240B268C4197A0C4D1DE</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Pods-environment.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>9683030508FA4DC8826E3F2C</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>518A7204417A4983AE4DD4D4</string>
-			<key>buildPhases</key>
-			<array>
-				<string>3F74F9879E3247E6A5AF8DF0</string>
-				<string>AABD43A2843640EB9D8E69AF</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>2702D78D15FE413EADE75FE5</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>Pods</string>
-			<key>productName</key>
-			<string>Pods</string>
-			<key>productReference</key>
-			<string>C8B785F1D000428CBDF802AA</string>
-			<key>productType</key>
-			<string>com.apple.product-type.library.static</string>
-		</dict>
-		<key>9A381940B9DB44D5B76BAD43</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CSNavigationController.h</string>
-			<key>path</key>
-			<string>CanvasLibrary/CSNavigationController.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A19884667445419B970170CE</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5ACA030283E94EB9A9DE0164</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>A22A4E4ABA774F7E8B97BD43</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>name</key>
-			<string>Podfile</string>
-			<key>path</key>
-			<string>../Podfile</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-			<key>xcLanguageSpecificationIdentifier</key>
-			<string>xcode.lang.ruby</string>
-		</dict>
-		<key>AA378E72A5744841A5413BF8</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>Pods-dummy.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>AABD43A2843640EB9D8E69AF</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>6E2B40C56680435DB53EB700</string>
-				<string>E09D22C6E48C496DAAE5A39E</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>AF2959E14DFA4629B9EF18F5</key>
-		<dict>
-			<key>attributes</key>
-			<dict>
-				<key>LastUpgradeCheck</key>
-				<string>0510</string>
-			</dict>
-			<key>buildConfigurationList</key>
-			<string>8A1BC492905E4F3A80B76C57</string>
-			<key>compatibilityVersion</key>
-			<string>Xcode 3.2</string>
-			<key>developmentRegion</key>
-			<string>English</string>
-			<key>hasScannedForEncodings</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXProject</string>
-			<key>knownRegions</key>
-			<array>
-				<string>en</string>
-			</array>
-			<key>mainGroup</key>
-			<string>D1F0BD729D2F4C519B4E39F4</string>
-			<key>productRefGroup</key>
-			<string>2E3D31F823594BF092D2014C</string>
-			<key>projectDirPath</key>
-			<string></string>
-			<key>projectReferences</key>
-			<array/>
-			<key>projectRoot</key>
-			<string></string>
-			<key>targets</key>
-			<array>
-				<string>9683030508FA4DC8826E3F2C</string>
-				<string>B70CBA2F16B44A49A9F2A56B</string>
-			</array>
-		</dict>
-		<key>B263FFD109D640F1AC661042</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>C7E121EAD05A40B9AC76A35E</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
-				<key>DSTROOT</key>
-				<string>/tmp/xcodeproj.dst</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_VERSION</key>
-				<string>com.apple.compilers.llvm.clang.1_0</string>
-				<key>INSTALL_PATH</key>
-				<string>$(BUILT_PRODUCTS_DIR)</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>OTHER_CFLAGS</key>
-				<array>
-					<string>-DNS_BLOCK_ASSERTIONS=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>OTHER_CPLUSPLUSFLAGS</key>
-				<array>
-					<string>-DNS_BLOCK_ASSERTIONS=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>B70CBA2F16B44A49A9F2A56B</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>C324B6DB63E64342AA3F967E</string>
-			<key>buildPhases</key>
-			<array>
-				<string>F0DC14068D854B498DC7E7BA</string>
-				<string>716F852492264F09B12C8A69</string>
-				<string>6FFA2BB1B553402F96550569</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>Pods-Canvas</string>
-			<key>productName</key>
-			<string>Pods-Canvas</string>
-			<key>productReference</key>
-			<string>791C1B40F16D4DD79EF62CCE</string>
-			<key>productType</key>
-			<string>com.apple.product-type.library.static</string>
-		</dict>
-		<key>B7F1A73D4B0746C0B53B3DAF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>27D6D1006F664D7182CAF14F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>BE0682435B344F80851309D2</key>
-		<dict>
-			<key>fileRef</key>
-			<string>AA378E72A5744841A5413BF8</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>BE942C447203491FB6B75BBC</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>UITextField+TCCustomFont.m</string>
-			<key>path</key>
-			<string>CanvasLibrary/UITextField+TCCustomFont.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C03F81E4DCF04F6F8348D4F5</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>C7E121EAD05A40B9AC76A35E</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>DSTROOT</key>
-				<string>/tmp/xcodeproj.dst</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>GCC_VERSION</key>
-				<string>com.apple.compilers.llvm.clang.1_0</string>
-				<key>INSTALL_PATH</key>
-				<string>$(BUILT_PRODUCTS_DIR)</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>C324B6DB63E64342AA3F967E</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>D76AB7EA37444548A94483E4</string>
-				<string>846AA47C276141FEA4262350</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>C5E047FFBAA5491DBDBCCAF1</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>133CECB3C4DD47C69B9E273B</string>
-				<string>0752C4AA1341400BA4986915</string>
-				<string>0408D676249041B28A227DAC</string>
-				<string>66A0949955474200B68A24E2</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Support Files</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>C7E121EAD05A40B9AC76A35E</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C80834C7EBD546C39C42BB07</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>UITextField+PlaceholderColor.m</string>
-			<key>path</key>
-			<string>CanvasLibrary/UITextField+PlaceholderColor.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C8B785F1D000428CBDF802AA</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>libPods.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>CDACDA6161C3421BBD931B8A</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0977F30139D44523BB8044F6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-fobjc-arc</string>
-			</dict>
-		</dict>
-		<key>D139E5F44BC949F0875642BC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>44104927198D43BF84B852D3</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-fobjc-arc</string>
-			</dict>
-		</dict>
-		<key>D14EE17FDDB74F9A9F1A0EB1</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>UIButton+TCCustomFont.m</string>
-			<key>path</key>
-			<string>CanvasLibrary/UIButton+TCCustomFont.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D1F0BD729D2F4C519B4E39F4</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>A22A4E4ABA774F7E8B97BD43</string>
-				<string>3EF0E3AC9A164249BBD443BC</string>
-				<string>6A325A07A7C5483E8EA68331</string>
-				<string>2E3D31F823594BF092D2014C</string>
-				<string>4D85995D2EF94FB4BF2F7611</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D487F56570A34081BD65DBDD</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CSBlurView.h</string>
-			<key>path</key>
-			<string>CanvasLibrary/CSBlurView.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D76AB7EA37444548A94483E4</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>0752C4AA1341400BA4986915</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>DSTROOT</key>
-				<string>/tmp/xcodeproj.dst</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Pods-Canvas-prefix.pch</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>GCC_VERSION</key>
-				<string>com.apple.compilers.llvm.clang.1_0</string>
-				<key>INSTALL_PATH</key>
-				<string>$(BUILT_PRODUCTS_DIR)</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>E09D22C6E48C496DAAE5A39E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>791C1B40F16D4DD79EF62CCE</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E277A6BD7543449784842418</key>
-		<dict>
-			<key>fileRef</key>
-			<string>9A381940B9DB44D5B76BAD43</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E7A8E8D955774C718AA76ABD</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>UITextField+TCCustomFont.h</string>
-			<key>path</key>
-			<string>CanvasLibrary/UITextField+TCCustomFont.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>ED9F6D3715D84EA0AC58CC33</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C80834C7EBD546C39C42BB07</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-fobjc-arc</string>
-			</dict>
-		</dict>
-		<key>F0DC14068D854B498DC7E7BA</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>415DE477907D4D2095B0532B</string>
-				<string>40400C14B28E4207BDFD58AF</string>
-				<string>CDACDA6161C3421BBD931B8A</string>
-				<string>D139E5F44BC949F0875642BC</string>
-				<string>3B3FEDD4AEFB4584BAC44C6E</string>
-				<string>FD50A5F48CB94F6AA4B95F14</string>
-				<string>F3BE058EE4114FE094B2E58D</string>
-				<string>7EE5D5B7A57F4FB8A1D1CE45</string>
-				<string>ED9F6D3715D84EA0AC58CC33</string>
-				<string>74A241FC4BBB48F59D398D53</string>
-				<string>1686D44D6A38479CAE788FFF</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>F117FC49CEFF41068D468264</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>NO</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>ONLY_ACTIVE_ARCH</key>
-				<string>YES</string>
-				<key>STRIP_INSTALLED_PRODUCT</key>
-				<string>NO</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>F3BE058EE4114FE094B2E58D</key>
-		<dict>
-			<key>fileRef</key>
-			<string>75CCC8294E924ABE9F9EBD72</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-fobjc-arc</string>
-			</dict>
-		</dict>
-		<key>F952C9D442E74C2F900FA8A4</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8D2CA3096277451D8480E244</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>FD50A5F48CB94F6AA4B95F14</key>
-		<dict>
-			<key>fileRef</key>
-			<string>D14EE17FDDB74F9A9F1A0EB1</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-fobjc-arc</string>
-			</dict>
-		</dict>
-		<key>FE58ECECC5754EA58933D296</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>Canvas.h</string>
-			<key>path</key>
-			<string>CanvasLibrary/Canvas.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-	</dict>
-	<key>rootObject</key>
-	<string>AF2959E14DFA4629B9EF18F5</string>
-</dict>
-</plist>
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		144B84F0E6C64FBFA2E23785 /* Canvas.h in Headers */ = {isa = PBXBuildFile; fileRef = FE58ECECC5754EA58933D296 /* Canvas.h */; };
+		1686D44D6A38479CAE788FFF /* UITextView+TCCustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FDF9936B48249C5BE23C90B /* UITextView+TCCustomFont.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		3B3FEDD4AEFB4584BAC44C6E /* Pods-Canvas-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0408D676249041B28A227DAC /* Pods-Canvas-dummy.m */; };
+		40400C14B28E4207BDFD58AF /* CSAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03727A4FA3B942B386CCADD6 /* CSAnimationView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		415DE477907D4D2095B0532B /* CSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD595B1A31462A881D3551 /* CSAnimation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		4B6E73AEBCE746FB8017EA1D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E13F9568ECE4F79A423282E /* Foundation.framework */; };
+		506D25D1299D465383FCEC0F /* CSBlurView.h in Headers */ = {isa = PBXBuildFile; fileRef = D487F56570A34081BD65DBDD /* CSBlurView.h */; };
+		62650A4FD07A47AA9E35810E /* UITextField+PlaceholderColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B6EADCFD169429F8BD3E8C5 /* UITextField+PlaceholderColor.h */; };
+		69038581C1FF4CC9987F76CF /* UITextView+TCCustomFont.h in Headers */ = {isa = PBXBuildFile; fileRef = 72B684705BEB4F8F95B8010E /* UITextView+TCCustomFont.h */; };
+		6B98D12C11674EF1816E74F5 /* UITextField+TCCustomFont.h in Headers */ = {isa = PBXBuildFile; fileRef = E7A8E8D955774C718AA76ABD /* UITextField+TCCustomFont.h */; };
+		6E2B40C56680435DB53EB700 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E13F9568ECE4F79A423282E /* Foundation.framework */; };
+		74A241FC4BBB48F59D398D53 /* UITextField+TCCustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = BE942C447203491FB6B75BBC /* UITextField+TCCustomFont.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		7C842C02361C428094FF3A0B /* UIButton+TCCustomFont.h in Headers */ = {isa = PBXBuildFile; fileRef = 08D92BD89639421DA434B74E /* UIButton+TCCustomFont.h */; };
+		7EE5D5B7A57F4FB8A1D1CE45 /* UINavigationBar+TCCustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 255827BEBBFA443FAD99F60E /* UINavigationBar+TCCustomFont.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		8794DE54D7AD43C4AA1F2649 /* CSAnimationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFA98E7B7A5416E8D74A704 /* CSAnimationView.h */; };
+		A19884667445419B970170CE /* UILabel+TCCustomFont.h in Headers */ = {isa = PBXBuildFile; fileRef = 5ACA030283E94EB9A9DE0164 /* UILabel+TCCustomFont.h */; };
+		B7F1A73D4B0746C0B53B3DAF /* UINavigationBar+TCCustomFont.h in Headers */ = {isa = PBXBuildFile; fileRef = 27D6D1006F664D7182CAF14F /* UINavigationBar+TCCustomFont.h */; };
+		BE0682435B344F80851309D2 /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AA378E72A5744841A5413BF8 /* Pods-dummy.m */; };
+		CDACDA6161C3421BBD931B8A /* CSBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0977F30139D44523BB8044F6 /* CSBlurView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		D139E5F44BC949F0875642BC /* CSNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44104927198D43BF84B852D3 /* CSNavigationController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		E09D22C6E48C496DAAE5A39E /* libPods-Canvas.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 791C1B40F16D4DD79EF62CCE /* libPods-Canvas.a */; };
+		E277A6BD7543449784842418 /* CSNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A381940B9DB44D5B76BAD43 /* CSNavigationController.h */; };
+		ED9F6D3715D84EA0AC58CC33 /* UITextField+PlaceholderColor.m in Sources */ = {isa = PBXBuildFile; fileRef = C80834C7EBD546C39C42BB07 /* UITextField+PlaceholderColor.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F3BE058EE4114FE094B2E58D /* UILabel+TCCustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 75CCC8294E924ABE9F9EBD72 /* UILabel+TCCustomFont.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F952C9D442E74C2F900FA8A4 /* CSAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D2CA3096277451D8480E244 /* CSAnimation.h */; };
+		FD50A5F48CB94F6AA4B95F14 /* UIButton+TCCustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = D14EE17FDDB74F9A9F1A0EB1 /* UIButton+TCCustomFont.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8B853845980745E397D0C30A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AF2959E14DFA4629B9EF18F5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B70CBA2F16B44A49A9F2A56B;
+			remoteInfo = "Pods-Canvas";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		03727A4FA3B942B386CCADD6 /* CSAnimationView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CSAnimationView.m; path = CanvasLibrary/CSAnimationView.m; sourceTree = "<group>"; };
+		0408D676249041B28A227DAC /* Pods-Canvas-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Canvas-dummy.m"; sourceTree = "<group>"; };
+		0752C4AA1341400BA4986915 /* Pods-Canvas-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Canvas-Private.xcconfig"; sourceTree = "<group>"; };
+		08D92BD89639421DA434B74E /* UIButton+TCCustomFont.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIButton+TCCustomFont.h"; path = "CanvasLibrary/UIButton+TCCustomFont.h"; sourceTree = "<group>"; };
+		0977F30139D44523BB8044F6 /* CSBlurView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CSBlurView.m; path = CanvasLibrary/CSBlurView.m; sourceTree = "<group>"; };
+		0AFA98E7B7A5416E8D74A704 /* CSAnimationView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CSAnimationView.h; path = CanvasLibrary/CSAnimationView.h; sourceTree = "<group>"; };
+		0B6EADCFD169429F8BD3E8C5 /* UITextField+PlaceholderColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITextField+PlaceholderColor.h"; path = "CanvasLibrary/UITextField+PlaceholderColor.h"; sourceTree = "<group>"; };
+		133CECB3C4DD47C69B9E273B /* Pods-Canvas.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Canvas.xcconfig"; sourceTree = "<group>"; };
+		1AF71AB85A5540FCA22342A5 /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
+		1E13F9568ECE4F79A423282E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		255827BEBBFA443FAD99F60E /* UINavigationBar+TCCustomFont.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UINavigationBar+TCCustomFont.m"; path = "CanvasLibrary/UINavigationBar+TCCustomFont.m"; sourceTree = "<group>"; };
+		27D6D1006F664D7182CAF14F /* UINavigationBar+TCCustomFont.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UINavigationBar+TCCustomFont.h"; path = "CanvasLibrary/UINavigationBar+TCCustomFont.h"; sourceTree = "<group>"; };
+		2FBD595B1A31462A881D3551 /* CSAnimation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CSAnimation.m; path = CanvasLibrary/CSAnimation.m; sourceTree = "<group>"; };
+		303DDB90EBAB48E78DBE9ABD /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
+		3FDF9936B48249C5BE23C90B /* UITextView+TCCustomFont.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITextView+TCCustomFont.m"; path = "CanvasLibrary/UITextView+TCCustomFont.m"; sourceTree = "<group>"; };
+		44104927198D43BF84B852D3 /* CSNavigationController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CSNavigationController.m; path = CanvasLibrary/CSNavigationController.m; sourceTree = "<group>"; };
+		5367943B72D9452EA9BC19EA /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
+		5ACA030283E94EB9A9DE0164 /* UILabel+TCCustomFont.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UILabel+TCCustomFont.h"; path = "CanvasLibrary/UILabel+TCCustomFont.h"; sourceTree = "<group>"; };
+		66A0949955474200B68A24E2 /* Pods-Canvas-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Canvas-prefix.pch"; sourceTree = "<group>"; };
+		72B684705BEB4F8F95B8010E /* UITextView+TCCustomFont.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITextView+TCCustomFont.h"; path = "CanvasLibrary/UITextView+TCCustomFont.h"; sourceTree = "<group>"; };
+		75CCC8294E924ABE9F9EBD72 /* UILabel+TCCustomFont.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UILabel+TCCustomFont.m"; path = "CanvasLibrary/UILabel+TCCustomFont.m"; sourceTree = "<group>"; };
+		791C1B40F16D4DD79EF62CCE /* libPods-Canvas.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Canvas.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D2CA3096277451D8480E244 /* CSAnimation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CSAnimation.h; path = CanvasLibrary/CSAnimation.h; sourceTree = "<group>"; };
+		90AC240B268C4197A0C4D1DE /* Pods-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-environment.h"; sourceTree = "<group>"; };
+		9A381940B9DB44D5B76BAD43 /* CSNavigationController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CSNavigationController.h; path = CanvasLibrary/CSNavigationController.h; sourceTree = "<group>"; };
+		A22A4E4ABA774F7E8B97BD43 /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		AA378E72A5744841A5413BF8 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
+		BE942C447203491FB6B75BBC /* UITextField+TCCustomFont.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITextField+TCCustomFont.m"; path = "CanvasLibrary/UITextField+TCCustomFont.m"; sourceTree = "<group>"; };
+		C7E121EAD05A40B9AC76A35E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.xcconfig; sourceTree = "<group>"; };
+		C80834C7EBD546C39C42BB07 /* UITextField+PlaceholderColor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITextField+PlaceholderColor.m"; path = "CanvasLibrary/UITextField+PlaceholderColor.m"; sourceTree = "<group>"; };
+		C8B785F1D000428CBDF802AA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D14EE17FDDB74F9A9F1A0EB1 /* UIButton+TCCustomFont.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIButton+TCCustomFont.m"; path = "CanvasLibrary/UIButton+TCCustomFont.m"; sourceTree = "<group>"; };
+		D487F56570A34081BD65DBDD /* CSBlurView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CSBlurView.h; path = CanvasLibrary/CSBlurView.h; sourceTree = "<group>"; };
+		E7A8E8D955774C718AA76ABD /* UITextField+TCCustomFont.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITextField+TCCustomFont.h"; path = "CanvasLibrary/UITextField+TCCustomFont.h"; sourceTree = "<group>"; };
+		FE58ECECC5754EA58933D296 /* Canvas.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Canvas.h; path = CanvasLibrary/Canvas.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		716F852492264F09B12C8A69 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B6E73AEBCE746FB8017EA1D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AABD43A2843640EB9D8E69AF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E2B40C56680435DB53EB700 /* Foundation.framework in Frameworks */,
+				E09D22C6E48C496DAAE5A39E /* libPods-Canvas.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		24B8A68E9DC54AA0BECDBEA3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C7E121EAD05A40B9AC76A35E /* Pods.xcconfig */,
+				1AF71AB85A5540FCA22342A5 /* Pods-acknowledgements.markdown */,
+				5367943B72D9452EA9BC19EA /* Pods-acknowledgements.plist */,
+				AA378E72A5744841A5413BF8 /* Pods-dummy.m */,
+				90AC240B268C4197A0C4D1DE /* Pods-environment.h */,
+				303DDB90EBAB48E78DBE9ABD /* Pods-resources.sh */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		2E3D31F823594BF092D2014C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C8B785F1D000428CBDF802AA /* libPods.a */,
+				791C1B40F16D4DD79EF62CCE /* libPods-Canvas.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3EF0E3AC9A164249BBD443BC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				731B8B2EDAD7405BA1DAB611 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4D85995D2EF94FB4BF2F7611 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				24B8A68E9DC54AA0BECDBEA3 /* Pods */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		6A325A07A7C5483E8EA68331 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				75993BD48A4D4C899ACECECA /* Canvas */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		731B8B2EDAD7405BA1DAB611 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				1E13F9568ECE4F79A423282E /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		75993BD48A4D4C899ACECECA /* Canvas */ = {
+			isa = PBXGroup;
+			children = (
+				8D2CA3096277451D8480E244 /* CSAnimation.h */,
+				2FBD595B1A31462A881D3551 /* CSAnimation.m */,
+				0AFA98E7B7A5416E8D74A704 /* CSAnimationView.h */,
+				03727A4FA3B942B386CCADD6 /* CSAnimationView.m */,
+				D487F56570A34081BD65DBDD /* CSBlurView.h */,
+				0977F30139D44523BB8044F6 /* CSBlurView.m */,
+				9A381940B9DB44D5B76BAD43 /* CSNavigationController.h */,
+				44104927198D43BF84B852D3 /* CSNavigationController.m */,
+				FE58ECECC5754EA58933D296 /* Canvas.h */,
+				08D92BD89639421DA434B74E /* UIButton+TCCustomFont.h */,
+				D14EE17FDDB74F9A9F1A0EB1 /* UIButton+TCCustomFont.m */,
+				5ACA030283E94EB9A9DE0164 /* UILabel+TCCustomFont.h */,
+				75CCC8294E924ABE9F9EBD72 /* UILabel+TCCustomFont.m */,
+				27D6D1006F664D7182CAF14F /* UINavigationBar+TCCustomFont.h */,
+				255827BEBBFA443FAD99F60E /* UINavigationBar+TCCustomFont.m */,
+				0B6EADCFD169429F8BD3E8C5 /* UITextField+PlaceholderColor.h */,
+				C80834C7EBD546C39C42BB07 /* UITextField+PlaceholderColor.m */,
+				E7A8E8D955774C718AA76ABD /* UITextField+TCCustomFont.h */,
+				BE942C447203491FB6B75BBC /* UITextField+TCCustomFont.m */,
+				72B684705BEB4F8F95B8010E /* UITextView+TCCustomFont.h */,
+				3FDF9936B48249C5BE23C90B /* UITextView+TCCustomFont.m */,
+				C5E047FFBAA5491DBDBCCAF1 /* Support Files */,
+			);
+			path = Canvas;
+			sourceTree = "<group>";
+		};
+		C5E047FFBAA5491DBDBCCAF1 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				133CECB3C4DD47C69B9E273B /* Pods-Canvas.xcconfig */,
+				0752C4AA1341400BA4986915 /* Pods-Canvas-Private.xcconfig */,
+				0408D676249041B28A227DAC /* Pods-Canvas-dummy.m */,
+				66A0949955474200B68A24E2 /* Pods-Canvas-prefix.pch */,
+			);
+			name = "Support Files";
+			sourceTree = SOURCE_ROOT;
+		};
+		D1F0BD729D2F4C519B4E39F4 = {
+			isa = PBXGroup;
+			children = (
+				A22A4E4ABA774F7E8B97BD43 /* Podfile */,
+				3EF0E3AC9A164249BBD443BC /* Frameworks */,
+				6A325A07A7C5483E8EA68331 /* Pods */,
+				2E3D31F823594BF092D2014C /* Products */,
+				4D85995D2EF94FB4BF2F7611 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		6FFA2BB1B553402F96550569 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F952C9D442E74C2F900FA8A4 /* CSAnimation.h in Headers */,
+				8794DE54D7AD43C4AA1F2649 /* CSAnimationView.h in Headers */,
+				506D25D1299D465383FCEC0F /* CSBlurView.h in Headers */,
+				E277A6BD7543449784842418 /* CSNavigationController.h in Headers */,
+				144B84F0E6C64FBFA2E23785 /* Canvas.h in Headers */,
+				7C842C02361C428094FF3A0B /* UIButton+TCCustomFont.h in Headers */,
+				A19884667445419B970170CE /* UILabel+TCCustomFont.h in Headers */,
+				B7F1A73D4B0746C0B53B3DAF /* UINavigationBar+TCCustomFont.h in Headers */,
+				62650A4FD07A47AA9E35810E /* UITextField+PlaceholderColor.h in Headers */,
+				6B98D12C11674EF1816E74F5 /* UITextField+TCCustomFont.h in Headers */,
+				69038581C1FF4CC9987F76CF /* UITextView+TCCustomFont.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		9683030508FA4DC8826E3F2C /* Pods */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 518A7204417A4983AE4DD4D4 /* Build configuration list for PBXNativeTarget "Pods" */;
+			buildPhases = (
+				3F74F9879E3247E6A5AF8DF0 /* Sources */,
+				AABD43A2843640EB9D8E69AF /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2702D78D15FE413EADE75FE5 /* PBXTargetDependency */,
+			);
+			name = Pods;
+			productName = Pods;
+			productReference = C8B785F1D000428CBDF802AA /* libPods.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		B70CBA2F16B44A49A9F2A56B /* Pods-Canvas */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C324B6DB63E64342AA3F967E /* Build configuration list for PBXNativeTarget "Pods-Canvas" */;
+			buildPhases = (
+				F0DC14068D854B498DC7E7BA /* Sources */,
+				716F852492264F09B12C8A69 /* Frameworks */,
+				6FFA2BB1B553402F96550569 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-Canvas";
+			productName = "Pods-Canvas";
+			productReference = 791C1B40F16D4DD79EF62CCE /* libPods-Canvas.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AF2959E14DFA4629B9EF18F5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+			};
+			buildConfigurationList = 8A1BC492905E4F3A80B76C57 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D1F0BD729D2F4C519B4E39F4;
+			productRefGroup = 2E3D31F823594BF092D2014C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9683030508FA4DC8826E3F2C /* Pods */,
+				B70CBA2F16B44A49A9F2A56B /* Pods-Canvas */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3F74F9879E3247E6A5AF8DF0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE0682435B344F80851309D2 /* Pods-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F0DC14068D854B498DC7E7BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				415DE477907D4D2095B0532B /* CSAnimation.m in Sources */,
+				40400C14B28E4207BDFD58AF /* CSAnimationView.m in Sources */,
+				CDACDA6161C3421BBD931B8A /* CSBlurView.m in Sources */,
+				D139E5F44BC949F0875642BC /* CSNavigationController.m in Sources */,
+				3B3FEDD4AEFB4584BAC44C6E /* Pods-Canvas-dummy.m in Sources */,
+				FD50A5F48CB94F6AA4B95F14 /* UIButton+TCCustomFont.m in Sources */,
+				F3BE058EE4114FE094B2E58D /* UILabel+TCCustomFont.m in Sources */,
+				7EE5D5B7A57F4FB8A1D1CE45 /* UINavigationBar+TCCustomFont.m in Sources */,
+				ED9F6D3715D84EA0AC58CC33 /* UITextField+PlaceholderColor.m in Sources */,
+				74A241FC4BBB48F59D398D53 /* UITextField+TCCustomFont.m in Sources */,
+				1686D44D6A38479CAE788FFF /* UITextView+TCCustomFont.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2702D78D15FE413EADE75FE5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B70CBA2F16B44A49A9F2A56B /* Pods-Canvas */;
+			targetProxy = 8B853845980745E397D0C30A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		442CAA5466B6415397CDC3E2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				STRIP_INSTALLED_PRODUCT = NO;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		846AA47C276141FEA4262350 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0752C4AA1341400BA4986915 /* Pods-Canvas-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pods-Canvas-prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B263FFD109D640F1AC661042 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7E121EAD05A40B9AC76A35E /* Pods.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C03F81E4DCF04F6F8348D4F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7E121EAD05A40B9AC76A35E /* Pods.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		D76AB7EA37444548A94483E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0752C4AA1341400BA4986915 /* Pods-Canvas-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pods-Canvas-prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		F117FC49CEFF41068D468264 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		518A7204417A4983AE4DD4D4 /* Build configuration list for PBXNativeTarget "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C03F81E4DCF04F6F8348D4F5 /* Debug */,
+				B263FFD109D640F1AC661042 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8A1BC492905E4F3A80B76C57 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F117FC49CEFF41068D468264 /* Debug */,
+				442CAA5466B6415397CDC3E2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C324B6DB63E64342AA3F967E /* Build configuration list for PBXNativeTarget "Pods-Canvas" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D76AB7EA37444548A94483E4 /* Debug */,
+				846AA47C276141FEA4262350 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AF2959E14DFA4629B9EF18F5 /* Project object */;
+}
